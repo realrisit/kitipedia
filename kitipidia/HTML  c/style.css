@@ -1,0 +1,353 @@
+/* Font Faces */
+@font-face {
+  font-family: 'CatPaw';
+  src: url('../fonts/CatPaw-zr0OG.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'CatFont2';
+  src: url('../fonts/CatFont2.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Base Styles */
+body {
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 20px;
+  color: #333;
+  background: url('../Images/Background.jpg') no-repeat center center fixed;
+  background-size: cover;
+  min-height: 100vh;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.7);
+  z-index: -1;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+h1 {
+  font-family: 'CatPaw', 'Arial', sans-serif;
+  color: #ff6b6b;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+  font-size: 2.8rem;
+  margin-bottom: 0.5rem;
+  line-height: 1.2;
+  letter-spacing: 1px;
+}
+
+/* Cat Grid */
+.cat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+.cat-card {
+  position: relative;
+  font-family: 'CatFont2', 'Arial', sans-serif;
+  background: rgba(255, 255, 255, 0.85);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.cat-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.cat-card img.cat-main-img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  transition: all 0.3s ease;
+}
+
+.cat-card:hover img.cat-main-img {
+  transform: scale(1.03);
+  filter: brightness(0.95);
+}
+
+/* Cat Doodle Styles */
+.cat-doodle {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  bottom: 10px;
+  right: 10px;
+  opacity: 0;
+  transform: scale(0.8) rotate(-10deg);
+  transition: all 0.3s ease;
+  z-index: 2;
+  color: #ff6b6b;
+}
+
+.cat-card:hover .cat-doodle {
+  opacity: 1;
+  transform: scale(1) rotate(-5deg);
+}
+
+.cat-doodle svg {
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 0 2px rgba(0,0,0,0.2));
+}
+
+/* Alternate colors for variety */
+.cat-card:nth-child(odd) .cat-doodle { color: #ff6b6b; }
+.cat-card:nth-child(even) .cat-doodle { color: #6b8cff; }
+
+.cat-info {
+  padding: 15px;
+}
+
+.cat-info h3 {
+  font-family: 'CatFont2', 'Arial', sans-serif;
+  margin: 0 0 5px 0;
+  font-size: 1.5rem;
+  color: #333;
+}
+
+.cat-info p {
+  font-family: Arial, sans-serif;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin: 0;
+  color: #666;
+  font-size: 14px;
+}
+
+.cat-info p img.gender-icon-small {
+  width: 16px;
+  height: 16px;
+  min-width: 16px;
+  object-fit: contain;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 5px;
+}
+
+/* Modal Styles */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 1000;
+  overflow-y: auto;
+}
+
+.modal-content {
+  position: relative;
+  background: rgba(255, 255, 255, 0.98);
+  margin: 50px auto;
+  max-width: 700px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  animation: fadeIn 0.3s;
+}
+
+.cat-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px 15px;
+}
+
+.gender-icon {
+  width: 28px;
+  height: 28px;
+}
+
+.modal-cat-img {
+  width: 100%;
+  max-height: 350px;
+  object-fit: contain;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Details Grid Layout */
+.details-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 15px;
+  padding: 0 20px;
+}
+
+.detail-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.detail-item.full-width {
+  grid-column: 1 / -1;
+}
+
+.detail-label {
+  font-weight: bold;
+  color: #ff6b6b;
+  min-width: 80px;
+}
+
+.status-icon {
+  width: 20px;
+  height: 20px;
+}
+
+/* Behavior Tags */
+.behavior-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 5px;
+}
+
+.tag {
+  background: #ffecec;
+  color: #ff6b6b;
+  padding: 4px 10px;
+  border-radius: 15px;
+  font-size: 0.8rem;
+}
+
+/* Navigation Buttons */
+.nav-btn {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #888;
+  padding: 10px 15px;
+  transition: all 0.2s ease;
+  border-radius: 50%;
+}
+
+.nav-btn:hover {
+  color: #ff6b6b;
+  background: rgba(255, 107, 107, 0.1);
+  transform: scale(1.1);
+}
+
+.close-btn {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  font-size: 28px;
+  cursor: pointer;
+  color: #888;
+  transition: all 0.2s ease;
+  background: none;
+  border: none;
+  z-index: 2;
+}
+
+.close-btn:hover {
+  color: #ff6b6b;
+  transform: rotate(90deg);
+}
+
+.cat-counter {
+  font-weight: bold;
+  color: #ff6b6b;
+  font-size: 0.9rem;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Floating animation for doodles */
+@keyframes float {
+  0%, 100% { transform: translateY(0) rotate(-5deg); }
+  50% { transform: translateY(-5px) rotate(-8deg); }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2.2rem;
+  }
+  
+  .modal-content {
+    margin: 20px;
+    max-width: 90%;
+  }
+  
+  .modal-body h2 {
+    font-size: 1.8rem;
+  }
+  
+  .details-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .nav-btn, .close-btn {
+    font-size: 20px;
+  }
+  
+  .cat-grid {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  }
+  
+  .cat-doodle {
+    width: 50px;
+    height: 50px;
+  }
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 1.8rem;
+  }
+  
+  .cat-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .modal-cat-img {
+    max-height: 250px;
+  }
+  
+  .modal-body h2 {
+    font-size: 1.5rem;
+  }
+  
+  .detail-label {
+    min-width: 70px;
+  }
+  
+  .cat-doodle {
+    width: 40px;
+    height: 40px;
+  }
+}
