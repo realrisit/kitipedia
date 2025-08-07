@@ -3,7 +3,7 @@ const cats = [
   {
     id: 1,
     name: "Santra",
-    image: "../Images/cats/santra.jpg",
+    image: "kitipedia/Images/cats/Santra.jpg",
     bgImage: "../Images/backgrounds/santra-bg.svg",
     doodle: "../Images/doodles/santra-doodle.png",
     age: "2 years",
@@ -323,3 +323,4 @@ document.addEventListener('keydown', (e) => {
     }
   }
 });
+
