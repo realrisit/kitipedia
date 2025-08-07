@@ -1,7 +1,7 @@
 /* Font Faces */
 @font-face {
   font-family: 'CatPaw';
-  src: url('../fonts/CatPaw-zr0OG.otf') format('opentype');
+  src: url('../Fonts/CatPaw-zr0OG.otf') format('opentype');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -9,7 +9,7 @@
 
 @font-face {
   font-family: 'CatFont2';
-  src: url('../fonts/CatFont2.otf') format('opentype');
+  src: url('../Fonts/CatFont2.otf') format('opentype');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -440,4 +440,5 @@ h1 {
     width: 40px;
     height: 40px;
   }
+
 }
