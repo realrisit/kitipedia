@@ -3,8 +3,8 @@ const cats = [
   {
     id: 1,
     name: "Santra",
-    image: "../Images/cats/Santra.jpg",
-    bgImage: "../Images/backgrounds/santra-bg.svg",
+    image: "../Images/cats/santra.jpg",
+    bgImage: "../Images/backgrounds/Santra-bg.svg",
     doodle: "../Images/doodles/santra-doodle.png",
     age: "2 years",
     gender: "Male",
@@ -18,8 +18,8 @@ const cats = [
   {
     id: 2,
     name: "Jambo",
-    image: "../Images/cats/jambo.jpg",
-    bgImage: "../Images/backgrounds/jambo-bg.jpg",
+    image: "../Images/cats/Jambo.jpg",
+    bgImage: "../Images/backgrounds/Jambo-bg.jpg",
     doodle: "../Images/doodles/jambo-doodle.png",
     age: "3 years",
     gender: "Male",
@@ -33,7 +33,7 @@ const cats = [
   {
     id: 3,
     name: "Gravy",
-    image: "../Images/cats/gravy.jpg",
+    image: "../Images/cats/Gravy.jpg",
     bgImage: "../Images/backgrounds/gravy-bg.svg",
     doodle: "../Images/doodles/gravy-doodle.png",
     age: "1.5 years",
@@ -48,7 +48,7 @@ const cats = [
   {
     id: 4,
     name: "Calico",
-    image: "../Images/cats/calico.jpg", 
+    image: "../Images/cats/Calico.jpg", 
     bgImage: "../Images/backgrounds/calico-bg.jpg",
     doodle: "../Images/doodles/calico-doodle.png",
     age: "4 years",
@@ -78,7 +78,7 @@ const cats = [
   {
     id: 6,
     name: "Gate Guardian",
-    image: "../Images/cats/gate.jpg",
+    image: "../Images/cats/Gate.jpg",
     bgImage: "../Images/backgrounds/gate-guardian-bg.jpg",
     doodle: "../Images/doodles/gate-doodle.png",
     age: "5 years",
@@ -108,7 +108,7 @@ const cats = [
   {
     id: 8,
     name: "Little Shadow",
-    image: "../Images/cats/kitten 2.jpg",
+    image: "../Images/cats/Kitten 2.jpg",
     bgImage: "../Images/backgrounds/little-shadow-bg.jpg",
     doodle: "../Images/doodles/little-shadow-doodle.png",
     age: "1 year",
@@ -123,8 +123,8 @@ const cats = [
   {
     id: 9,
     name: "Idli",
-    image: "../Images/cats/Idli.jpg",
-    bgImage: "../Images/backgrounds/Idli-bg.jpg",
+    image: "../Images/cats/idli.jpg",
+    bgImage: "../Images/backgrounds/idli-bg.jpg",
     doodle: "../Images/doodles/Idli-doodle.svg",
     age: "4 year",
     gender: "Male",
@@ -323,5 +323,3 @@ document.addEventListener('keydown', (e) => {
     }
   }
 });
-
-
