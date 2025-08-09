@@ -2,50 +2,50 @@
 const cats = [
   {
     id: 1,
-    name: "Honey",
-    nicknames: ["Santra", "Orange Boy"],
+    name: "Santra",
+    nicknames: ["Honey","Gotya"],
     image: "../Images/cats/Santra.jpg",
     bgImage: "../Images/backgrounds/Santra-bg.svg",
-    doodle: "../Images/doodles/santra-doodle.png",
-    age: "2 years",
+    doodle: "../Images/doodles/santra-doodle.svg",
+    age: "1.5 years",
     gender: "Male",
-    vaccinated: true,
+    vaccinated: false,
     sterilized: true,
-    personality: "Friendly but shy. Loves sunbathing near the hostel gate.",
-    behavior: ["friendly", "lazy"],
-    petting: "Pet gently; he likes head scratches.",
-    location: "Hostel Gate"
+    personality: "",
+    behavior: ["very friendly","possessive","quite lazy"],
+    petting: " he likes base of tail (upper back) scratches.",
+    location: "Hostel 2"
   },
   {
     id: 2,
     name: "Jumbo",
-    nicknames: ["Santra", "Orange Boy"],
     image: "../Images/cats/Jambo.jpg",
     bgImage: "../Images/backgrounds/Jambo-bg.svg",
     doodle: "../Images/doodles/jambo-doodle.png",
-    age: "3 years",
+    age: "2.5 years",
     gender: "Male",
     vaccinated: false,
     sterilized: true,
-    personality: "Independent. Hates sudden movements.",
-    behavior: ["shy", "hisses if provoked"],
-    petting: "Do not pet unless she approaches you.",
-    location: "Garden behind Cafeteria"
+    personality: "",
+    behavior: ["friendly", "affectionate", "cuddly", "follows-you", "purring"],
+    petting: "Enjoys pets all over, especially loves head scratches.",
+    location: "D-Quarters"
   },
   {
     id: 3,
     name: "Gravy",
+    nicknames: ["Pouncy"],
     image: "../Images/cats/Gravy.jpg",
     bgImage: "../Images/backgrounds/Gravy-bg.svg",
     doodle: "../Images/doodles/gravy-doodle.png",
     age: "1.5 years",
     gender: "female",
-    vaccinated: true,
-    sterilized: false,
-    personality: "Playful and energetic. Loves chasing leaves.",
-    behavior: ["playful", "attention-seeker"],
-    petting: "Great with kids! Loves belly rubs.",
-    location: "Parking Lot"
+    vaccinated: false,
+    sterilized: true,
+    personality: "",
+    behavior: ["playful", "independent", "bold"],
+    petting: "Allows petting, but may scratch when annoyed.",
+    location: "Hostel 2 2nd floor"
   },
   {
     id: 4,
@@ -53,29 +53,30 @@ const cats = [
     image: "../Images/cats/Calico.jpg", 
     bgImage: "../Images/backgrounds/Calico-bg.svg",
     doodle: "../Images/doodles/calico-doodle.png",
-    age: "4 years",
+    age: "1.5 years",
     gender: "Female",
-    vaccinated: true,
+    vaccinated: false,
     sterilized: true,
-    personality: "Queen of the campus. Demands treats.",
-    behavior: ["bold", "food-motivated"],
-    petting: "Only if you have snacks.",
-    location: "Near Library"
+    personality: "",
+    behavior: ["shy", "skittish", "cautious", "timid", "wary","hisses","quiet"],
+    petting: "Trusts only a few people; avoid petting unless she comes to you.",
+    location: "Hostel 2,Old Academic Building"
   },
  {
     id: 5,
     name: "Chaya",
+    nicknames: ["Bluetooth"],
     image: "../Images/cats/chaya.jpg",
     bgImage: "../Images/backgrounds/Chaya-bg.svg",
     doodle: "../Images/doodles/chaya-doodle.png",
-    age: "6 months",
+    age: "1.5 years",
     gender: "Female",
     vaccinated: false,
     sterilized: true,
-    personality: "Curious and tiny. Always exploring.",
-    behavior: ["timid", "playful"],
-    petting: "Very gentle—she's still small!",
-    location: "Hostel Backyard"
+    personality: "",
+    behavior: ["selective", "attention-seeking","skittish", "moody","vocal"],
+    petting: "Avoid if you want to avoid scratches — she startles easily.",
+    location: "Hostel 2,Old Academic Building"
   },
   {
     id: 6,
@@ -83,89 +84,92 @@ const cats = [
     image: "../Images/cats/Gate.jpg",
     bgImage: "../Images/backgrounds/Gate-bg.svg",
     doodle: "../Images/doodles/gate-doodle.png",
-    age: "5 years",
+    age: "? years",
     gender: "Male",
     vaccinated: true,
     sterilized: true,
-    personality: "Watchful and protective of his territory.",
-    behavior: ["alert", "territorial"],
-    petting: "Approach slowly, he's cautious with strangers.",
+    personality: "",
+    behavior: ["mysterious", "elusive","batman"],
+    petting: "Don't know much yet, but he allows pets.",
     location: "Main Gate Area"
   },
   {
     id: 7,
-    name: "Raanu",
+    name: "Sasha",
     image: "../Images/cats/IDK her name.jpg",
     bgImage: "../Images/backgrounds/Idk-bg.svg",
     doodle: "../Images/doodles/idk-doodle.svg",
-    age: "Unknown",
+    age: "2.5 years",
     gender: "Female",
     vaccinated: false,
     sterilized: true,
-    personality: "Elusive and mysterious. Rarely seen.",
-    behavior: ["shy", "independent"],
-    petting: "Best admired from a distance.",
-    location: "Near PJ"
+    personality: "",
+    behavior: ["chill", "friendly", "easygoing"],
+    petting: "Comfortable with humans and enjoys gentle affection.",
+    location: "PJ auditorium"
   },
   {
     id: 8,
-    name: "Little Shadow",
+    name: "Banku",
+    nicknames: ["Paratha"],
     image: "../Images/cats/Kitten 2.jpg",
     bgImage: "../Images/backgrounds/Kitten-bg.svg",
     doodle: "../Images/doodles/Kitten-doodle.png",
-    age: "1 year",
-    gender: "Male",
-    vaccinated: false,
-    sterilized: true,
-    personality: "Quiet but affectionate once she knows you.",
-    behavior: ["reserved", "gentle"],
-    petting: "Let her come to you first.",
-    location: "Near Cafeteria"
-  },
-  {
-    id: 9,
-    name: "Idli",
-    image: "../Images/cats/idli.jpg",
-    bgImage: "../Images/backgrounds/Idli-bg.svg",
-    doodle: "../Images/doodles/Idli-doodle.png",
-    age: "4 year",
-    gender: "Male",
-    vaccinated: true,
-    sterilized: true,
-    personality: "Mini version of Gravy with the same playful energy.",
-    behavior: ["energetic", "mischievous"],
-    petting: "Loves playing with string toys.",
-    location: "Parking Lot"
-  },
-  {
-    id: 10,
-    name: "Jambo's Twin",
-    image: "../Images/cats/Fjambo.jpg",
-    bgImage: "../Images/backgrounds/Fjambo-bg.svg",
-    doodle: "../Images/doodles/Fjambo-doodle.png",
-    age: "3 years",
-    gender: "Female",
-    vaccinated: false,
-    sterilized: true,
-    personality: "Looks like Jambo but much friendlier.",
-    behavior: ["social", "vocal"],
-    petting: "Will meow for attention and pets.",
-    location: "Garden Area"
-  },
-  {
-    id: 11,
-    name: "Mumma cat",
-    image: "../Images/cats/mumma cat.jpg",
-    bgImage: "../Images/backgrounds/Mumma-bg.svg",
-    doodle: "../Images/doodles/mumma cat-doodle.png",
-    age: "4 months",
+    age: "5 Months",
     gender: "Male",
     vaccinated: false,
     sterilized: false,
-    personality: "The baby of the group. Full of energy.",
-    behavior: ["playful", "curious"],
-    petting: "Very gentle pets only!",
-    location: "Hostel Backyard"
+    personality: "",
+    behavior: ["energetic", "playful", "vocal", "clumsy", "curious"],
+    petting: "Pet very gentelly — he is too smoll yet.",
+    location: "Hostel 2 2nd floor"
+  },
+  {
+    id: 9,
+    name: "Sishu",
+    nicknames: ["Idli"],
+    image: "../Images/cats/idli.jpg",
+    bgImage: "../Images/backgrounds/Idli-bg.svg",
+    doodle: "../Images/doodles/Idli-doodle.png",
+    age: "2.5 year",
+    gender: "Male",
+    vaccinated: false,
+    sterilized: true,
+    personality: "",
+    behavior: ["chill", "friendly", "gentle", "confident", "laid-back", "never-aggressive"],
+    petting: "can be petted anytime, anywhere.",
+    location: "Missing :("
+  },
+  {
+    id: 10,
+    name: "I foreget her name ;(",
+    image: "../Images/cats/Fjambo.jpg",
+    bgImage: "../Images/backgrounds/Fjambo-bg.svg",
+    doodle: "../Images/doodles/Fjambo-doodle.png",
+    age: "2.5 years",
+    gender: "Female",
+    vaccinated: false,
+    sterilized: false,
+    personality: "",
+    behavior: ["vocal", "food-driven", "moody", "sometimes-aggressive"],
+    petting: "Avoid petting — may be aggressive or scared, and doesn't generally like humans.",
+    location: "B-Quarter"
+  },
+  {
+    id: 11,
+    name: "Raanu",
+    nicknames:["mumma-cat"],
+    image: "../Images/cats/mumma cat.jpg",
+    bgImage: "../Images/backgrounds/Mumma-bg.svg",
+    doodle: "../Images/doodles/mumma cat-doodle.png",
+    age: "? months",
+    gender: "Female",
+    vaccinated: false,
+    sterilized: true,
+    personality: "",
+    behavior: ["chill", "independent", "laid-back", "aloof", "unbothered"],
+    petting: "Allows petting, though she may rarely signal to stop.",
+    location: "Old Academic Building"
   },
   {
     id: 12,
@@ -173,14 +177,14 @@ const cats = [
     image: "../Images/cats/Thoothless.jpg",
     bgImage: "../Images/backgrounds/Toothless-bg.svg",
     doodle: "../Images/doodles/toothless-doodle.png",
-    age: "4 months",
-    gender: "Male",
+    age: "2.5 months",
+    gender: "Female",
     vaccinated: false,
-    sterilized: false,
-    personality: "The baby of the group. Full of energy.",
-    behavior: ["playful", "curious"],
-    petting: "Very gentle pets only!",
-    location: "Hostel Backyard"
+    sterilized: true,
+    personality: "",
+    behavior: ["vocal", "sometimes-aggressive", "needs-patience", "possibly-traumatized"],
+    petting: "Better to avoid petting if you don't want scratches or bites — she needs to be handled carefully",
+    location: "Hostel 1"
   },
   {
     id: 13,
@@ -188,15 +192,60 @@ const cats = [
     image: "../Images/cats/White.jpg",
     bgImage: "../Images/backgrounds/White-bg.svg",
     doodle: "../Images/doodles/White-doodle.svg",
-    age: "4 months",
+    age: "? years",
     gender: "Male",
     vaccinated: false,
     sterilized: false,
-    personality: "The baby of the group. Full of energy.",
-    behavior: ["playful", "curious"],
-    petting: "Very gentle pets only!",
-    location: "Hostel Backyard"
-  }
+    personality: "",
+    behavior: ["very-shy", "rarely-seen", "not-adapted-to-humans", "skittish"],
+    petting: "You won't be able to — he runs away before you can pet.",
+    location: "Jungle near badminton court"
+  },
+  {
+    id: 14,
+    name: "Utpal",
+    image: "../Images/cats/Utpal.jpg",
+    bgImage: "../Images/backgrounds/Utpal-bg.svg",
+    doodle: "../Images/doodles/Utpal-doodle.svg",
+    age: "old af",
+    gender: "Male",
+    vaccinated: false,
+    sterilized: false,
+    personality: "",
+    behavior: ["affectionate", "very-chill", "people-loving", "friendly"],
+    petting: "PLEASE PET AS MUCH AS YOU CAN",
+    location: "PJ auditorium,Near Hostles"
+  },
+  {
+    id: 15,
+    name: "Coco",
+    image: "../Images/cats/Coco.jpg",
+    bgImage: "../Images/backgrounds/Coco-bg.svg",
+    doodle: "../Images/doodles/Coco-doodle.svg",
+    age: "? Year",
+    gender: "Female",
+    vaccinated: false,
+    sterilized: false,
+    personality: "",
+    behavior: ["affectionate", "a-little-shy", "gentle", "people-friendly"],
+    petting: "PLEASE PET AS MUCH AS YOU CAN",
+    location: "Near Hostles"
+  },
+  {
+    id: 16,
+    name: "Dogie",
+    image: "../Images/cats/Dogie.jpg",
+    bgImage: "../Images/backgrounds/Dogie-bg.svg",
+    doodle: "../Images/doodles/Dogie-doodle.svg",
+    age: "? years",
+    gender: "Male",
+    vaccinated: false,
+    sterilized: false,
+    personality: "",
+    behavior: ["extrovert", "food-driven", "friendly"],
+    petting: "He won't bit (probably)",
+    location: "Near shops"
+}
 ];
 
 // DOM Elements
@@ -249,56 +298,56 @@ function updateModalContent(cat) {
     : '';
 
   modalBody.innerHTML = `
-    <div class="modal-bg-container" style="--cat-bg: url('${cat.bgImage}')">
-      <div class="modal-bg-overlay"></div>
-      <div class="modal-content-wrapper">
-        <div class="cat-header">
-          <div class="name-doodle-container">
-            <img src="${cat.doodle}" alt="${cat.name} doodle" class="modal-doodle">
-            <div class="name-container">
-              <h2>${cat.name}</h2>
-              ${nicknamesDisplay}
-            </div>
+  <div class="modal-bg-container" style="--cat-bg: url('${cat.bgImage}')">
+    <div class="modal-bg-overlay"></div>
+    <div class="modal-content-wrapper">
+      <div class="cat-header">
+        <div class="name-doodle-container">
+          <img src="${cat.doodle}" alt="${cat.name} doodle" class="modal-doodle">
+          <div class="name-container">
+            <h2>${cat.name}</h2>
+            ${nicknamesDisplay}
           </div>
-          <img src="../Images/icons/${cat.gender.toLowerCase()}.svg" class="gender-icon" alt="${cat.gender}">
         </div>
-        <img src="${cat.image}" alt="${cat.name}" class="modal-cat-img">
-        <div class="details-grid">
-          <div class="detail-item">
-            <span class="detail-label">Age:</span>
-            <span class="detail-value">${cat.age}</span>
+        <img src="../Images/icons/${cat.gender.toLowerCase()}.svg" class="gender-icon" alt="${cat.gender}">
+      </div>
+      <img src="${cat.image}" alt="${cat.name}" class="modal-cat-img">
+      <div class="details-grid">
+        <div class="detail-item">
+          <span class="detail-label">Age:</span>
+          <span class="detail-value">${cat.age}</span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">Vaccinated:</span>
+          <img src="../Images/icons/${cat.vaccinated ? 'yes' : 'no'}.svg" class="status-icon" alt="${cat.vaccinated ? 'Yes' : 'No'}">
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">Sterilized:</span>
+          <img src="../Images/icons/${cat.sterilized ? 'yes' : 'no'}.svg" class="status-icon" alt="${cat.sterilized ? 'Yes' : 'No'}">
+        </div>
+        <div class="detail-item full-width">
+          <span class="detail-label">Detail:</span>
+          <p>${cat.personality}</p>
+        </div>
+        <div class="detail-item full-width">
+          <span class="detail-label">Behavior:</span>
+          <div class="behavior-tags">
+            ${cat.behavior.map(b => `<span class="tag">${b}</span>`).join('')}
           </div>
-          <div class="detail-item">
-            <span class="detail-label">Vaccinated:</span>
-            <img src="../Images/icons/${cat.vaccinated ? 'yes' : 'no'}.svg" class="status-icon" alt="${cat.vaccinated ? 'Yes' : 'No'}">
-          </div>
-          <div class="detail-item">
-            <span class="detail-label">Sterilized:</span>
-            <img src="../Images/icons/${cat.sterilized ? 'yes' : 'no'}.svg" class="status-icon" alt="${cat.sterilized ? 'Yes' : 'No'}">
-          </div>
-          <div class="detail-item full-width">
-            <span class="detail-label">Personality:</span>
-            <p>${cat.personality}</p>
-          </div>
-          <div class="detail-item full-width">
-            <span class="detail-label">Behavior:</span>
-            <div class="behavior-tags">
-              ${cat.behavior.map(b => `<span class="tag">${b}</span>`).join('')}
-            </div>
-          </div>
-          <div class="detail-item full-width">
-            <span class="detail-label">Petting Advice:</span>
-            <p>${cat.petting}</p>
-          </div>
-          <div class="detail-item full-width">
-            <span class="detail-label">Location:</span>
-            <p>${cat.location}</p>
-          </div>
+        </div>
+        <div class="detail-item full-width">
+          <span class="detail-label">Petting Advice:</span>
+          <p>${cat.petting}</p>
+        </div>
+        <div class="detail-item full-width">
+          <span class="detail-label">Location:</span>
+          <p>${cat.location}</p>
         </div>
       </div>
     </div>
-  `;
-  updateCounter();
+  </div>
+`;
+updateCounter();
 }
 
 function updateCounter() {
@@ -348,4 +397,3 @@ document.addEventListener('keydown', (e) => {
     }
   }
 });
-
