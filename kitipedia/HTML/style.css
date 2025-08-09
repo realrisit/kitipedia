@@ -499,6 +499,7 @@ h1 {
   font-family: 'CatFont3', Arial, sans-serif;
   line-height: 1.1;
 }
+
 /* Animations */
 @keyframes floatDoodle {
   0%, 100% { transform: translateY(0) rotate(-5deg); }
@@ -710,4 +711,100 @@ h1 {
     height: 40px;
   }
 
+}
+@media (max-width: 480px) {
+  h1 {
+    font-size: 1.8rem;
+  }
+  /* ...other existing small screen styles... */
+}
+
+/* Mobile Responsive Styles */
+@media (max-width: 768px) {
+  /* Modal adjustments */
+  .modal-content {
+    margin: 20px auto;
+    max-width: 95%;
+  }
+
+  /* Stack all details vertically */
+  .details-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 0 15px;
+  }
+
+  /* Each detail item takes full width */
+  .detail-item {
+    width: 100%;
+    margin-bottom: 0;
+  }
+
+  /* Remove grid-specific styles */
+  .detail-item:nth-child(1),
+  .detail-item:nth-child(2),
+  .detail-item:nth-child(3) {
+    grid-row: auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+  }
+
+  /* Label styling */
+  .detail-label {
+    min-width: 90px;
+    margin-bottom: 0;
+    font-size: 0.9em;
+  }
+
+  /* Value alignment */
+  .detail-value {
+    font-size: 0.95em;
+  }
+
+  /* Status icon alignment */
+  .status-icon {
+    margin-left: 0;
+  }
+
+  /* Compact padding */
+  .modal-content-wrapper {
+    padding: 15px;
+  }
+
+  /* Header adjustments */
+  .cat-header {
+    padding: 0 15px 10px;
+  }
+
+  /* Image sizing */
+  .modal-cat-img {
+    max-height: 250px;
+    margin-bottom: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Extra small devices */
+  .modal-content {
+    margin: 10px auto;
+  }
+  
+  .detail-label {
+    min-width: 80px;
+  }
+  
+  .modal-cat-img {
+    max-height: 200px;
+  }
+}
+
+@media (max-width: 768px) {
+  /* Mobile modal styles... */
+}
+
+@media (max-width: 480px) {
+  /* Extra small device tweaks... */
 }
