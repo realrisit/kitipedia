@@ -719,7 +719,8 @@ h1 {
   /* ...other existing small screen styles... */
 }
 
-/* Mobile Responsive Styles */
+/* Add this to your style.css file, replacing the existing mobile media queries */
+
 @media (max-width: 768px) {
   /* Modal adjustments */
   .modal-content {
@@ -727,7 +728,7 @@ h1 {
     max-width: 95%;
   }
 
-  /* Stack all details vertically */
+  /* Details grid - mobile layout */
   .details-grid {
     display: flex;
     flex-direction: column;
@@ -735,36 +736,62 @@ h1 {
     padding: 0 15px;
   }
 
-  /* Each detail item takes full width */
+  /* Detail items - proper alignment */
   .detail-item {
-    width: 100%;
-    margin-bottom: 0;
-  }
-
-  /* Remove grid-specific styles */
-  .detail-item:nth-child(1),
-  .detail-item:nth-child(2),
-  .detail-item:nth-child(3) {
-    grid-row: auto;
     display: flex;
-    flex-direction: row;
-    align-items: center;
+    flex-wrap: wrap;
+    align-items: flex-start;
     gap: 8px;
+    width: 100%;
   }
 
-  /* Label styling */
+  /* Labels - fixed width for alignment */
   .detail-label {
-    min-width: 90px;
-    margin-bottom: 0;
+    min-width: 100px;
+    width: 100px;
+    font-weight: 600;
+    color: #ff3a3a;
     font-size: 0.9em;
+    text-align: left;
+    margin: 0;
+    padding-right: 5px;
   }
 
-  /* Value alignment */
-  .detail-value {
-    font-size: 0.95em;
+  /* Values - take remaining space */
+  .detail-value,
+  .detail-item p {
+    flex: 1;
+    min-width: calc(100% - 110px);
+    margin: 0;
+    text-align: left;
   }
 
-  /* Status icon alignment */
+  /* Full width items */
+  .detail-item.full-width {
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .detail-item.full-width .detail-label {
+    width: 100%;
+    min-width: 100%;
+  }
+
+  .detail-item.full-width .detail-value,
+  .detail-item.full-width p {
+    width: 100%;
+    min-width: 100%;
+  }
+
+  /* Behavior tags */
+  .behavior-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    width: 100%;
+  }
+
+  /* Status icons */
   .status-icon {
     margin-left: 0;
   }
@@ -794,17 +821,17 @@ h1 {
   
   .detail-label {
     min-width: 80px;
+    width: 80px;
+    font-size: 0.85em;
+  }
+  
+  .detail-value,
+  .detail-item p {
+    min-width: calc(100% - 90px);
+    font-size: 0.9em;
   }
   
   .modal-cat-img {
     max-height: 200px;
   }
-}
-
-@media (max-width: 768px) {
-  /* Mobile modal styles... */
-}
-
-@media (max-width: 480px) {
-  /* Extra small device tweaks... */
 }
