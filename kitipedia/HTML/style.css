@@ -15,6 +15,229 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: 'CatFont3';
+  src: url('../Fonts/font 3.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Base Styles */
+body {
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 20px;
+  color: #333;
+  background: url('../Images/backgrounds/Background.jpg') no-repeat center center fixed;
+  background-size: cover;
+  min-height: 100vh;
+}
+
+@media (max-width: 768px) {
+  body {
+    background: url('../Images/backgrounds/Background mb.jpg') no-repeat center center fixed;
+    background-size: cover;
+    padding: 15px;
+  }
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.5);
+  z-index: -1;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 30 px;
+}
+
+h1 {
+  font-family: 'CatPaw', 'Arial', sans-serif;
+  color: #ff6b6b;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+  font-size: 2.8rem;
+  margin-bottom: 0.5rem;
+  line-height: 1.2;
+  letter-spacing: 1px;
+}
+
+/* Cat Grid */
+.cat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+/* Cat Cards */
+.cat-card {
+  position: relative;
+  font-family: 'CatFont2', 'Arial', sans-serif;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.cat-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+.cat-card img.cat-main-img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  transition: all 0.3s ease;
+}
+
+.cat-card:hover img.cat-main-img {
+  transform: scale(1.03);
+  filter: brightness(0.95);
+}
+
+.cat-info {
+  padding: 15px;
+  position: relative;
+}
+
+.cat-info h3 {
+  font-family: 'CatFont2', 'Arial', sans-serif;
+  margin: 0 0 5px 0;
+  font-size: 1.5rem;
+  color: #333;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.cat-info p {
+  font-family: Arial, sans-serif;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin: 0;
+  color: #666;
+  font-size: 14px;
+}
+
+.gender-icon {
+  width: 24px;
+  height: 24px;
+  margin-left: auto;
+}
+
+.gender-icon-small {
+  width: 16px;
+  height: 16px;
+  min-width: 16px;
+}
+
+/* Cat Doodles in Cards */
+.cat-doodle {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  bottom: 10px;
+  right: 10px;
+  opacity: 0;
+  transform: scale(0.8) rotate(-10deg);
+  transition: all 0.3s ease;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.cat-card:hover .cat-doodle {
+  opacity: 1;
+  transform: scale(1) rotate(-5deg);
+  animation: floatDoodle 3s ease-in-out infinite;
+}
+
+.doodle-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 0 2px rgba(0,0,0,0.2));
+}
+
+/* Modal Styles */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 1000;
+  overflow-y: auto;
+}
+
+.modal-content {
+  position: relative;
+  background: white;
+  margin: 50px auto;
+  max-width: 700px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  animation: fadeIn 0.3s;
+}
+
+.modal-bg-container {
+  position: relative;
+  width: 100%;
+  min-height: 100%;
+}
+
+.modal-bg-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: var(--cat-bg);
+  background-size: cover;
+  background-position: center;
+  z-index: 0;
+  opacity: 0.85; /* Increased opacity */
+  filter: blur(1px); /* Reduced blur */
+}
+
+.modal-content-wrapper {
+  position: relative;
+  z-index: 1;
+  background: rgba(255, 255, 255, 0.75); /* More transparent */
+  backdrop-filter: blur(0.5px); /* Reduced blur */
+  padding: 20px; /* Added padding */
+}
+
+/* Font Faces */
+@font-face {
+  font-family: 'CatPaw';
+  src: url('../Fonts/CatPaw-zr0OG.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'CatFont2';
+  src: url('../Fonts/CatFont2.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* Base Styles */
 body {
   font-family: 'Arial', sans-serif;
@@ -33,7 +256,7 @@ body::before {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(255, 255, 255, 0.7);
+  background-color: rgba(255, 255, 255, 0.5); /* Reduced from 0.7 to 0.5 */
   z-index: -1;
 }
 
@@ -64,7 +287,7 @@ h1 {
 .cat-card {
   position: relative;
   font-family: 'CatFont2', 'Arial', sans-serif;
-  background: rgba(255, 255, 255, 0.85);
+  background: rgba(255, 255, 255, 0.6); /* Increased from 0.85 to 0.9 */
   border-radius: 10px;
   overflow: hidden;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -191,15 +414,16 @@ h1 {
   background-size: cover;
   background-position: center;
   z-index: 0;
-  opacity: 0.7; /* Increased from 0.4 (adjust between 0.5-0.8) */
-  filter: blur(2px); /* Reduced from 3px (try values between 1-3px) */
+  opacity: 0.85;
+  filter: blur(1px);
 }
 
 .modal-content-wrapper {
   position: relative;
   z-index: 1;
-  background: rgba(255, 255, 255, 0.85); /* Slightly more transparent */
-  backdrop-filter: blur(1px); /* Optional: subtle blur effect */
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(0.5px);
+  padding: 20px;
 }
 
 .modal-header {
@@ -207,6 +431,7 @@ h1 {
   padding: 15px 20px;
   background: rgba(255, 255, 255, 0.9);
 }
+
 .modal-body-content {
   padding: 20px;
 }
@@ -221,42 +446,68 @@ h1 {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+/* Cat Header Styles */
 .cat-header {
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
   margin-bottom: 15px;
-  padding-left: 20px;
+  padding: 5px 0 0 20px;
 }
 
-/* Doodle in modal header */
+/* Name and Doodle Container */
 .name-doodle-container {
+  font-family: 'CatFont3', Arial, sans-serif;
   display: flex;
-  align-items: center;
-  gap: 15px;
+  align-items: center;  /* Changed from flex-start to center */
+  gap: 10px;
 }
 
 .modal-doodle {
-  width: 65px;  /* Increased from 50px */
-  height: 65px; /* Increased from 50px */
+  width: 65px;
+  height: 65px;
   object-fit: contain;
   filter: drop-shadow(0 0 3px rgba(0,0,0,0.2));
   animation: floatDoodle 3s ease-in-out infinite;
-  margin-right: 10px; /* Added spacing between doodle and name */
+  margin-right: 10px;
+  align-self: flex-start; /* Add this to align doodle to top */
+  margin-top: 5px; /* Adjust this value to fine-tune position */
 }
 
-/* Adjust gender icon positioning */
-.cat-header {
+/* Name and Nickname Container */
+.name-container {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  flex-direction: column;
+  justify-content: center; /* Add this to center vertically */
+  line-height: 1;
+  margin-top: 0; /* Changed from -5px */
 }
 
-/* Keep your existing float animation */
+.name-container h2 {
+  margin: 0;
+  padding: 0;
+  line-height: 1.2;
+}
+
+.aka {
+  font-size: 0.85rem;
+  color: #666;
+  margin: 2px 0 0 0; /* Changed from -4px to 2px */
+  padding: 0;
+  font-style: italic;
+  font-family: 'CatFont3', Arial, sans-serif;
+  line-height: 1.1;
+}
+/* Animations */
 @keyframes floatDoodle {
   0%, 100% { transform: translateY(0) rotate(-5deg); }
   50% { transform: translateY(-5px) rotate(5deg); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 .gender-icon {
@@ -265,40 +516,58 @@ h1 {
   padding-right: 20px;
 }
 
-/* Details Grid */
+/* ============== DETAILS GRID CONTAINER ============== */
 .details-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: 15px;
   padding: 0 20px;
+  font-family: 'CatFont3', Arial, sans-serif; /* Added font family */
 }
 
+/* ============== GRID ITEM POSITIONING ============== */
+/* First row items */
 .detail-item:nth-child(1), /* Age */
 .detail-item:nth-child(2), /* Vaccinated */
 .detail-item:nth-child(3) { /* Sterilized */
-  grid-row: 1; /* Force to first row */
+  grid-row: 1;
 }
 
+/* Full-width items */
 .detail-item.full-width {
-  grid-column: 1 / -1; /* Span all columns */
+  grid-column: 1 / -1;
 }
+
+/* ============== ITEM STYLES ============== */
 .detail-item {
   display: flex;
   align-items: center;
   gap: 8px;
 }
+
+/* Red label styling */
 .detail-label {
-  font-weight: bold;
-  color: #ff6b6b;
-  min-width: 80px;
+  font-weight: 600;
+  color: #ff3a3a; /* Brighter red */
+  min-width: 90px;
+  font-size: 0.9em;
+  letter-spacing: 0.5px;
+}
+
+/* Value styling after red label */
+.detail-value {
+  color: #333;
+  font-weight: 400;
+  font-size: 0.95em;
 }
 
 .status-icon {
   width: 20px;
   height: 20px;
+  margin-right: 5px; /* Added spacing */
 }
 
-/* Behavior Tags */
+/* ============== BEHAVIOR TAGS ============== */
 .behavior-tags {
   display: flex;
   flex-wrap: wrap;
@@ -312,8 +581,8 @@ h1 {
   padding: 4px 10px;
   border-radius: 15px;
   font-size: 0.8rem;
+  font-weight: 500;
 }
-
 /* Navigation Buttons */
 
 .modal-navigation {

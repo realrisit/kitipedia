@@ -2,8 +2,9 @@
 const cats = [
   {
     id: 1,
-    name: "Santra",
-    image: "../Images/cats/Santra.jpg",
+    name: "Honey",
+    nicknames: ["Santra", "Orange Boy"],
+    image: "../Images/cats/santra.jpg",
     bgImage: "../Images/backgrounds/Santra-bg.svg",
     doodle: "../Images/doodles/santra-doodle.png",
     age: "2 years",
@@ -17,9 +18,10 @@ const cats = [
   },
   {
     id: 2,
-    name: "Jambo",
+    name: "Jumbo",
+    nicknames: ["Santra", "Orange Boy"],
     image: "../Images/cats/Jambo.jpg",
-    bgImage: "../Images/backgrounds/Jambo-bg.jpg",
+    bgImage: "../Images/backgrounds/Jambo-bg.svg",
     doodle: "../Images/doodles/jambo-doodle.png",
     age: "3 years",
     gender: "Male",
@@ -34,7 +36,7 @@ const cats = [
     id: 3,
     name: "Gravy",
     image: "../Images/cats/Gravy.jpg",
-    bgImage: "../Images/backgrounds/gravy-bg.svg",
+    bgImage: "../Images/backgrounds/Gravy-bg.svg",
     doodle: "../Images/doodles/gravy-doodle.png",
     age: "1.5 years",
     gender: "female",
@@ -49,7 +51,7 @@ const cats = [
     id: 4,
     name: "Calico",
     image: "../Images/cats/Calico.jpg", 
-    bgImage: "../Images/backgrounds/calico-bg.jpg",
+    bgImage: "../Images/backgrounds/Calico-bg.svg",
     doodle: "../Images/doodles/calico-doodle.png",
     age: "4 years",
     gender: "Female",
@@ -64,7 +66,7 @@ const cats = [
     id: 5,
     name: "Chaya",
     image: "../Images/cats/chaya.jpg",
-    bgImage: "../Images/backgrounds/chaya-bg.jpg",
+    bgImage: "../Images/backgrounds/Chaya-bg.svg",
     doodle: "../Images/doodles/chaya-doodle.png",
     age: "6 months",
     gender: "Female",
@@ -79,7 +81,7 @@ const cats = [
     id: 6,
     name: "Gate Guardian",
     image: "../Images/cats/Gate.jpg",
-    bgImage: "../Images/backgrounds/gate-guardian-bg.jpg",
+    bgImage: "../Images/backgrounds/Gate-bg.svg",
     doodle: "../Images/doodles/gate-doodle.png",
     age: "5 years",
     gender: "Male",
@@ -92,25 +94,25 @@ const cats = [
   },
   {
     id: 7,
-    name: "Mystery Cat",
+    name: "Raanu",
     image: "../Images/cats/IDK her name.jpg",
-    bgImage: "../Images/backgrounds/mystery-cat-bg.jpg",
-    doodle: "../Images/doodles/idk-doodle.png",
+    bgImage: "../Images/backgrounds/Idk-bg.svg",
+    doodle: "../Images/doodles/idk-doodle.svg",
     age: "Unknown",
     gender: "Female",
     vaccinated: false,
-    sterilized: false,
+    sterilized: true,
     personality: "Elusive and mysterious. Rarely seen.",
     behavior: ["shy", "independent"],
     petting: "Best admired from a distance.",
-    location: "Behind Science Building"
+    location: "Near PJ"
   },
   {
     id: 8,
     name: "Little Shadow",
     image: "../Images/cats/Kitten 2.jpg",
-    bgImage: "../Images/backgrounds/little-shadow-bg.jpg",
-    doodle: "../Images/doodles/little-shadow-doodle.png",
+    bgImage: "../Images/backgrounds/Kitten-bg.svg",
+    doodle: "../Images/doodles/Kitten-doodle.png",
     age: "1 year",
     gender: "Male",
     vaccinated: false,
@@ -124,8 +126,8 @@ const cats = [
     id: 9,
     name: "Idli",
     image: "../Images/cats/idli.jpg",
-    bgImage: "../Images/backgrounds/idli-bg.jpg",
-    doodle: "../Images/doodles/Idli-doodle.svg",
+    bgImage: "../Images/backgrounds/Idli-bg.svg",
+    doodle: "../Images/doodles/Idli-doodle.png",
     age: "4 year",
     gender: "Male",
     vaccinated: true,
@@ -139,7 +141,7 @@ const cats = [
     id: 10,
     name: "Jambo's Twin",
     image: "../Images/cats/Fjambo.jpg",
-    bgImage: "../Images/backgrounds/Fjambo-bg.jpg",
+    bgImage: "../Images/backgrounds/Fjambo-bg.svg",
     doodle: "../Images/doodles/Fjambo-doodle.png",
     age: "3 years",
     gender: "Female",
@@ -154,7 +156,7 @@ const cats = [
     id: 11,
     name: "Mumma cat",
     image: "../Images/cats/mumma cat.jpg",
-    bgImage: "../Images/backgrounds/tiny-paws-bg.jpg",
+    bgImage: "../Images/backgrounds/Mumma-bg.svg",
     doodle: "../Images/doodles/mumma cat-doodle.png",
     age: "4 months",
     gender: "Male",
@@ -169,8 +171,23 @@ const cats = [
     id: 12,
     name: "Toothless",
     image: "../Images/cats/Thoothless.jpg",
-    bgImage: "../Images/backgrounds/toothless-bg.jpg",
+    bgImage: "../Images/backgrounds/Toothless-bg.svg",
     doodle: "../Images/doodles/toothless-doodle.png",
+    age: "4 months",
+    gender: "Male",
+    vaccinated: false,
+    sterilized: false,
+    personality: "The baby of the group. Full of energy.",
+    behavior: ["playful", "curious"],
+    petting: "Very gentle pets only!",
+    location: "Hostel Backyard"
+  },
+  {
+    id: 13,
+    name: "White Cat",
+    image: "../Images/cats/White.jpg",
+    bgImage: "../Images/backgrounds/White-bg.svg",
+    doodle: "../Images/doodles/White-doodle.svg",
     age: "4 months",
     gender: "Male",
     vaccinated: false,
@@ -226,6 +243,11 @@ function openModal(cat) {
 }
 
 function updateModalContent(cat) {
+  // Create nickname display if they exist
+  const nicknamesDisplay = cat.nicknames && cat.nicknames.length > 0 
+    ? `<p class="aka">a.k.a <span>${cat.nicknames.join(", ")}</span></p>`
+    : '';
+
   modalBody.innerHTML = `
     <div class="modal-bg-container" style="--cat-bg: url('${cat.bgImage}')">
       <div class="modal-bg-overlay"></div>
@@ -233,7 +255,10 @@ function updateModalContent(cat) {
         <div class="cat-header">
           <div class="name-doodle-container">
             <img src="${cat.doodle}" alt="${cat.name} doodle" class="modal-doodle">
-            <h2>${cat.name}</h2>
+            <div class="name-container">
+              <h2>${cat.name}</h2>
+              ${nicknamesDisplay}
+            </div>
           </div>
           <img src="../Images/icons/${cat.gender.toLowerCase()}.svg" class="gender-icon" alt="${cat.gender}">
         </div>
@@ -323,4 +348,3 @@ document.addEventListener('keydown', (e) => {
     }
   }
 });
-
