@@ -4,7 +4,7 @@ const cats = [
     id: 1,
     name: "Honey",
     nicknames: ["Santra", "Orange Boy"],
-    image: "../Images/cats/santra.jpg",
+    image: "../Images/cats/Santra.jpg",
     bgImage: "../Images/backgrounds/Santra-bg.svg",
     doodle: "../Images/doodles/santra-doodle.png",
     age: "2 years",
@@ -348,3 +348,4 @@ document.addEventListener('keydown', (e) => {
     }
   }
 });
+
