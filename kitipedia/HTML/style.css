@@ -739,10 +739,10 @@ h1 {
   /* Detail items - proper alignment */
   .detail-item {
     display: flex;
-    flex-wrap: wrap;
-    align-items: flex-start;
-    gap: 8px;
+    flex-direction: row;
+    align-items: center;
     width: 100%;
+    margin: 0;
   }
 
   /* Labels - fixed width for alignment */
@@ -755,20 +755,30 @@ h1 {
     text-align: left;
     margin: 0;
     padding-right: 5px;
+    flex-shrink: 0;
   }
 
-  /* Values - take remaining space */
-  .detail-value,
-  .detail-item p {
+  /* Values - proper alignment */
+  .detail-value {
     flex: 1;
-    min-width: calc(100% - 110px);
     margin: 0;
     text-align: left;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  /* Status icons alignment */
+  .status-icon {
+    margin: 0;
+    width: 20px;
+    height: 20px;
   }
 
   /* Full width items */
   .detail-item.full-width {
     flex-direction: column;
+    align-items: flex-start;
     gap: 5px;
   }
 
@@ -777,10 +787,11 @@ h1 {
     min-width: 100%;
   }
 
-  .detail-item.full-width .detail-value,
+  /* Paragraphs in full-width items */
   .detail-item.full-width p {
+    margin: 0;
+    padding-left: 0;
     width: 100%;
-    min-width: 100%;
   }
 
   /* Behavior tags */
@@ -789,11 +800,7 @@ h1 {
     flex-wrap: wrap;
     gap: 6px;
     width: 100%;
-  }
-
-  /* Status icons */
-  .status-icon {
-    margin-left: 0;
+    padding-left: 0;
   }
 
   /* Compact padding */
@@ -820,18 +827,13 @@ h1 {
   }
   
   .detail-label {
-    min-width: 80px;
-    width: 80px;
+    min-width: 90px;
+    width: 90px;
     font-size: 0.85em;
-  }
-  
-  .detail-value,
-  .detail-item p {
-    min-width: calc(100% - 90px);
-    font-size: 0.9em;
   }
   
   .modal-cat-img {
     max-height: 200px;
   }
 }
+
