@@ -6,7 +6,7 @@ const cats = [
     nicknames: ["Honey","Gotya"],
     image: "../Images/cats/Santra.jpg",
     bgImage: "../Images/backgrounds/Santra-bg.svg",
-    doodle: "../Images/doodles/santra-doodle.svg",
+    doodle: "../Images/doodles/Santra-doodle.svg",
     age: "1.5 years",
     gender: "Male",
     vaccinated: false,
@@ -68,7 +68,7 @@ const cats = [
     nicknames: ["Bluetooth"],
     image: "../Images/cats/chaya.jpg",
     bgImage: "../Images/backgrounds/Chaya-bg.svg",
-    doodle: "../Images/doodles/chaya-doodle.png",
+    doodle: "../Images/doodles/Chaya-doodle.png",
     age: "1.5 years",
     gender: "Female",
     vaccinated: false,
@@ -426,4 +426,5 @@ function handleSwipeGesture() {
     }
   }
 }
+
 
