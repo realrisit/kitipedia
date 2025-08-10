@@ -6,7 +6,7 @@ const cats = [
     nicknames: ["Honey","Gotya"],
     image: "../Images/cats/Santra.jpg",
     bgImage: "../Images/backgrounds/Santra-bg.svg",
-    doodle: "../Images/doodles/santra-doodle.svg",
+    doodle: "../Images/doodles/Santra-doodle.svg",
     age: "1.5 years",
     gender: "Male",
     vaccinated: false,
@@ -247,7 +247,6 @@ const cats = [
     location: "Near shops"
 }
 ];
-
 // DOM Elements
 const catGrid = document.getElementById('catGrid');
 const modal = document.getElementById('catModal');
@@ -261,75 +260,95 @@ const catCounter = document.getElementById('catCounter');
 let currentCatIndex = 0;
 let activeDoodleCard = null;
 let doodleTimer = null;
+let scrollObserver = null;
+
+// Configuration
+const MOBILE_BREAKPOINT = 768;
+const CENTER_THRESHOLD = 0.35; // 35% from screen center
+const VISIBILITY_DELAY = 500; // 0.5 second delay
+const VISIBILITY_THRESHOLD = 0.7; // 70% of card must be visible
 
 // Load Cat Cards with Personalized Doodles
-cats.forEach((cat, index) => {
-  const card = document.createElement('div');
-  card.className = 'cat-card';
-  card.setAttribute('data-cat', cat.name.toLowerCase().replace(' ', '-'));
-  
-  card.innerHTML = `
-    <img src="${cat.image}" alt="${cat.name}" class="cat-main-img">
-    <div class="cat-doodle">
-      <img src="${cat.doodle}" alt="${cat.name} doodle" class="doodle-img">
-    </div>
-    <div class="cat-info">
-      <h3>${cat.name}</h3>
-      <p><img src="../Images/icons/${cat.gender.toLowerCase()}.svg" class="gender-icon-small" alt="${cat.gender}"> <span class="cat-age">${cat.age}</span></p>
-    </div>
-  `;
-
-  const doodle = card.querySelector('.cat-doodle');
-  
-  // Mobile-specific behavior
-  if (window.innerWidth <= 768) {
-    doodle.style.opacity = '0';
-    
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (!entry.isIntersecting) {
-          if (activeDoodleCard === entry.target) {
-            clearTimeout(doodleTimer);
-            doodle.style.opacity = '0';
-            activeDoodleCard = null;
-          }
-          return;
-        }
-        
-        const rect = entry.target.getBoundingClientRect();
-        const viewportCenter = window.innerHeight / 2;
-        const cardCenter = rect.top + rect.height / 2;
-        const distanceFromCenter = Math.abs(viewportCenter - cardCenter);
-        
-        if (distanceFromCenter < window.innerHeight * 0.4) {
-          clearTimeout(doodleTimer);
-          
-          if (activeDoodleCard && activeDoodleCard !== entry.target) {
-            activeDoodleCard.querySelector('.cat-doodle').style.opacity = '0';
-          }
-          
-          doodleTimer = setTimeout(() => {
-            activeDoodleCard = entry.target;
-            doodle.style.opacity = '1';
-          }, 500);
-        }
-      });
-    }, { 
-      threshold: 0.7,
-      rootMargin: '0px 0px -30% 0px'
+function createCatCards() {
+  // Clear previous observers if any
+  if (scrollObserver) {
+    document.querySelectorAll('.cat-card').forEach(card => {
+      scrollObserver.unobserve(card);
     });
-
-    observer.observe(card);
   }
 
-  // Click handler for all devices
-  card.addEventListener('click', () => {
-    currentCatIndex = index;
-    openModal(cats[currentCatIndex]);
+  // Create new IntersectionObserver
+  scrollObserver = new IntersectionObserver(handleCardVisibility, {
+    threshold: VISIBILITY_THRESHOLD,
+    rootMargin: '0px 0px -30% 0px'
   });
 
-  catGrid.appendChild(card);
-});
+  cats.forEach((cat, index) => {
+    const card = document.createElement('div');
+    card.className = 'cat-card';
+    card.setAttribute('data-cat', cat.name.toLowerCase().replace(' ', '-'));
+    
+    card.innerHTML = `
+      <img src="${cat.image}" alt="${cat.name}" class="cat-main-img">
+      <div class="cat-doodle">
+        <img src="${cat.doodle}" alt="${cat.name} doodle" class="doodle-img">
+      </div>
+      <div class="cat-info">
+        <h3>${cat.name}</h3>
+        <p><img src="../Images/icons/${cat.gender.toLowerCase()}.svg" class="gender-icon-small" alt="${cat.gender}"> <span class="cat-age">${cat.age}</span></p>
+      </div>
+    `;
+
+    const doodle = card.querySelector('.cat-doodle');
+    doodle.style.opacity = '0';
+
+    // Mobile-specific behavior
+    if (window.innerWidth <= MOBILE_BREAKPOINT) {
+      scrollObserver.observe(card);
+    }
+
+    // Click handler for all devices
+    card.addEventListener('click', () => {
+      currentCatIndex = index;
+      openModal(cats[currentCatIndex]);
+    });
+
+    catGrid.appendChild(card);
+  });
+}
+
+function handleCardVisibility(entries) {
+  entries.forEach(entry => {
+    const doodle = entry.target.querySelector('.cat-doodle');
+    
+    if (!entry.isIntersecting) {
+      if (activeDoodleCard === entry.target) {
+        clearTimeout(doodleTimer);
+        doodle.style.opacity = '0';
+        activeDoodleCard = null;
+      }
+      return;
+    }
+    
+    const rect = entry.target.getBoundingClientRect();
+    const viewportCenter = window.innerHeight / 2;
+    const cardCenter = rect.top + rect.height / 2;
+    const distanceRatio = Math.abs(viewportCenter - cardCenter) / viewportCenter;
+    
+    if (distanceRatio < CENTER_THRESHOLD) {
+      clearTimeout(doodleTimer);
+      
+      if (activeDoodleCard && activeDoodleCard !== entry.target) {
+        activeDoodleCard.querySelector('.cat-doodle').style.opacity = '0';
+      }
+      
+      doodleTimer = setTimeout(() => {
+        activeDoodleCard = entry.target;
+        doodle.style.opacity = '1';
+      }, VISIBILITY_DELAY);
+    }
+  });
+}
 
 // Modal Functions
 function openModal(cat) {
@@ -443,3 +462,13 @@ document.addEventListener('keydown', (e) => {
     }
   }
 });
+
+// Handle window resize
+window.addEventListener('resize', () => {
+  if (window.innerWidth <= MOBILE_BREAKPOINT) {
+    createCatCards();
+  }
+});
+
+// Initialize
+createCatCards();

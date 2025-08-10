@@ -885,3 +885,15 @@ h1 {
     transition: transform 0.1s ease;
   }
 }
+
+/* Add to your style.css */
+@media (max-width: 768px) {
+  .cat-doodle {
+    transition: opacity 0.3s ease;
+    will-change: opacity;
+  }
+  
+  .cat-card:hover .cat-doodle {
+    opacity: 0 !important;
+  }
+}
