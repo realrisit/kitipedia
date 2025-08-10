@@ -150,6 +150,7 @@ h1 {
   bottom: 10px;
   right: 10px;
   opacity: 0;
+  transition: opacity 0.3s ease, transform 0.3s ease;
   transform: scale(0.8) rotate(-10deg);
   transition: all 0.3s ease;
   z-index: 2;
@@ -834,5 +835,53 @@ h1 {
   
   .modal-cat-img {
     max-height: 200px;
+  }
+}
+
+@media (max-width: 768px) {
+  /* Remove hover effect on mobile */
+  .nav-btn:hover {
+    color: #888;
+    background: none;
+  }
+  
+  /* Add active state style */
+  .nav-btn:active {
+    color: #ff6b6b;
+    background: rgba(255, 107, 107, 0.1);
+  }
+  
+  /* Optional: Add transition for smooth press effect */
+  .nav-btn {
+    transition: color 0.1s ease, background 0.1s ease;
+  }
+}
+
+@media (max-width: 768px) {
+  /* Show doodle by default on mobile */
+  .cat-doodle {
+    opacity: 1;
+    transform: scale(1) rotate(-5deg);
+    animation: floatDoodle 3s ease-in-out infinite;
+  }
+
+  /* Remove the hover effect on mobile */
+@media (max-width: 768px) {
+  .cat-card:hover .cat-doodle {
+    opacity: 0 !important; /* Disable hover effects on mobile */
+  }
+}
+
+  /* Optional: Make the doodle slightly smaller on mobile */
+  .cat-doodle {
+    width: 50px;
+    height: 50px;
+  }
+}
+
+@media (max-width: 768px) {
+  .cat-card:active {
+    transform: scale(0.98);
+    transition: transform 0.1s ease;
   }
 }

@@ -259,6 +259,8 @@ const catCounter = document.getElementById('catCounter');
 
 // State Variables
 let currentCatIndex = 0;
+let activeDoodleCard = null;
+let doodleTimer = null;
 
 // Load Cat Cards with Personalized Doodles
 cats.forEach((cat, index) => {
@@ -276,11 +278,56 @@ cats.forEach((cat, index) => {
       <p><img src="../Images/icons/${cat.gender.toLowerCase()}.svg" class="gender-icon-small" alt="${cat.gender}"> <span class="cat-age">${cat.age}</span></p>
     </div>
   `;
+
+  const doodle = card.querySelector('.cat-doodle');
   
+  // Mobile-specific behavior
+  if (window.innerWidth <= 768) {
+    doodle.style.opacity = '0';
+    
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) {
+          if (activeDoodleCard === entry.target) {
+            clearTimeout(doodleTimer);
+            doodle.style.opacity = '0';
+            activeDoodleCard = null;
+          }
+          return;
+        }
+        
+        const rect = entry.target.getBoundingClientRect();
+        const viewportCenter = window.innerHeight / 2;
+        const cardCenter = rect.top + rect.height / 2;
+        const distanceFromCenter = Math.abs(viewportCenter - cardCenter);
+        
+        if (distanceFromCenter < window.innerHeight * 0.4) {
+          clearTimeout(doodleTimer);
+          
+          if (activeDoodleCard && activeDoodleCard !== entry.target) {
+            activeDoodleCard.querySelector('.cat-doodle').style.opacity = '0';
+          }
+          
+          doodleTimer = setTimeout(() => {
+            activeDoodleCard = entry.target;
+            doodle.style.opacity = '1';
+          }, 500);
+        }
+      });
+    }, { 
+      threshold: 0.7,
+      rootMargin: '0px 0px -30% 0px'
+    });
+
+    observer.observe(card);
+  }
+
+  // Click handler for all devices
   card.addEventListener('click', () => {
     currentCatIndex = index;
     openModal(cats[currentCatIndex]);
   });
+
   catGrid.appendChild(card);
 });
 
@@ -292,7 +339,6 @@ function openModal(cat) {
 }
 
 function updateModalContent(cat) {
-  // Create nickname display if they exist
   const nicknamesDisplay = cat.nicknames && cat.nicknames.length > 0 
     ? `<p class="aka">a.k.a <span>${cat.nicknames.join(", ")}</span></p>`
     : '';
@@ -346,8 +392,8 @@ function updateModalContent(cat) {
       </div>
     </div>
   </div>
-`;
-updateCounter();
+  `;
+  updateCounter();
 }
 
 function updateCounter() {
