@@ -444,7 +444,8 @@ h1 {
 .modal-header {
   position: relative;
   padding: 15px 20px;
-  background: rgba(255, 255, 255, 0.9);
+  background: transparent; /* no separate background */
+  color: white; /* ensure text/icons are visible */
 }
 
 .modal-body-content {
@@ -647,8 +648,7 @@ h1 {
 }
 
 .modal-footer {
-  text-align: center;
-  padding: 15px;
+  display: none !important;
 }
 
 .cat-counter {
@@ -868,6 +868,33 @@ h1 {
     height: 55px;
   }
 }
+@media (max-width: 768px) {
+  .modal-header .nav-btn {
+    display: none !important;
+  }
+}
 
+.modal-footer {
+  display: none !important;
+}
+.credits {
+  text-align: center;
+  font-size: 0.8rem;
+  color: #777;
+  padding: 10px 0;
+  font-family: 'CatFont3', Arial, sans-serif;
+}
+@media (max-width: 768px) {
+  /* Make close button bigger */
+  .close-btn {
+    font-size: 36px; /* bigger size */
+    top: 10px;
+    right: 15px;
+  }
 
-
+  /* Remove hover animation on mobile */
+  .close-btn:hover {
+    transform: none !important;
+    color: #ff6b6b; /* keep hover color if you want */
+  }
+}

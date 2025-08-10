@@ -6,7 +6,7 @@ const cats = [
     nicknames: ["Honey","Gotya"],
     image: "../Images/cats/Santra.jpg",
     bgImage: "../Images/backgrounds/Santra-bg.svg",
-    doodle: "../Images/doodles/Santra-doodle.svg",
+    doodle: "../Images/doodles/santra-doodle.svg",
     age: "1.5 years",
     gender: "Male",
     vaccinated: false,
@@ -68,7 +68,7 @@ const cats = [
     nicknames: ["Bluetooth"],
     image: "../Images/cats/chaya.jpg",
     bgImage: "../Images/backgrounds/Chaya-bg.svg",
-    doodle: "../Images/doodles/Chaya-doodle.png",
+    doodle: "../Images/doodles/chaya-doodle.png",
     age: "1.5 years",
     gender: "Female",
     vaccinated: false,
@@ -245,7 +245,7 @@ const cats = [
     behavior: ["extrovert", "food-driven", "friendly"],
     petting: "He won't bit (probably)",
     location: "Near shops"
-}
+  }
 ];
 
 // DOM Elements
@@ -267,9 +267,9 @@ cats.forEach((cat, index) => {
   card.setAttribute('data-cat', cat.name.toLowerCase().replace(' ', '-'));
   
   card.innerHTML = `
-    <img src="${cat.image}" alt="${cat.name}" class="cat-main-img">
+    <img src="${cat.image}" alt="${cat.name}" class="cat-main-img" loading="lazy">
     <div class="cat-doodle">
-      <img src="${cat.doodle}" alt="${cat.name} doodle" class="doodle-img">
+      <img src="${cat.doodle}" alt="${cat.name} doodle" class="doodle-img" loading="lazy">
     </div>
     <div class="cat-info">
       <h3>${cat.name}</h3>
@@ -292,62 +292,79 @@ function openModal(cat) {
 }
 
 function updateModalContent(cat) {
-  // Create nickname display if they exist
   const nicknamesDisplay = cat.nicknames && cat.nicknames.length > 0 
     ? `<p class="aka">a.k.a <span>${cat.nicknames.join(", ")}</span></p>`
     : '';
 
-  modalBody.innerHTML = `
-  <div class="modal-bg-container" style="--cat-bg: url('${cat.bgImage}')">
-    <div class="modal-bg-overlay"></div>
-    <div class="modal-content-wrapper">
-      <div class="cat-header">
-        <div class="name-doodle-container">
-          <img src="${cat.doodle}" alt="${cat.name} doodle" class="modal-doodle">
-          <div class="name-container">
-            <h2>${cat.name}</h2>
-            ${nicknamesDisplay}
+  // Lazy load background image
+  const bgImg = new Image();
+  bgImg.src = cat.bgImage;
+  bgImg.onload = () => {
+    modalBody.innerHTML = `
+    <div class="modal-bg-container" style="--cat-bg: url('${cat.bgImage}')">
+      <div class="modal-bg-overlay"></div>
+      <div class="modal-content-wrapper">
+        <div class="cat-header">
+          <div class="name-doodle-container">
+            <img src="${cat.doodle}" alt="${cat.name} doodle" class="modal-doodle" loading="lazy">
+            <div class="name-container">
+              <h2>${cat.name}</h2>
+              ${nicknamesDisplay}
+            </div>
           </div>
+          <img src="../Images/icons/${cat.gender.toLowerCase()}.svg" class="gender-icon" alt="${cat.gender}">
         </div>
-        <img src="../Images/icons/${cat.gender.toLowerCase()}.svg" class="gender-icon" alt="${cat.gender}">
-      </div>
-      <img src="${cat.image}" alt="${cat.name}" class="modal-cat-img">
-      <div class="details-grid">
-        <div class="detail-item">
-          <span class="detail-label">Age:</span>
-          <span class="detail-value">${cat.age}</span>
-        </div>
-        <div class="detail-item">
-          <span class="detail-label">Vaccinated:</span>
-          <img src="../Images/icons/${cat.vaccinated ? 'yes' : 'no'}.svg" class="status-icon" alt="${cat.vaccinated ? 'Yes' : 'No'}">
-        </div>
-        <div class="detail-item">
-          <span class="detail-label">Sterilized:</span>
-          <img src="../Images/icons/${cat.sterilized ? 'yes' : 'no'}.svg" class="status-icon" alt="${cat.sterilized ? 'Yes' : 'No'}">
-        </div>
-        <div class="detail-item full-width">
-          <span class="detail-label">Detail:</span>
-          <p>${cat.personality}</p>
-        </div>
-        <div class="detail-item full-width">
-          <span class="detail-label">Behavior:</span>
-          <div class="behavior-tags">
-            ${cat.behavior.map(b => `<span class="tag">${b}</span>`).join('')}
+        <img src="${cat.image}" alt="${cat.name}" class="modal-cat-img" loading="lazy">
+        <div class="details-grid">
+          <div class="detail-item">
+            <span class="detail-label">Age:</span>
+            <span class="detail-value">${cat.age}</span>
           </div>
-        </div>
-        <div class="detail-item full-width">
-          <span class="detail-label">Petting Advice:</span>
-          <p>${cat.petting}</p>
-        </div>
-        <div class="detail-item full-width">
-          <span class="detail-label">Location:</span>
-          <p>${cat.location}</p>
+          <div class="detail-item">
+            <span class="detail-label">Vaccinated:</span>
+            <img src="../Images/icons/${cat.vaccinated ? 'yes' : 'no'}.svg" class="status-icon" alt="${cat.vaccinated ? 'Yes' : 'No'}">
+          </div>
+          <div class="detail-item">
+            <span class="detail-label">Sterilized:</span>
+            <img src="../Images/icons/${cat.sterilized ? 'yes' : 'no'}.svg" class="status-icon" alt="${cat.sterilized ? 'Yes' : 'No'}">
+          </div>
+          <div class="detail-item full-width">
+            <span class="detail-label">Detail:</span>
+            <p>${cat.personality}</p>
+          </div>
+          <div class="detail-item full-width">
+            <span class="detail-label">Behavior:</span>
+            <div class="behavior-tags">
+              ${cat.behavior.map(b => `<span class="tag">${b}</span>`).join('')}
+            </div>
+          </div>
+          <div class="detail-item full-width">
+            <span class="detail-label">Petting Advice:</span>
+            <p>${cat.petting}</p>
+          </div>
+          <div class="detail-item full-width">
+            <span class="detail-label">Location:</span>
+            <p>${cat.location}</p>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-`;
-updateCounter();
+    `;
+    preloadCatImages(currentCatIndex);
+    updateCounter();
+  };
+}
+
+function preloadCatImages(index) {
+  let prevIndex = (index - 1 + cats.length) % cats.length;
+  let nextIndex = (index + 1) % cats.length;
+
+  [prevIndex, nextIndex].forEach(i => {
+    let img = new Image();
+    img.src = cats[i].image;
+    let bg = new Image();
+    bg.src = cats[i].bgImage;
+  });
 }
 
 function updateCounter() {
@@ -397,16 +414,15 @@ document.addEventListener('keydown', (e) => {
     }
   }
 });
+
 // ===== Swipe Support for Mobile =====
 let touchStartX = 0;
 let touchEndX = 0;
 
-// Detect touch start
 modal.addEventListener('touchstart', function (e) {
   touchStartX = e.changedTouches[0].screenX;
 }, false);
 
-// Detect touch end
 modal.addEventListener('touchend', function (e) {
   touchEndX = e.changedTouches[0].screenX;
   handleSwipeGesture();
@@ -414,17 +430,11 @@ modal.addEventListener('touchend', function (e) {
 
 function handleSwipeGesture() {
   let swipeDistance = touchEndX - touchStartX;
-
-  // Minimum distance to count as a swipe
   if (Math.abs(swipeDistance) > 50) {
     if (swipeDistance < 0) {
-      // Swiped left → next cat
       showNextCat();
     } else {
-      // Swiped right → previous cat
       showPrevCat();
     }
   }
 }
-
-
