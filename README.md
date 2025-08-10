@@ -1,2 +1,0 @@
-# kittipedia
-cats are gay
