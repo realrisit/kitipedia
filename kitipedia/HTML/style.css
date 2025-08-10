@@ -150,7 +150,6 @@ h1 {
   bottom: 10px;
   right: 10px;
   opacity: 0;
-  transition: opacity 0.3s ease, transform 0.3s ease;
   transform: scale(0.8) rotate(-10deg);
   transition: all 0.3s ease;
   z-index: 2;
@@ -168,6 +167,21 @@ h1 {
   height: 100%;
   object-fit: contain;
   filter: drop-shadow(0 0 2px rgba(0,0,0,0.2));
+}
+
+footer {
+  text-align: center;
+  font-size: 0.9rem;
+  color: #555;
+  margin-top: 40px;
+  padding: 15px;
+  background: rgba(255, 255, 255, 0.6);
+  border-top: 2px solid #ff6b6b;
+  font-family: 'CatFont3', Arial, sans-serif;
+}
+
+footer p {
+  margin: 0;
 }
 
 /* Modal Styles */
@@ -217,7 +231,7 @@ h1 {
 .modal-content-wrapper {
   position: relative;
   z-index: 1;
-  background: rgba(255, 255, 255, 0.75); /* More transparent */
+  background: rgba(255, 255, 255, 0.75); /* Almost solid white */
   backdrop-filter: blur(0.5px); /* Reduced blur */
   padding: 20px; /* Added padding */
 }
@@ -839,61 +853,21 @@ h1 {
 }
 
 @media (max-width: 768px) {
-  /* Remove hover effect on mobile */
-  .nav-btn:hover {
-    color: #888;
-    background: none;
-  }
-  
-  /* Add active state style */
-  .nav-btn:active {
-    color: #ff6b6b;
-    background: rgba(255, 107, 107, 0.1);
-  }
-  
-  /* Optional: Add transition for smooth press effect */
-  .nav-btn {
-    transition: color 0.1s ease, background 0.1s ease;
-  }
-}
-
-@media (max-width: 768px) {
-  /* Show doodle by default on mobile */
   .cat-doodle {
-    opacity: 1;
-    transform: scale(1) rotate(-5deg);
-    animation: floatDoodle 3s ease-in-out infinite;
-  }
-
-  /* Remove the hover effect on mobile */
-@media (max-width: 768px) {
-  .cat-card:hover .cat-doodle {
-    opacity: 0 !important; /* Disable hover effects on mobile */
+    opacity: 1 !important;
+    transform: scale(1) rotate(-5deg) !important;
+    animation: floatDoodle 3s ease-in-out infinite !important;
+    width: 65px;
+    height: 65px;
   }
 }
 
-  /* Optional: Make the doodle slightly smaller on mobile */
+@media (max-width: 480px) {
   .cat-doodle {
-    width: 50px;
-    height: 50px;
+    width: 55px;
+    height: 55px;
   }
 }
 
-@media (max-width: 768px) {
-  .cat-card:active {
-    transform: scale(0.98);
-    transition: transform 0.1s ease;
-  }
-}
 
-/* Add to your style.css */
-@media (max-width: 768px) {
-  .cat-doodle {
-    transition: opacity 0.3s ease;
-    will-change: opacity;
-  }
-  
-  .cat-card:hover .cat-doodle {
-    opacity: 0 !important;
-  }
-}
+
