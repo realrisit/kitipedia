@@ -415,27 +415,125 @@ document.addEventListener('keydown', (e) => {
   }
 });
 
-// ===== Swipe Support for Mobile =====
-let touchStartX = 0;
-let touchEndX = 0;
+// ===== Swipe Support for Mobile with Smooth Slide Animation =====
+let swipeStartX = 0;
+let swipeEndX = 0;
 
-modal.addEventListener('touchstart', function (e) {
-  touchStartX = e.changedTouches[0].screenX;
+const modalContent = document.querySelector('.modal-content');
+
+modalContent.addEventListener('touchstart', (e) => {
+  swipeStartX = e.changedTouches[0].screenX;
 }, false);
 
-modal.addEventListener('touchend', function (e) {
-  touchEndX = e.changedTouches[0].screenX;
-  handleSwipeGesture();
+modalContent.addEventListener('touchend', (e) => {
+  swipeEndX = e.changedTouches[0].screenX;
+  handleSwipe();
 }, false);
 
-function handleSwipeGesture() {
-  let swipeDistance = touchEndX - touchStartX;
+function handleSwipe() {
+  const swipeDistance = swipeEndX - swipeStartX;
   if (Math.abs(swipeDistance) > 50) {
     if (swipeDistance < 0) {
-      showNextCat();
+      slideToCat('next'); // Swipe left
     } else {
-      showPrevCat();
+      slideToCat('prev'); // Swipe right
     }
   }
 }
 
+function slideToCat(direction) {
+  const oldContent = modalBody.querySelector('.modal-bg-container');
+  if (!oldContent) return;
+
+  const newIndex = direction === 'next'
+    ? (currentCatIndex + 1) % cats.length
+    : (currentCatIndex - 1 + cats.length) % cats.length;
+
+  // Create a temp container for new cat
+  const tempContainer = document.createElement('div');
+  tempContainer.className = 'modal-bg-container';
+  tempContainer.style.setProperty('--cat-bg', `url('${cats[newIndex].bgImage}')`);
+  tempContainer.style.position = 'absolute';
+  tempContainer.style.top = '0';
+  tempContainer.style.left = '0';
+  tempContainer.style.width = '100%';
+  tempContainer.style.transition = 'transform 0.35s ease, opacity 0.35s ease';
+  tempContainer.style.transform = direction === 'next' ? 'translateX(100%)' : 'translateX(-100%)';
+  tempContainer.style.opacity = '0';
+
+  // Fill temp container with content
+  tempContainer.innerHTML = generateModalHTML(cats[newIndex]);
+
+  // Position containers for animation
+  modalBody.style.position = 'relative';
+  modalBody.appendChild(tempContainer);
+
+  requestAnimationFrame(() => {
+    // Animate both
+    oldContent.style.transition = 'transform 0.35s ease, opacity 0.35s ease';
+    oldContent.style.transform = direction === 'next' ? 'translateX(-100%)' : 'translateX(100%)';
+    oldContent.style.opacity = '0';
+
+    tempContainer.style.transform = 'translateX(0)';
+    tempContainer.style.opacity = '1';
+  });
+
+  // After animation, cleanup
+  setTimeout(() => {
+    modalBody.innerHTML = '';
+    updateModalContent(cats[newIndex]); // Your existing function
+    currentCatIndex = newIndex;
+  }, 350);
+}
+
+// Helper to get modal HTML without opening
+function generateModalHTML(cat) {
+  const nicknamesDisplay = cat.nicknames && cat.nicknames.length > 0
+    ? `<p class="aka">a.k.a <span>${cat.nicknames.join(", ")}</span></p>`
+    : '';
+
+  return `
+    <div class="modal-bg-overlay"></div>
+    <div class="modal-content-wrapper">
+      <div class="cat-header">
+        <div class="name-doodle-container">
+          <img src="${cat.doodle}" alt="${cat.name} doodle" class="modal-doodle" loading="lazy">
+          <div class="name-container">
+            <h2>${cat.name}</h2>
+            ${nicknamesDisplay}
+          </div>
+        </div>
+        <img src="../Images/icons/${cat.gender.toLowerCase()}.svg" class="gender-icon" alt="${cat.gender}">
+      </div>
+      <img src="${cat.image}" alt="${cat.name}" class="modal-cat-img" loading="lazy">
+      <div class="details-grid">
+        <div class="detail-item">
+          <span class="detail-label">Age:</span>
+          <span class="detail-value">${cat.age}</span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">Vaccinated:</span>
+          <img src="../Images/icons/${cat.vaccinated ? 'yes' : 'no'}.svg" class="status-icon" alt="${cat.vaccinated ? 'Yes' : 'No'}">
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">Sterilized:</span>
+          <img src="../Images/icons/${cat.sterilized ? 'yes' : 'no'}.svg" class="status-icon" alt="${cat.sterilized ? 'Yes' : 'No'}">
+        </div>
+        <div class="detail-item full-width">
+          <span class="detail-label">Behavior:</span>
+          <div class="behavior-tags">
+            ${cat.behavior.map(b => `<span class="tag">${b}</span>`).join('')}
+          </div>
+        </div>
+        <div class="detail-item full-width">
+          <span class="detail-label">Petting Advice:</span>
+          <p>${cat.petting}</p>
+        </div>
+        <div class="detail-item full-width">
+          <span class="detail-label">Location:</span>
+          <p>${cat.location}</p>
+        </div>
+      </div>
+    </div>
+  `;
+}
