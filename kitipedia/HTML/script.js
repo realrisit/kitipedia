@@ -67,7 +67,7 @@ const cats = [
     name: "Chaya",
     nicknames: ["Bluetooth"],
     image: "../Images/cats/chaya.jpg",
-    bgImage: "../Images/backgrounds/Chaya-bg.svg",
+    bgImage: "../Images/backgrounds/chaya-bg.svg",
     doodle: "../Images/doodles/chaya-doodle.png",
     age: "1.5 years",
     gender: "Female",
@@ -410,3 +410,4 @@ function showNextCat() {
 function showPrevCat() {
   renderCat((currentCatIndex - 1 + cats.length) % cats.length, false, 'prev');
 }
+
