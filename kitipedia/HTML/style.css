@@ -208,12 +208,16 @@ footer p {
   animation: fadeIn 0.3s;
 }
 
+.modal-body {
+  position: relative;
+  overflow: hidden; /* Prevent scrollbars during slide */
+}
+
 .modal-bg-container {
   position: relative;
   width: 100%;
   min-height: 100%;
-  transition: transform 0.35s ease, opacity 0.35s ease; /* for swipe animation */
-  will-change: transform, opacity; /* better performance on mobile */
+  will-change: transform;
 }
 
 
@@ -901,21 +905,45 @@ h1 {
     color: #ff6b6b; /* keep hover color if you want */
   }
 }
-/* ===== Swipe Animations for Mobile Modal ===== */
-@keyframes swipeLeft {
-  from { transform: translateX(0); opacity: 1; }
-  to { transform: translateX(-100%); opacity: 0; }
+/* ===== Smooth Swipe Animations for Mobile Modal ===== */
+@keyframes slideOutLeft {
+  from { transform: translateX(0); }
+  to { transform: translateX(-100%); }
 }
 
-@keyframes swipeRight {
-  from { transform: translateX(0); opacity: 1; }
-  to { transform: translateX(100%); opacity: 0; }
+@keyframes slideInRight {
+  from { transform: translateX(100%); }
+  to { transform: translateX(0); }
 }
 
-.swipe-left {
-  animation: swipeLeft 0.3s ease forwards;
+@keyframes slideOutRight {
+  from { transform: translateX(0); }
+  to { transform: translateX(100%); }
 }
 
-.swipe-right {
-  animation: swipeRight 0.3s ease forwards;
+@keyframes slideInLeft {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(0); }
+}
+
+.swipe-left-out {
+  animation: slideOutLeft 0.35s ease forwards;
+}
+
+.swipe-left-in {
+  animation: slideInRight 0.35s ease forwards;
+}
+
+.swipe-right-out {
+  animation: slideOutRight 0.35s ease forwards;
+}
+
+.swipe-right-in {
+  animation: slideInLeft 0.35s ease forwards;
+}
+
+/* Ensure smooth GPU-accelerated transitions */
+.modal-bg-container {
+  will-change: transform;
+  backface-visibility: hidden;
 }
