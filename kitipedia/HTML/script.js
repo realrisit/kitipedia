@@ -145,7 +145,7 @@ const cats = [
     name: "Grace",
     image: "../Images/cats/Fjambo.jpg",
     bgImage: "../Images/backgrounds/Fjambo-bg.svg",
-    doodle: "../Images/doodles/Fjambo-doodle.svg",
+    doodle: "../Images/doodles/Fjambo-doodle.png",
     age: "2.5 years",
     gender: "Female",
     vaccinated: false,
@@ -460,6 +460,7 @@ modalBody.addEventListener('touchend', (e) => {
     }
   }
 }, false);
+
 
 
 
