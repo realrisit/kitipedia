@@ -188,17 +188,17 @@ const cats = [
   },
   {
     id: 13,
-    name: "White Cat",
+    name: "Meowesh",
     image: "../Images/cats/White.jpg",
     bgImage: "../Images/backgrounds/White-bg.svg",
     doodle: "../Images/doodles/White-doodle.svg",
-    age: "?year",
+    age: "1.5 year",
     gender: "Male",
     vaccinated: false,
     sterilized: false,
     personality: "Not seen too often, but a shy guy.",
-    behavior: ["very-shy", "rarely-seen", "not-adapted-to-humans", "skittish"],
-    petting: "You won't be able to — he runs away before you can pet.",
+    behavior: ["shy", "rarely-seen", "skittish"],
+    petting: "He may be shy, but these days he allows pets",
     location: "Jungle near badminton court"
   },
   {
