@@ -189,9 +189,9 @@ const cats = [
   {
     id: 13,
     name: "Patchy",
-    image: "../Images/cats/Fjambo 2.jpg",
-    bgImage: "../Images/backgrounds/Fjambo 2-bg.svg",
-    doodle: "../Images/doodles/Fjambo 2-doodle.png",
+    image: "../Images/cats/F jambo 2.jpg",
+    bgImage: "../Images/backgrounds/F jambo 2-bg.svg",
+    doodle: "../Images/doodles/F jambo 2-doodle.png",
     age: "2.5 years",
     gender: "Female",
     vaccinated: false,
@@ -440,6 +440,7 @@ function showNextCat() {
 function showPrevCat() {
   renderCat((currentCatIndex - 1 + cats.length) % cats.length, false, 'prev');
 }
+
 
 
 
