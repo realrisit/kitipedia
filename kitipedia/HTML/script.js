@@ -280,9 +280,6 @@ const cats = [
 
 // ===== Swipeable Cat Modal =====
 
-// Your cat data array stays exactly as you have it above (cats = [...])
-// I won't remove any cat or detail
-
 // DOM Elements
 const catGrid = document.getElementById('catGrid');
 const modal = document.getElementById('catModal');
@@ -331,6 +328,32 @@ function closeModal() {
 closeBtn.addEventListener('click', closeModal);
 window.addEventListener('click', (e) => {
   if (e.target === modal) closeModal();
+});
+
+// ===== Navigation Functions =====
+function showNextCat() {
+  renderCat((currentCatIndex + 1) % cats.length, false, 'next');
+}
+
+function showPrevCat() {
+  renderCat((currentCatIndex - 1 + cats.length) % cats.length, false, 'prev');
+}
+
+// Connect navigation buttons
+prevBtn.addEventListener('click', showPrevCat);
+nextBtn.addEventListener('click', showNextCat);
+
+// Add keyboard navigation
+document.addEventListener('keydown', (e) => {
+  if (modal.style.display === 'block') { // Only when modal is open
+    if (e.key === 'ArrowLeft') {
+      showPrevCat();
+    } else if (e.key === 'ArrowRight') {
+      showNextCat();
+    } else if (e.key === 'Escape') {
+      closeModal();
+    }
+  }
 });
 
 // ===== Render Cat in Modal with Slide Animation =====
@@ -407,11 +430,15 @@ function renderCat(index, instant = false, direction = null) {
   }
 
   currentCatIndex = index;
-  preloadCatImages(index);
   updateCounter();
 }
 
-// ===== Swipe Support with Slide-In/Out Animation =====
+// Update counter display
+function updateCounter() {
+  catCounter.textContent = `${currentCatIndex + 1}/${cats.length}`;
+}
+
+// Touch swipe support (keep your existing implementation)
 let startX = 0, currentX = 0, isDragging = false;
 const threshold = 50;
 
@@ -433,15 +460,6 @@ modalBody.addEventListener('touchend', (e) => {
     }
   }
 }, false);
-
-function showNextCat() {
-  renderCat((currentCatIndex + 1) % cats.length, false, 'next');
-}
-function showPrevCat() {
-  renderCat((currentCatIndex - 1 + cats.length) % cats.length, false, 'prev');
-}
-
-
 
 
 
