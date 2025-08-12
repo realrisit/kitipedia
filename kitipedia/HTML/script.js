@@ -145,7 +145,7 @@ const cats = [
     name: "Grace",
     image: "../Images/cats/Fjambo.jpg",
     bgImage: "../Images/backgrounds/Fjambo-bg.svg",
-    doodle: "../Images/doodles/Fjambo-doodle.png",
+    doodle: "../Images/doodles/Fjambo-doodle.svg",
     age: "2.5 years",
     gender: "Female",
     vaccinated: false,
@@ -160,7 +160,7 @@ const cats = [
     name: "Patchy",
     image: "../Images/cats/F jambo 2.jpg",
     bgImage: "../Images/backgrounds/F jambo 2-bg.svg",
-    doodle: "../Images/doodles/F jambo 2-doodle.png",
+    doodle: "../Images/doodles/F jambo 2-doodle.svg",
     age: "2.5 years",
     gender: "Female",
     vaccinated: false,
@@ -460,6 +460,7 @@ modalBody.addEventListener('touchend', (e) => {
     }
   }
 }, false);
+
 
 
 
