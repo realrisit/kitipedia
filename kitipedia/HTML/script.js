@@ -142,7 +142,7 @@ const cats = [
   },
   {
     id: 10,
-    name: "Patchy",
+    name: "Grace",
     image: "../Images/cats/Fjambo.jpg",
     bgImage: "../Images/backgrounds/Fjambo-bg.svg",
     doodle: "../Images/doodles/Fjambo-doodle.png",
@@ -150,10 +150,10 @@ const cats = [
     gender: "Female",
     vaccinated: false,
     sterilized: false,
-    personality: "",
-    behavior: ["vocal", "food-driven", "moody", "sometimes-aggressive"],
-    petting: "Avoid petting — may be aggressive or scared, and doesn't generally like humans.",
-    location: "B-Quarter"
+    personality: "Super friendly and affectionate since day one, back when she and her sis Toothless were always together. You might mix her up with Patchy, but nah — Patchy’s got a blacker back and a totally opposite vibe.",
+    behavior: ["Friendly", "Affectionate", "Social", "Easy-going", "People-loving", "Gentle"],
+    petting: "she’ll probably come to you first, so just give her all the love.",
+    location: "Missing :("
   },
   {
     id: 11,
@@ -188,6 +188,36 @@ const cats = [
   },
   {
     id: 13,
+    name: "Patchy",
+    image: "../Images/cats/Fjambo 2.jpg",
+    bgImage: "../Images/backgrounds/Fjambo 2-bg.svg",
+    doodle: "../Images/doodles/Fjambo 2-doodle.png",
+    age: "2.5 years",
+    gender: "Female",
+    vaccinated: false,
+    sterilized: false,
+    personality: "Used to be shy with her two sons near B quarters — food had to be dropped and you’d step away. Now she’s way friendlier, and if you’re feeding her, you can probably pet her.",
+    behavior: ["vocal", "food-driven", "moody", "sometimes-aggressive"],
+    petting: "Food first, pets after.",
+    location: "B-Quarter"
+  },
+  {
+    id: 14,
+    name: "Don",
+    image: "../Images/cats/Don.jpg",
+    bgImage: "../Images/backgrounds/Don-bg.svg",
+    doodle: "../Images/doodles/Don-doodle.svg",
+    age: "? year",
+    gender: "Male",
+    vaccinated: false,
+    sterilized: false,
+    personality: "Kinda the boss around here. Most male cats see him and bolt — and for good reason, he’ll chase and bully them. Not really into humans or the food offered, totally does his own thing. Seen hanging out with Patchy sometimes.",
+    behavior: ["Dominant", "Territorial", "Independent", "Not-social", "Bold"],
+    petting: "Don’t. Just… don’t.",
+    location: "Rarlly but near hostel 1"
+  }
+  {
+    id: 15,
     name: "Meowesh",
     image: "../Images/cats/White.jpg",
     bgImage: "../Images/backgrounds/White-bg.svg",
@@ -202,7 +232,7 @@ const cats = [
     location: "Jungle near badminton court"
   },
   {
-    id: 14,
+    id: 16,
     name: "Utpal",
     image: "../Images/cats/Utpal.jpg",
     bgImage: "../Images/backgrounds/Utpal-bg.svg",
@@ -217,7 +247,7 @@ const cats = [
     location: "PJ auditorium,Near Hostles"
   },
   {
-    id: 15,
+    id: 17,
     name: "Coco",
     image: "../Images/cats/Coco.jpg",
     bgImage: "../Images/backgrounds/Coco-bg.svg",
@@ -232,7 +262,7 @@ const cats = [
     location: "Near Hostles"
   },
   {
-    id: 16,
+    id: 18,
     name: "Dogie",
     image: "../Images/cats/Dogie.jpg",
     bgImage: "../Images/backgrounds/Dogie-bg.svg",
@@ -410,6 +440,7 @@ function showNextCat() {
 function showPrevCat() {
   renderCat((currentCatIndex - 1 + cats.length) % cats.length, false, 'prev');
 }
+
 
 
 
