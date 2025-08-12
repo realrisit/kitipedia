@@ -11,7 +11,7 @@ const cats = [
     gender: "Male",
     vaccinated: false,
     sterilized: true,
-    personality: "He’s so possessive 😭 — if I take care of another cat, he stops talking to me for days and won’t let me pet him. But deep down, he’s still a chill guy ;)",
+    personality: "He's so possessive 😭 — if I take care of another cat, he stops talking to me for days and won't let me pet him. But deep down, he's still a chill guy ;)",
     behavior: ["very friendly","possessive","quite lazy"],
     petting: " he likes base of tail (upper back) scratches.",
     location: "Hostel 2"
@@ -26,7 +26,7 @@ const cats = [
     gender: "Male",
     vaccinated: false,
     sterilized: true,
-    personality: "He’s huge af ... super affectionate, rubbing himself against everyone who passes by and purring when you pet him. As a part-time job, he also hunts snake.",
+    personality: "He's huge af ... super affectionate, rubbing himself against everyone who passes by and purring when you pet him. As a part-time job, he also hunts snake.",
     behavior: ["friendly", "affectionate", "cuddly", "follows-you", "purring"],
     petting: "Enjoys pets all over, especially loves head scratches.",
     location: "D-Quarters"
@@ -42,7 +42,7 @@ const cats = [
     gender: "female",
     vaccinated: false,
     sterilized: true,
-    personality: "She’s a strong, independent lady — super playful, does silly things, and is too cute :3",
+    personality: "She's a strong, independent lady — super playful, does silly things, and is too cute :3",
     behavior: ["playful", "independent", "bold"],
     petting: "Allows petting, but may scratch when annoyed.",
     location: "Hostel 2 2nd floor"
@@ -57,12 +57,12 @@ const cats = [
     gender: "Female",
     vaccinated: false,
     sterilized: true,
-    personality: "She’s very shy and may be a bit anxious if you approach or might hiss, but once she’s comfortable, you can attempt a covert cuddle mission. Also, her pattern is beautiful! :)",
+    personality: "She's very shy and may be a bit anxious if you approach or might hiss, but once she's comfortable, you can attempt a covert cuddle mission. Also, her pattern is beautiful! :)",
     behavior: ["shy", "skittish", "cautious", "timid", "wary","hisses","quiet"],
     petting: "Trusts only a few people; avoid petting unless she comes to you.",
     location: "Hostel 2,Old Academic Building"
   },
- {
+  {
     id: 5,
     name: "Chaya",
     nicknames: ["Bluetooth"],
@@ -73,7 +73,7 @@ const cats = [
     gender: "Female",
     vaccinated: false,
     sterilized: true,
-    personality: "You might confuse her with Toothless, but a major difference is the white stripe at the end of her tail. She doesn’t let strangers touch her, but she’s chill if you feed her ;)",
+    personality: "You might confuse her with Toothless, but a major difference is the white stripe at the end of her tail. She doesn't let strangers touch her, but she's chill if you feed her ;)",
     behavior: ["selective", "attention-seeking","skittish", "moody","vocal"],
     petting: "Avoid if you want to avoid scratches — she startles easily.",
     location: "Hostel 2,Old Academic Building"
@@ -88,7 +88,7 @@ const cats = [
     gender: "Male",
     vaccinated: true,
     sterilized: true,
-    personality: "If you wanna meet this gorgeous guy, just come to the main gate between 3-5 AM. He’s got a beautiful tail, and the guards are total fans!",
+    personality: "If you wanna meet this gorgeous guy, just come to the main gate between 3-5 AM. He's got a beautiful tail, and the guards are total fans!",
     behavior: ["mysterious", "elusive","batman"],
     petting: "Don't know much yet, but he allows pets.",
     location: "Main Gate Area"
@@ -103,7 +103,7 @@ const cats = [
     gender: "Female",
     vaccinated: false,
     sterilized: true,
-    personality: "She’s very calm, loves humans, and might join you otw to the market ;)",
+    personality: "She's very calm, loves humans, and might join you otw to the market ;)",
     behavior: ["chill", "friendly", "easygoing"],
     petting: "Comfortable with humans and enjoys gentle affection.",
     location: "PJ auditorium"
@@ -119,7 +119,7 @@ const cats = [
     gender: "Male",
     vaccinated: false,
     sterilized: false,
-    personality: "He’s super energetic and playful—think twice before letting him into your room! 😭, His biological mom is Sasha, but Gravy adopted him ;)",
+    personality: "He's super energetic and playful—think twice before letting him into your room! 😭, His biological mom is Sasha, but Gravy adopted him ;)",
     behavior: ["energetic", "playful", "vocal", "clumsy", "curious"],
     petting: "Pet very gently — he is too smoll yet.",
     location: "Hostel 2 2nd floor"
@@ -135,14 +135,14 @@ const cats = [
     gender: "Male",
     vaccinated: false,
     sterilized: true,
-    personality: "He’s the chillest guy on campus—super friendly and fun to hang out with, and he’s pretty popular with the ladies. Seems like he’s been off on a mysterious mission lately :(",
+    personality: "He's the chillest guy on campus—super friendly and fun to hang out with, and he's pretty popular with the ladies. Seems like he's been off on a mysterious mission lately :(",
     behavior: ["chill", "friendly", "gentle", "confident", "laid-back", "never-aggressive"],
     petting: "can be petted anytime, anywhere.",
     location: "Missing :("
   },
   {
     id: 10,
-    name: "Patchy",
+    name: "Grace",
     image: "../Images/cats/Fjambo.jpg",
     bgImage: "../Images/backgrounds/Fjambo-bg.svg",
     doodle: "../Images/doodles/Fjambo-doodle.png",
@@ -150,13 +150,43 @@ const cats = [
     gender: "Female",
     vaccinated: false,
     sterilized: false,
-    personality: "",
-    behavior: ["vocal", "food-driven", "moody", "sometimes-aggressive"],
-    petting: "Avoid petting — may be aggressive or scared, and doesn't generally like humans.",
-    location: "B-Quarter"
+    personality: "Super friendly and affectionate since day one, back when she and her sis Toothless were always together. You might mix her up with Patchy, but nah — Patchy's got a blacker back and a totally opposite vibe.",
+    behavior: ["friendly", "affectionate", "social", "easy-going", "people-loving", "gentle"],
+    petting: "She'll probably come to you first, so just give her all the love.",
+    location: "Missing :("
   },
   {
     id: 11,
+    name: "Patchy",
+    image: "../Images/cats/F jambo 2.jpg",
+    bgImage: "../Images/backgrounds/F jambo 2-bg.svg",
+    doodle: "../Images/doodles/F jambo 2-doodle.png",
+    age: "2.5 years",
+    gender: "Female",
+    vaccinated: false,
+    sterilized: false,
+    personality: "Used to be shy with her two sons near B quarters — food had to be dropped and you'd step away. Now she's way friendlier, and if you're feeding her, you can probably pet her.",
+    behavior: ["vocal", "food-driven", "moody", "sometimes-aggressive"],
+    petting: "Food first, pets after.",
+    location: "B-Quarter"
+  },
+  {
+    id: 12,
+    name: "Don",
+    image: "../Images/cats/Don.jpg",
+    bgImage: "../Images/backgrounds/Don-bg.svg",
+    doodle: "../Images/doodles/Don-doodle.svg",
+    age: "? year",
+    gender: "Male",
+    vaccinated: false,
+    sterilized: false,
+    personality: "Kinda the boss around here. Most male cats see him and bolt — and for good reason, he'll chase and bully them. Not really into humans or the food offered, totally does his own thing. Seen hanging out with Patchy sometimes.",
+    behavior: ["dominant", "territorial", "independent", "not-social", "bold"],
+    petting: "Don't. Just… don't.",
+    location: "Rarely but near Hostel 1"
+  },
+  {
+    id: 13,
     name: "Raanu",
     nicknames:["mumma-cat"],
     image: "../Images/cats/mumma cat.jpg",
@@ -166,13 +196,13 @@ const cats = [
     gender: "Female",
     vaccinated: false,
     sterilized: true,
-    personality: "She’s the mama of every cat on campus—the most nonchalant one around—and you’ll find her attending every class in G26. ;)",
+    personality: "She's the mama of every cat on campus—the most nonchalant one around—and you'll find her attending every class in G26. ;)",
     behavior: ["chill", "independent", "laid-back", "aloof", "unbothered"],
     petting: "Allows petting, though she may rarely signal to stop.",
     location: "Old Academic Building"
   },
   {
-    id: 12,
+    id: 14,
     name: "Toothless",
     image: "../Images/cats/Thoothless.jpg",
     bgImage: "../Images/backgrounds/Toothless-bg.svg",
@@ -181,13 +211,13 @@ const cats = [
     gender: "Female",
     vaccinated: false,
     sterilized: true,
-    personality: "She’s a cute black ball... but can be a bit aggressive sometimes.",
+    personality: "She's a cute black ball... but can be a bit aggressive sometimes.",
     behavior: ["vocal", "sometimes-aggressive", "needs-patience", "possibly-traumatized"],
     petting: "Better to avoid petting if you don't want scratches or bites — she needs to be handled carefully",
     location: "Hostel 1"
   },
   {
-    id: 13,
+    id: 15,
     name: "Meowesh",
     image: "../Images/cats/White.jpg",
     bgImage: "../Images/backgrounds/White-bg.svg",
@@ -202,7 +232,7 @@ const cats = [
     location: "Jungle near badminton court"
   },
   {
-    id: 14,
+    id: 16,
     name: "Utpal",
     image: "../Images/cats/Utpal.jpg",
     bgImage: "../Images/backgrounds/Utpal-bg.svg",
@@ -211,13 +241,13 @@ const cats = [
     gender: "Male",
     vaccinated: false,
     sterilized: false,
-    personality: "He’s an old guy who’ll ask you for affection and might even join you in the mess.",
+    personality: "He's an old guy who'll ask you for affection and might even join you in the mess.",
     behavior: ["affectionate", "very-chill", "people-loving", "friendly"],
     petting: "PLEASE PET AS MUCH AS YOU CAN",
     location: "PJ auditorium,Near Hostles"
   },
   {
-    id: 15,
+    id: 17,
     name: "Coco",
     image: "../Images/cats/Coco.jpg",
     bgImage: "../Images/backgrounds/Coco-bg.svg",
@@ -226,13 +256,13 @@ const cats = [
     gender: "Female",
     vaccinated: false,
     sterilized: false,
-    personality: "She’ll follow you for pets, but the moment you turn to look, she gets shy and runs away 😭",
+    personality: "She'll follow you for pets, but the moment you turn to look, she gets shy and runs away 😭",
     behavior: ["affectionate", "a-little-shy", "gentle", "people-friendly"],
     petting: "PLEASE PET AS MUCH AS YOU CAN",
     location: "Near Hostles"
   },
   {
-    id: 16,
+    id: 18,
     name: "Dogie",
     image: "../Images/cats/Dogie.jpg",
     bgImage: "../Images/backgrounds/Dogie-bg.svg",
@@ -241,7 +271,7 @@ const cats = [
     gender: "Femasle",
     vaccinated: false,
     sterilized: false,
-    personality: "She’s a gorgeous girl—you’ll usually find her at Rajubhiya’s shop or chilling with a cup of tea.",
+    personality: "She's a gorgeous girl—you'll usually find her at Rajubhiya's shop or chilling with a cup of tea.",
     behavior: ["extrovert", "food-driven", "friendly"],
     petting: "she won't bite (probably)",
     location: "Near shops"
@@ -410,6 +440,7 @@ function showNextCat() {
 function showPrevCat() {
   renderCat((currentCatIndex - 1 + cats.length) % cats.length, false, 'prev');
 }
+
 
 
 
