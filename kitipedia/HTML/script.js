@@ -268,7 +268,7 @@ const cats = [
     bgImage: "../Images/backgrounds/Dogie-bg.svg",
     doodle: "../Images/doodles/Dogie-doodle.svg",
     age: "? year",
-    gender: "Femasle",
+    gender: "Female",
     vaccinated: false,
     sterilized: false,
     personality: "She's a gorgeous girl—you'll usually find her at Rajubhiya's shop or chilling with a cup of tea.",
@@ -440,6 +440,7 @@ function showNextCat() {
 function showPrevCat() {
   renderCat((currentCatIndex - 1 + cats.length) % cats.length, false, 'prev');
 }
+
 
 
 
