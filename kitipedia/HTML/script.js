@@ -215,7 +215,7 @@ const cats = [
     behavior: ["Dominant", "Territorial", "Independent", "Not-social", "Bold"],
     petting: "Don’t. Just… don’t.",
     location: "Rarlly but near hostel 1"
-  }
+  },
   {
     id: 15,
     name: "Meowesh",
@@ -440,6 +440,7 @@ function showNextCat() {
 function showPrevCat() {
   renderCat((currentCatIndex - 1 + cats.length) % cats.length, false, 'prev');
 }
+
 
 
 
