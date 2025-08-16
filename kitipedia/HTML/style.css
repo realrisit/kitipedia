@@ -947,6 +947,7 @@ h1 {
   will-change: transform;
   backface-visibility: hidden;
 }
+
 /* ===== Donation Section ===== */
 .donation-box {
   text-align: center;
@@ -965,37 +966,64 @@ h1 {
   font-size: 1.3rem;
 }
 
+.payment-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
 .donate-btn {
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 100%;
   padding: 12px;
-  margin: 10px 0;
   color: white;
   text-decoration: none;
   border-radius: 10px;
   font-weight: bold;
   font-size: 1rem;
   transition: transform 0.2s, background 0.3s;
+  gap: 8px;
 }
 
 .donate-btn:hover {
   transform: translateY(-2px);
 }
 
+.donate-btn i {
+  font-size: 1.2rem;
+}
+
 /* PhonePe button */
 .phonepe-btn {
   background: #5a2ec9; /* PhonePe purple */
+  border: 2px solid #5a2ec9;
 }
+
 .phonepe-btn:hover {
   background: #4722a8;
+  border-color: #4722a8;
+}
+
+/* Google Pay button */
+.gpay-btn {
+  background: #4285F4; /* Google blue */
+  border: 2px solid #4285F4;
+}
+
+.gpay-btn:hover {
+  background: #3367d6;
+  border-color: #3367d6;
 }
 
 /* UPI button (matches site theme) */
 .upi-btn {
   background: #ff6b6b; /* site red-pink */
+  border: 2px solid #ff6b6b;
 }
+
 .upi-btn:hover {
   background: #e25555;
+  border-color: #e25555;
 }
-
-
