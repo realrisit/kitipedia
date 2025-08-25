@@ -21,19 +21,6 @@
   </div>
 </main>
 
-<!-- ===== QR + UPI Section ===== -->
-<section class="donation-section">
-  <h2>Support the Cats 🐾</h2>
-  <div class="qr-container">
-    <img src="../Images/qr-code.png" alt="QR Code" class="qr-code">
-  </div>
-  <p class="upi-text">UPI ID: 
-    <span id="upi-id">priyanka26031993@ibl</span>
-    <button onclick="copyUPI()" class="copy-btn"><i class="fas fa-copy"></i></button>
-  </p>
-
-</section>
-
 <!-- Modal Popup with enhanced navigation -->
 <div class="modal" id="catModal">
   <div class="modal-content">
@@ -51,20 +38,7 @@
   </div>
 </div>
 
-<!-- Floating Donate Button (Mobile only) -->
-<button id="donate-float-btn">
-  <i class="fas fa-heart"></i> Support
-</button>
-
 <script src="script.js"></script>
-<script>
-  function copyUPI() {
-    const upi = document.getElementById("upi-id").innerText;
-    navigator.clipboard.writeText(upi).then(() => {
-      alert("UPI ID copied: " + upi);
-    });
-  }
-</script>
 
 <footer>
   <p>🐾 Designed & Developed by Ew 😛— <span class="credits">Doodles by Zoya</span> — Images © 2025 Kitipidia</p>
@@ -72,3 +46,4 @@
 
 </body>
 </html>
+

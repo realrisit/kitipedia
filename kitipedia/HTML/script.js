@@ -460,24 +460,6 @@ modalBody.addEventListener('touchend', (e) => {
     }
   }
 }, false);
-// ===== Floating Donate Button =====
-const donateBtn = document.getElementById("donate-float-btn");
-const donationSection = document.querySelector(".donation-section");
-
-// Show/Hide button depending on section visibility
-window.addEventListener("scroll", () => {
-  if (!donationSection || !donateBtn) return;
-  const rect = donationSection.getBoundingClientRect();
-  const inView = rect.top < window.innerHeight && rect.bottom > 0;
-  donateBtn.style.display = inView ? "none" : "flex";
-});
-
-// Scroll smoothly to donation section
-if (donateBtn && donationSection) {
-  donateBtn.addEventListener("click", () => {
-    donationSection.scrollIntoView({ behavior: "smooth" });
-  });
-}
 
 
 
