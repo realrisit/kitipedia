@@ -1,5 +1,5 @@
-  // Cat Data with Consistent Naming
-  const cats = [
+// Cat Data with Consistent Naming
+const cats = [
   {
     id: 1,
     name: "Santra",
@@ -278,163 +278,208 @@
   }
 ];
 
-  // ===== Swipeable Cat Modal =====
+// ===== Swipeable Cat Modal =====
 
-  // DOM Elements
-  const catGrid = document.getElementById('catGrid');
-  const modal = document.getElementById('catModal');
-  const modalBody = document.getElementById('modalBody');
-  const closeBtn = document.querySelector('.close-btn');
-  const prevBtn = document.getElementById('prevCat');
-  const nextBtn = document.getElementById('nextCat');
-  const catCounter = document.getElementById('catCounter');
+// DOM Elements
+const catGrid = document.getElementById('catGrid');
+const modal = document.getElementById('catModal');
+const modalBody = document.getElementById('modalBody');
+const closeBtn = document.querySelector('.close-btn');
+const prevBtn = document.getElementById('prevCat');
+const nextBtn = document.getElementById('nextCat');
+const catCounter = document.getElementById('catCounter');
 
-  let currentCatIndex = 0;
+let currentCatIndex = 0;
 
-  // ===== Render Cat Cards =====
-  cats.forEach((cat, index) => {
-    const card = document.createElement('div');
-    card.className = 'cat-card';
-    card.innerHTML = `
-      <img src="${cat.image}" alt="${cat.name}" class="cat-main-img" loading="lazy">
-      <div class="cat-doodle">
-        <img src="${cat.doodle}" alt="${cat.name} doodle" class="doodle-img" loading="lazy">
-      </div>
-      <div class="cat-info">
-        <h3>${cat.name}</h3>
-        <p><img src="../Images/icons/${cat.gender.toLowerCase()}.svg" class="gender-icon-small" alt="${cat.gender}"> 
-        <span class="cat-age">${cat.age}</span></p>
-      </div>
-    `;
-    card.addEventListener('click', () => {
-      currentCatIndex = index;
-      openModal(currentCatIndex);
-    });
-    catGrid.appendChild(card);
-  });
-
-  // ===== Modal Functions =====
-  function openModal(index) {
-    modal.style.display = 'block';
-    document.body.style.overflow = 'hidden';
-    renderCat(index, true);
-  }
-
-  function closeModal() {
-    modal.style.display = 'none';
-    document.body.style.overflow = '';
-  }
-
-  closeBtn.addEventListener('click', closeModal);
-  window.addEventListener('click', (e) => {
-    if (e.target === modal) closeModal();
-  });
-
-  // ===== Render Cat in Modal with Slide Animation =====
-  function renderCat(index, instant = false, direction = null) {
-    const cat = cats[index];
-    const nicknamesDisplay = cat.nicknames?.length
-      ? `<p class="aka">a.k.a <span>${cat.nicknames.join(", ")}</span></p>`
-      : '';
-
-    const newContainer = document.createElement('div');
-    newContainer.className = 'modal-bg-container';
-    newContainer.style.setProperty('--cat-bg', `url('${cat.bgImage}')`);
-    newContainer.innerHTML = `
-      <div class="modal-bg-overlay"></div>
-      <div class="modal-content-wrapper">
-        <div class="cat-header">
-          <div class="name-doodle-container">
-            <img src="${cat.doodle}" alt="${cat.name} doodle" class="modal-doodle" loading="lazy">
-            <div class="name-container">
-              <h2>${cat.name}</h2>
-              ${nicknamesDisplay}
-            </div>
-          </div>
-          <img src="../Images/icons/${cat.gender.toLowerCase()}.svg" class="gender-icon" alt="${cat.gender}">
-        </div>
-        <img src="${cat.image}" alt="${cat.name}" class="modal-cat-img" loading="lazy">
-        <div class="details-grid">
-          <div class="detail-item"><span class="detail-label">Age:</span><span class="detail-value">${cat.age}</span></div>
-          <div class="detail-item"><span class="detail-label">Vaccinated:</span>
-            <img src="../Images/icons/${cat.vaccinated ? 'yes' : 'no'}.svg" class="status-icon">
-          </div>
-          <div class="detail-item"><span class="detail-label">Sterilized:</span>
-            <img src="../Images/icons/${cat.sterilized ? 'yes' : 'no'}.svg" class="status-icon">
-          </div>
-          <div class="detail-item full-width"><span class="detail-label">Detail:</span><p>${cat.personality}</p></div>
-          <div class="detail-item full-width"><span class="detail-label">Behavior:</span>
-            <div class="behavior-tags">${cat.behavior.map(b => `<span class="tag">${b}</span>`).join('')}</div>
-          </div>
-          <div class="detail-item full-width"><span class="detail-label">Petting Advice:</span><p>${cat.petting}</p></div>
-          <div class="detail-item full-width"><span class="detail-label">Location:</span><p>${cat.location}</p></div>
-        </div>
-      </div>
-    `;
-
-    if (instant || !direction) {
-      modalBody.innerHTML = '';
-      modalBody.appendChild(newContainer);
-    } else {
-      const oldContainer = modalBody.querySelector('.modal-bg-container');
-
-      // Prepare new container offscreen
-      newContainer.style.position = 'absolute';
-      newContainer.style.top = '0';
-      newContainer.style.left = '0';
-      newContainer.style.width = '100%';
-      newContainer.style.height = '100%';
-      newContainer.style.transform = direction === 'next' ? 'translateX(100%)' : 'translateX(-100%)';
-
-      modalBody.appendChild(newContainer);
-
-      // Animate both containers
-      requestAnimationFrame(() => {
-        oldContainer.style.transition = "transform 0.35s ease";
-        newContainer.style.transition = "transform 0.35s ease";
-        oldContainer.style.transform = direction === 'next' ? 'translateX(-100%)' : 'translateX(100%)';
-        newContainer.style.transform = 'translateX(0)';
-      });
-
-      // Cleanup after animation
-      setTimeout(() => {
-        if (oldContainer) oldContainer.remove();
-        newContainer.style.position = 'relative';
-      }, 350);
-    }
-
+// ===== Render Cat Cards =====
+cats.forEach((cat, index) => {
+  const card = document.createElement('div');
+  card.className = 'cat-card';
+  card.innerHTML = `
+    <img src="${cat.image}" alt="${cat.name}" class="cat-main-img" loading="lazy">
+    <div class="cat-doodle">
+      <img src="${cat.doodle}" alt="${cat.name} doodle" class="doodle-img" loading="lazy">
+    </div>
+    <div class="cat-info">
+      <h3>${cat.name}</h3>
+      <p><img src="../Images/icons/${cat.gender.toLowerCase()}.svg" class="gender-icon-small" alt="${cat.gender}"> 
+      <span class="cat-age">${cat.age}</span></p>
+    </div>
+  `;
+  card.addEventListener('click', () => {
     currentCatIndex = index;
-    preloadCatImages(index);
-    updateCounter();
-  }
+    openModal(currentCatIndex);
+  });
+  catGrid.appendChild(card);
+});
 
-  // ===== Swipe Support with Slide-In/Out Animation =====
-  let startX = 0, currentX = 0, isDragging = false;
-  const threshold = 50;
+// ===== Modal Functions =====
+function openModal(index) {
+  modal.style.display = 'block';
+  document.body.style.overflow = 'hidden';
+  renderCat(index, true);
+}
 
-  modalBody.addEventListener('touchstart', (e) => {
-    startX = e.touches[0].clientX;
-    isDragging = true;
-  }, false);
+function closeModal() {
+  modal.style.display = 'none';
+  document.body.style.overflow = '';
+}
 
-  modalBody.addEventListener('touchend', (e) => {
-    if (!isDragging) return;
-    isDragging = false;
-    let diffX = e.changedTouches[0].clientX - startX;
+closeBtn.addEventListener('click', closeModal);
+window.addEventListener('click', (e) => {
+  if (e.target === modal) closeModal();
+});
 
-    if (Math.abs(diffX) > threshold) {
-      if (diffX < 0) {
-        showNextCat();
-      } else {
-        showPrevCat();
-      }
+// ===== Navigation Functions =====
+function showNextCat() {
+  renderCat((currentCatIndex + 1) % cats.length, false, 'next');
+}
+
+function showPrevCat() {
+  renderCat((currentCatIndex - 1 + cats.length) % cats.length, false, 'prev');
+}
+
+// Connect navigation buttons
+prevBtn.addEventListener('click', showPrevCat);
+nextBtn.addEventListener('click', showNextCat);
+
+// Add keyboard navigation
+document.addEventListener('keydown', (e) => {
+  if (modal.style.display === 'block') { // Only when modal is open
+    if (e.key === 'ArrowLeft') {
+      showPrevCat();
+    } else if (e.key === 'ArrowRight') {
+      showNextCat();
+    } else if (e.key === 'Escape') {
+      closeModal();
     }
-  }, false);
+  }
+});
 
-  function showNextCat() {
-    renderCat((currentCatIndex + 1) % cats.length, false, 'next');
+// ===== Render Cat in Modal with Slide Animation =====
+function renderCat(index, instant = false, direction = null) {
+  const cat = cats[index];
+  const nicknamesDisplay = cat.nicknames?.length
+    ? `<p class="aka">a.k.a <span>${cat.nicknames.join(", ")}</span></p>`
+    : '';
+
+  const newContainer = document.createElement('div');
+  newContainer.className = 'modal-bg-container';
+  newContainer.style.setProperty('--cat-bg', `url('${cat.bgImage}')`);
+  newContainer.innerHTML = `
+    <div class="modal-bg-overlay"></div>
+    <div class="modal-content-wrapper">
+      <div class="cat-header">
+        <div class="name-doodle-container">
+          <img src="${cat.doodle}" alt="${cat.name} doodle" class="modal-doodle" loading="lazy">
+          <div class="name-container">
+            <h2>${cat.name}</h2>
+            ${nicknamesDisplay}
+          </div>
+        </div>
+        <img src="../Images/icons/${cat.gender.toLowerCase()}.svg" class="gender-icon" alt="${cat.gender}">
+      </div>
+      <img src="${cat.image}" alt="${cat.name}" class="modal-cat-img" loading="lazy">
+      <div class="details-grid">
+        <div class="detail-item"><span class="detail-label">Age:</span><span class="detail-value">${cat.age}</span></div>
+        <div class="detail-item"><span class="detail-label">Vaccinated:</span>
+          <img src="../Images/icons/${cat.vaccinated ? 'yes' : 'no'}.svg" class="status-icon">
+        </div>
+        <div class="detail-item"><span class="detail-label">Sterilized:</span>
+          <img src="../Images/icons/${cat.sterilized ? 'yes' : 'no'}.svg" class="status-icon">
+        </div>
+        <div class="detail-item full-width"><span class="detail-label">Detail:</span><p>${cat.personality}</p></div>
+        <div class="detail-item full-width"><span class="detail-label">Behavior:</span>
+          <div class="behavior-tags">${cat.behavior.map(b => `<span class="tag">${b}</span>`).join('')}</div>
+        </div>
+        <div class="detail-item full-width"><span class="detail-label">Petting Advice:</span><p>${cat.petting}</p></div>
+        <div class="detail-item full-width"><span class="detail-label">Location:</span><p>${cat.location}</p></div>
+      </div>
+    </div>
+  `;
+
+  if (instant || !direction) {
+    modalBody.innerHTML = '';
+    modalBody.appendChild(newContainer);
+  } else {
+    const oldContainer = modalBody.querySelector('.modal-bg-container');
+
+    // Prepare new container offscreen
+    newContainer.style.position = 'absolute';
+    newContainer.style.top = '0';
+    newContainer.style.left = '0';
+    newContainer.style.width = '100%';
+    newContainer.style.height = '100%';
+    newContainer.style.transform = direction === 'next' ? 'translateX(100%)' : 'translateX(-100%)';
+
+    modalBody.appendChild(newContainer);
+
+    // Animate both containers
+    requestAnimationFrame(() => {
+      oldContainer.style.transition = "transform 0.35s ease";
+      newContainer.style.transition = "transform 0.35s ease";
+      oldContainer.style.transform = direction === 'next' ? 'translateX(-100%)' : 'translateX(100%)';
+      newContainer.style.transform = 'translateX(0)';
+    });
+
+    // Cleanup after animation
+    setTimeout(() => {
+      if (oldContainer) oldContainer.remove();
+      newContainer.style.position = 'relative';
+    }, 350);
   }
-  function showPrevCat() {
-    renderCat((currentCatIndex - 1 + cats.length) % cats.length, false, 'prev');
+
+  currentCatIndex = index;
+  updateCounter();
+}
+
+// Update counter display
+function updateCounter() {
+  catCounter.textContent = `${currentCatIndex + 1}/${cats.length}`;
+}
+
+// Touch swipe support (keep your existing implementation)
+let startX = 0, currentX = 0, isDragging = false;
+const threshold = 50;
+
+modalBody.addEventListener('touchstart', (e) => {
+  startX = e.touches[0].clientX;
+  isDragging = true;
+}, false);
+
+modalBody.addEventListener('touchend', (e) => {
+  if (!isDragging) return;
+  isDragging = false;
+  let diffX = e.changedTouches[0].clientX - startX;
+
+  if (Math.abs(diffX) > threshold) {
+    if (diffX < 0) {
+      showNextCat();
+    } else {
+      showPrevCat();
+    }
   }
+}, false);
+// ===== Floating Donate Button =====
+const donateBtn = document.getElementById("donate-float-btn");
+const donationSection = document.querySelector(".donation-section");
+
+// Show/Hide button depending on section visibility
+window.addEventListener("scroll", () => {
+  if (!donationSection || !donateBtn) return;
+  const rect = donationSection.getBoundingClientRect();
+  const inView = rect.top < window.innerHeight && rect.bottom > 0;
+  donateBtn.style.display = inView ? "none" : "flex";
+});
+
+// Scroll smoothly to donation section
+if (donateBtn && donationSection) {
+  donateBtn.addEventListener("click", () => {
+    donationSection.scrollIntoView({ behavior: "smooth" });
+  });
+}
+
+
+
+
 

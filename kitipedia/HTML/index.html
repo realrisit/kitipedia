@@ -21,6 +21,19 @@
   </div>
 </main>
 
+<!-- ===== QR + UPI Section ===== -->
+<section class="donation-section">
+  <h2>Support the Cats 🐾</h2>
+  <div class="qr-container">
+    <img src="../Images/qr-code.png" alt="QR Code" class="qr-code">
+  </div>
+  <p class="upi-text">UPI ID: 
+    <span id="upi-id">priyanka26031993@ibl</span>
+    <button onclick="copyUPI()" class="copy-btn"><i class="fas fa-copy"></i></button>
+  </p>
+
+</section>
+
 <!-- Modal Popup with enhanced navigation -->
 <div class="modal" id="catModal">
   <div class="modal-content">
@@ -38,48 +51,24 @@
   </div>
 </div>
 
+<!-- Floating Donate Button (Mobile only) -->
+<button id="donate-float-btn">
+  <i class="fas fa-heart"></i> Support
+</button>
+
 <script src="script.js"></script>
+<script>
+  function copyUPI() {
+    const upi = document.getElementById("upi-id").innerText;
+    navigator.clipboard.writeText(upi).then(() => {
+      alert("UPI ID copied: " + upi);
+    });
+  }
+</script>
 
 <footer>
   <p>🐾 Designed & Developed by Ew 😛— <span class="credits">Doodles by Zoya</span> — Images © 2025 Kitipidia</p>
-
-  <div class="donation-box">
-  <h3>Testing stage (dont pay)</h3>
-  
-  <div class="payment-buttons-container">
-    <div class="payment-buttons">
-      <!-- PhonePe button -->
-      <a href="phonepe://pay?pa=realrisit@axl" 
-         class="donate-btn phonepe-btn">
-         <i class="fab fa-product-hunt"></i> PhonePe
-      </a>
-      
-      <!-- Google Pay button -->
-      <a href="tez://upi/pay?pa=realrisit@axl" 
-         class="donate-btn gpay-btn">
-         <i class="fab fa-google-pay"></i> Google Pay
-      </a>
-      
-      <!-- Generic UPI button -->
-      <a href="upi://pay?pa=realrisit@axl&pn=Kitipidia%20Cats&cu=INR&tn=Donation%20for%20Cats" 
-         class="donate-btn upi-btn">
-         <i class="fas fa-mobile-alt"></i> Any UPI App
-      </a>
-    </div>
-  </div>
-  
-  <p style="margin-top:15px;">UPI ID: <b>realrisit@axl</b></p>
-</div>
-
 </footer>
-
 
 </body>
 </html>
-
-
-
-
-
-
-

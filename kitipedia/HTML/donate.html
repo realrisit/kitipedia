@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donate to Stray Cats</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #ff6b6b;
+            --secondary: #6c5ce7;
+            --success: #4CAF50;
+            --error: #f44336;
+            --light: #f8f9fa;
+            --dark: #343a40;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            background-color: #f5f7fa;
+            color: #333;
+            padding: 20px;
+        }
+        .donation-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+        }
+        h1 { color: var(--primary); margin-bottom: 10px; text-align: center; }
+        p.subtitle { text-align: center; color: #666; margin-bottom: 30px; }
+        .donation-form { margin-top: 20px; }
+        .form-group { margin-bottom: 20px; }
+        label { display: block; margin-bottom: 8px; font-weight: 600; color: #555; }
+        input, textarea {
+            width: 100%; padding: 12px 15px; border: 1px solid #ddd;
+            border-radius: 8px; font-size: 16px; transition: border-color 0.3s;
+        }
+        input:focus, textarea:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 2px rgba(255, 107, 107, 0.2); }
+        .amount-options { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 10px; }
+        .amount-btn {
+            padding: 12px; border: 2px solid #ddd; border-radius: 8px;
+            background: white; font-weight: bold; font-size: 16px; cursor: pointer;
+            transition: all 0.2s;
+        }
+        .amount-btn:hover { border-color: var(--primary); }
+        .amount-btn.selected { background: var(--primary); color: white; border-color: var(--primary); }
+        .custom-amount { grid-column: span 3; display: flex; gap: 10px; }
+        .custom-amount input { flex: 1; text-align: center; }
+        #custom-btn { padding: 0 20px; background: var(--success); color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; }
+        #custom-btn:hover { background: #3e8e41; }
+        textarea { min-height: 100px; resize: vertical; }
+        .payment-methods { margin: 30px 0; padding-top: 20px; border-top: 1px solid #eee; }
+        .payment-methods p { text-align: center; margin-bottom: 15px; font-weight: 600; color: #555; }
+        .payment-buttons { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+        .payment-btn {
+            padding: 12px 20px; border-radius: 8px; color: white; border: none; font-weight: bold;
+            display: flex; align-items: center; gap: 8px; cursor: pointer; transition: transform 0.2s, opacity 0.2s;
+        }
+        .payment-btn:hover { transform: translateY(-2px); opacity: 0.9; }
+        .phonepe { background: #5f27cd; }
+        .gpay { background: #4285F4; }
+        .upi { background: #6c5ce7; }
+        .qr-section { margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee; text-align: center; }
+        .qr-section img { width: 180px; height: 180px; border: 1px solid #eee; padding: 10px; background: white; margin: 10px 0; }
+        .qr-section strong { color: var(--primary); }
+        .confirmation { text-align: center; padding: 30px 0; display: none; }
+        .confirmation h2 { color: var(--success); margin-bottom: 15px; }
+        .loading { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.5); z-index: 1000; justify-content: center; align-items: center; }
+        .spinner { width: 50px; height: 50px; border: 5px solid #f3f3f3; border-top: 5px solid var(--primary); border-radius: 50%; animation: spin 1s linear infinite; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    </style>
+</head>
+<body>
+    <div class="donation-container">
+        <h1>Help Stray Cats</h1>
+        <p class="subtitle">Your support makes a difference!</p>
+
+        <form id="donation-form" class="donation-form">
+            <div class="form-group">
+                <label for="name">Your Name</label>
+                <input type="text" id="name" required>
+                <div id="name-error" class="error-message" style="color:red;display:none;">Please enter your name</div>
+            </div>
+            <div class="form-group">
+                <label for="email">Email (Optional)</label>
+                <input type="email" id="email">
+                <div id="email-error" class="error-message" style="color:red;display:none;">Please enter a valid email</div>
+            </div>
+            <div class="form-group">
+                <label>Donation Amount (₹)</label>
+                <div class="amount-options">
+                    <button type="button" class="amount-btn" data-amount="100">₹100</button>
+                    <button type="button" class="amount-btn" data-amount="250">₹250</button>
+                    <button type="button" class="amount-btn" data-amount="500">₹500</button>
+                    <div class="custom-amount">
+                        <input type="number" id="custom-input" placeholder="Other amount" min="1">
+                        <button type="button" id="custom-btn">Custom</button>
+                    </div>
+                </div>
+                <div id="amount-error" class="error-message" style="color:red;display:none;">Please select an amount</div>
+            </div>
+            <div class="form-group">
+                <label for="message">Special Instructions (Optional)</label>
+                <textarea id="message"></textarea>
+            </div>
+            <div class="payment-methods">
+                <p>Choose payment method:</p>
+                <div class="payment-buttons">
+                    <button type="button" class="payment-btn phonepe" data-app="phonepe"><i class="fab fa-product-hunt"></i> PhonePe</button>
+                    <button type="button" class="payment-btn gpay" data-app="gpay"><i class="fab fa-google-pay"></i> Google Pay</button>
+                    <button type="button" class="payment-btn upi" data-app="upi"><i class="fas fa-mobile-alt"></i> Any UPI App</button>
+                </div>
+            </div>
+        </form>
+
+        <div class="qr-section">
+            <h3>Or scan this QR code:</h3>
+            <img src="upi-qr.png" alt="UPI QR Code">
+            <p>UPI ID: <strong>realrisit@axl</strong></p>
+        </div>
+
+        <div class="confirmation" id="confirmation">
+            <h2>Thank You! ❤️</h2>
+            <p>Your donation details have been recorded.</p>
+            <p>Transaction reference: <span id="txn-ref"></span></p>
+        </div>
+    </div>
+
+    <div class="loading" id="loading"><div class="spinner"></div></div>
+
+    <script>
+        const upiId = "realrisit@axl";
+        const recipientName = "Stray Cat Rescue";
+        const googleScriptUrl = "https://script.google.com/macros/s/AKfycbxQedlBJ7--G_9QNr4ZUz0u-NSfTl1yCsFsP4kLHG-UV-q8gXEZSnICwRyaMz9yT8zs/exec";
+        let selectedAmount = 0;
+        const donationForm = document.getElementById('donation-form');
+        const confirmationDiv = document.getElementById('confirmation');
+        const loadingDiv = document.getElementById('loading');
+        const nameInput = document.getElementById('name');
+        const emailInput = document.getElementById('email');
+        const customInput = document.getElementById('custom-input');
+        const nameError = document.getElementById('name-error');
+        const emailError = document.getElementById('email-error');
+        const amountError = document.getElementById('amount-error');
+
+        document.querySelectorAll('.amount-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                selectedAmount = parseInt(btn.dataset.amount);
+                document.querySelectorAll('.amount-btn').forEach(b => b.classList.remove('selected'));
+                btn.classList.add('selected');
+                customInput.value = '';
+                amountError.style.display = 'none';
+            });
+        });
+
+        document.getElementById('custom-btn').addEventListener('click', () => {
+            const customAmount = parseInt(customInput.value);
+            if (customAmount && customAmount > 0) {
+                selectedAmount = customAmount;
+                document.querySelectorAll('.amount-btn').forEach(b => b.classList.remove('selected'));
+                amountError.style.display = 'none';
+            } else {
+                amountError.style.display = 'block';
+                amountError.textContent = "Please enter a valid amount";
+            }
+        });
+
+        function validateForm() {
+            let isValid = true;
+            if (!nameInput.value.trim()) { nameError.style.display = 'block'; isValid = false; } else { nameError.style.display = 'none'; }
+            if (emailInput.value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailInput.value)) { emailError.style.display = 'block'; isValid = false; } else { emailError.style.display = 'none'; }
+            if (selectedAmount <= 0) { amountError.style.display = 'block'; amountError.textContent = "Please select an amount"; isValid = false; } else { amountError.style.display = 'none'; }
+            return isValid;
+        }
+
+        document.querySelectorAll('.payment-btn').forEach(btn => {
+            btn.addEventListener('click', async () => {
+                if (!validateForm()) return;
+
+                const donorName = nameInput.value.trim();
+                const donorEmail = emailInput.value.trim();
+                const message = document.getElementById('message').value.trim();
+                const txnRef = 'TXN-' + Date.now().toString().slice(-6);
+
+                loadingDiv.style.display = 'flex';
+                try {
+                    const response = await fetch(googleScriptUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            name: donorName,
+                            email: donorEmail,
+                            amount: selectedAmount,
+                            message: message,
+                            paymentMethod: btn.dataset.app,
+                            txnRef: txnRef,
+                            timestamp: new Date().toISOString()
+                        })
+                    });
+                    const result = await response.json();
+                    if (result.status === "success") {
+                        document.getElementById('txn-ref').textContent = txnRef;
+                        donationForm.style.display = 'none';
+                        confirmationDiv.style.display = 'block';
+                    } else {
+                        alert("⚠️ Could not save record, but payment will still continue.");
+                    }
+                } catch (error) {
+                    alert("⚠️ Error saving record, but payment will still continue.");
+                } finally {
+                    loadingDiv.style.display = 'none';
+                    // open payment app
+                    const app = btn.dataset.app;
+                    let paymentUrl = "";
+                    switch(app) {
+                        case "phonepe":
+                            paymentUrl = `phonepe://pay?pa=${upiId}&pn=${encodeURIComponent(recipientName)}&am=${selectedAmount}&cu=INR&tn=Donation for ${encodeURIComponent(donorName)}`;
+                            break;
+                        case "gpay":
+                            paymentUrl = `tez://upi/pay?pa=${upiId}&pn=${encodeURIComponent(recipientName)}&am=${selectedAmount}&cu=INR&tn=Donation for ${encodeURIComponent(donorName)}`;
+                            break;
+                        default:
+                            paymentUrl = `upi://pay?pa=${upiId}&pn=${encodeURIComponent(recipientName)}&am=${selectedAmount}&cu=INR&tn=Donation for ${encodeURIComponent(donorName)}`;
+                    }
+                    window.location.href = paymentUrl;
+                }
+            });
+        });
+    </script>
+</body>
+</html>

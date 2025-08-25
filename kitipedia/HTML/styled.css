@@ -1,0 +1,208 @@
+
+/* Base Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #f5f9ff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    color: #333;
+}
+
+.donation-container {
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    text-align: center;
+    max-width: 500px;
+    width: 90%;
+}
+
+h1 {
+    color: #ff6b6b;
+    margin-bottom: 0.5rem;
+}
+
+/* Form Styles */
+.donation-form {
+    margin-top: 1.5rem;
+    text-align: left;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+    color: #555;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="number"],
+textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    box-sizing: border-box;
+}
+
+textarea {
+    height: 80px;
+    resize: vertical;
+}
+
+/* Amount Options */
+.amount-options {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-top: 0.5rem;
+}
+
+.amount-btn {
+    padding: 12px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    background: white;
+    font-weight: bold;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.amount-btn:hover {
+    border-color: #ff6b6b;
+}
+
+.amount-btn.selected {
+    background: #ff6b6b;
+    color: white;
+    border-color: #ff6b6b;
+}
+
+.custom-amount {
+    grid-column: span 3;
+    display: flex;
+    gap: 0.5rem;
+}
+
+.custom-amount input {
+    flex: 1;
+    padding: 12px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    text-align: center;
+}
+
+#custom-btn {
+    padding: 0 1.5rem;
+    background: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* Payment Methods */
+.payment-methods {
+    margin: 2rem 0;
+    border-top: 1px solid #eee;
+    padding-top: 1.5rem;
+}
+
+.payment-buttons {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.payment-btn {
+    padding: 12px 1.5rem;
+    border-radius: 8px;
+    color: white;
+    border: none;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.payment-btn:hover {
+    transform: translateY(-2px);
+    opacity: 0.9;
+}
+
+.phonepe {
+    background: #5f27cd;
+}
+
+.gpay {
+    background: #4285F4;
+}
+
+.upi {
+    background: #6c5ce7;
+}
+
+/* QR Section */
+.qr-section {
+    margin-top: 2rem;
+    border-top: 1px solid #eee;
+    padding-top: 1.5rem;
+}
+
+.qr-section img {
+    width: 180px;
+    height: 180px;
+    border: 1px solid #eee;
+    padding: 10px;
+    background: white;
+    margin: 10px 0;
+}
+
+/* Confirmation */
+.confirmation {
+    text-align: center;
+    padding: 2rem 0;
+}
+
+.confirmation h2 {
+    color: #4CAF50;
+}
+
+#txn-ref {
+    font-weight: bold;
+    color: #333;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+    .amount-options {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .custom-amount {
+        grid-column: span 2;
+    }
+    .payment-buttons {
+        flex-direction: column;
+    }
+    .payment-btn {
+        justify-content: center;
+    }
+}
