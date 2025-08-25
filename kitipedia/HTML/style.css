@@ -339,11 +339,14 @@ h1 {
 }
 
 .cat-info h3 {
-  font-family: 'CatFont2', 'Arial', sans-serif;
+  font-family: 'CatFont3', 'Arial', sans-serif;
   margin: 0 0 5px 0;
   font-size: 1.5rem;
+  font-weight: 400;   /* normal weight */
   color: #333;
+  letter-spacing: 0.5px; /* optional: improves readability */
 }
+
 
 .cat-info p {
   font-family: Arial, sans-serif;

@@ -317,18 +317,33 @@ cats.forEach((cat, index) => {
 function openModal(index) {
   modal.style.display = 'block';
   document.body.style.overflow = 'hidden';
+
+  // hide support button
+  if (donateBtn) donateBtn.style.display = "none";
+
   renderCat(index, true);
 }
 
 function closeModal() {
   modal.style.display = 'none';
   document.body.style.overflow = '';
+
+  // show support button again
+  if (donateBtn) donateBtn.style.display = "flex";
 }
 
 closeBtn.addEventListener('click', closeModal);
 window.addEventListener('click', (e) => {
   if (e.target === modal) closeModal();
 });
+document.addEventListener('keydown', (e) => {
+  if (modal.style.display === 'block') {
+    if (e.key === 'Escape') {
+      closeModal();
+    }
+  }
+});
+
 
 // ===== Navigation Functions =====
 function showNextCat() {
