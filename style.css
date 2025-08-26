@@ -1,7 +1,7 @@
 /* Font Faces */
 @font-face {
   font-family: 'CatPaw';
-  src: url('../Fonts/CatPaw-zr0OG.otf') format('opentype');
+  src: url('./Fonts/CatPaw-zr0OG.otf') format('opentype');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -9,7 +9,7 @@
 
 @font-face {
   font-family: 'CatFont2';
-  src: url('../Fonts/CatFont2.otf') format('opentype');
+  src: url('./Fonts/CatFont2.otf') format('opentype');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -17,7 +17,7 @@
 
 @font-face {
   font-family: 'CatFont3';
-  src: url('../Fonts/font 3.otf') format('opentype');
+  src: url('./Fonts/font 3.otf') format('opentype');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -29,14 +29,14 @@ body {
   margin: 0;
   padding: 20px;
   color: #333;
-  background: url('../Images/backgrounds/Background.jpg') no-repeat center center fixed;
+  background: url('./Images/backgrounds/Background.jpg') no-repeat center center fixed;
   background-size: cover;
   min-height: 100vh;
 }
 
 @media (max-width: 768px) {
   body {
-    background: url('../Images/backgrounds/Background mb.jpg') no-repeat center center fixed;
+    background: url('./Images/backgrounds/Background mb.jpg') no-repeat center center fixed;
     background-size: cover;
     padding: 15px;
   }
@@ -246,7 +246,7 @@ footer p {
 /* Font Faces */
 @font-face {
   font-family: 'CatPaw';
-  src: url('../Fonts/CatPaw-zr0OG.otf') format('opentype');
+  src: url('./Fonts/CatPaw-zr0OG.otf') format('opentype');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -254,7 +254,7 @@ footer p {
 
 @font-face {
   font-family: 'CatFont2';
-  src: url('../Fonts/CatFont2.otf') format('opentype');
+  src: url('./Fonts/CatFont2.otf') format('opentype');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -266,7 +266,7 @@ body {
   margin: 0;
   padding: 20px;
   color: #333;
-  background: url('../Images/backgrounds/Background.jpg') no-repeat center center fixed;
+  background: url('./Images/backgrounds/Background.jpg') no-repeat center center fixed;
   background-size: cover;
   min-height: 100vh;
 }
@@ -1122,3 +1122,4 @@ h1 {
     display: block;
   }
 }
+
