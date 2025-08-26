@@ -4,9 +4,9 @@ const cats = [
     id: 1,
     name: "Santra",
     nicknames: ["Honey","Gotya"],
-    image: "../Images/cats/Santra.jpg",
-    bgImage: "../Images/backgrounds/Santra-bg.svg",
-    doodle: "../Images/doodles/Santra-doodle.svg",
+    image: "./Images/cats/Santra.jpg",
+    bgImage: "./Images/backgrounds/Santra-bg.svg",
+    doodle: "./Images/doodles/Santra-doodle.svg",
     age: "1 year",
     gender: "Male",
     vaccinated: false,
@@ -19,9 +19,9 @@ const cats = [
   {
     id: 2,
     name: "Jumbo",
-    image: "../Images/cats/Jambo.jpg",
-    bgImage: "../Images/backgrounds/Jambo-bg.svg",
-    doodle: "../Images/doodles/jambo-doodle.png",
+    image: "./Images/cats/Jambo.jpg",
+    bgImage: "./Images/backgrounds/Jambo-bg.svg",
+    doodle: "./Images/doodles/jambo-doodle.png",
     age: "2.5 years",
     gender: "Male",
     vaccinated: false,
@@ -35,9 +35,9 @@ const cats = [
     id: 3,
     name: "Gravy",
     nicknames: ["Pouncy"],
-    image: "../Images/cats/Gravy.jpg",
-    bgImage: "../Images/backgrounds/Gravy-bg.svg",
-    doodle: "../Images/doodles/gravy-doodle.png",
+    image: "./Images/cats/Gravy.jpg",
+    bgImage: "./Images/backgrounds/Gravy-bg.svg",
+    doodle: "./Images/doodles/gravy-doodle.png",
     age: "1 year",
     gender: "female",
     vaccinated: false,
@@ -50,9 +50,9 @@ const cats = [
   {
     id: 4,
     name: "Calico",
-    image: "../Images/cats/Calico.jpg", 
-    bgImage: "../Images/backgrounds/Calico-bg.svg",
-    doodle: "../Images/doodles/calico-doodle.png",
+    image: "./Images/cats/Calico.jpg", 
+    bgImage: "./Images/backgrounds/Calico-bg.svg",
+    doodle: "./Images/doodles/calico-doodle.png",
     age: "1 year",
     gender: "Female",
     vaccinated: false,
@@ -66,9 +66,9 @@ const cats = [
     id: 5,
     name: "Chaya",
     nicknames: ["Bluetooth"],
-    image: "../Images/cats/chaya.jpg",
-    bgImage: "../Images/backgrounds/chaya-bg.svg",
-    doodle: "../Images/doodles/chaya-doodle.png",
+    image: "./Images/cats/chaya.jpg",
+    bgImage: "./Images/backgrounds/chaya-bg.svg",
+    doodle: "./Images/doodles/chaya-doodle.png",
     age: "1 year",
     gender: "Female",
     vaccinated: false,
@@ -81,9 +81,9 @@ const cats = [
   {
     id: 6,
     name: "Gate Guardian",
-    image: "../Images/cats/Gate.jpg",
-    bgImage: "../Images/backgrounds/Gate-bg.svg",
-    doodle: "../Images/doodles/gate-doodle.png",
+    image: "./Images/cats/Gate.jpg",
+    bgImage: "./Images/backgrounds/Gate-bg.svg",
+    doodle: "./Images/doodles/gate-doodle.png",
     age: "?year",
     gender: "Male",
     vaccinated: false,
@@ -96,9 +96,9 @@ const cats = [
   {
     id: 7,
     name: "Sasha",
-    image: "../Images/cats/IDK her name.jpg",
-    bgImage: "../Images/backgrounds/Idk-bg.svg",
-    doodle: "../Images/doodles/idk-doodle.svg",
+    image: "./Images/cats/IDK her name.jpg",
+    bgImage: "./Images/backgrounds/Idk-bg.svg",
+    doodle: "./Images/doodles/idk-doodle.svg",
     age: "2.5year",
     gender: "Female",
     vaccinated: false,
@@ -112,9 +112,9 @@ const cats = [
     id: 8,
     name: "Banku",
     nicknames: ["Paratha"],
-    image: "../Images/cats/Kitten 2.jpg",
-    bgImage: "../Images/backgrounds/Kitten-bg.svg",
-    doodle: "../Images/doodles/Kitten-doodle.png",
+    image: "./Images/cats/Kitten 2.jpg",
+    bgImage: "./Images/backgrounds/Kitten-bg.svg",
+    doodle: "./Images/doodles/Kitten-doodle.png",
     age: "5 Months",
     gender: "Male",
     vaccinated: false,
@@ -128,9 +128,9 @@ const cats = [
     id: 9,
     name: "Sishu",
     nicknames: ["Idli"],
-    image: "../Images/cats/idli.jpg",
-    bgImage: "../Images/backgrounds/Idli-bg.svg",
-    doodle: "../Images/doodles/Idli-doodle.png",
+    image: "./Images/cats/idli.jpg",
+    bgImage: "./Images/backgrounds/Idli-bg.svg",
+    doodle: "./Images/doodles/Idli-doodle.png",
     age: "2.5 years",
     gender: "Male",
     vaccinated: false,
@@ -143,9 +143,9 @@ const cats = [
   {
     id: 10,
     name: "Grace",
-    image: "../Images/cats/Fjambo.jpg",
-    bgImage: "../Images/backgrounds/Fjambo-bg.svg",
-    doodle: "../Images/doodles/Fjambo-doodle.png",
+    image: "./Images/cats/Fjambo.jpg",
+    bgImage: "./Images/backgrounds/Fjambo-bg.svg",
+    doodle: "./Images/doodles/Fjambo-doodle.png",
     age: "2.5 years",
     gender: "Female",
     vaccinated: false,
@@ -158,9 +158,9 @@ const cats = [
   {
     id: 11,
     name: "Patchy",
-    image: "../Images/cats/F jambo 2.jpg",
-    bgImage: "../Images/backgrounds/F jambo 2-bg.svg",
-    doodle: "../Images/doodles/F jambo 2-doodle.svg",
+    image: "./Images/cats/F jambo 2.jpg",
+    bgImage: "./Images/backgrounds/F jambo 2-bg.svg",
+    doodle: "./Images/doodles/F jambo 2-doodle.svg",
     age: "2.5 years",
     gender: "Female",
     vaccinated: false,
@@ -173,9 +173,9 @@ const cats = [
   {
     id: 12,
     name: "Don",
-    image: "../Images/cats/Don.jpg",
-    bgImage: "../Images/backgrounds/Don-bg.svg",
-    doodle: "../Images/doodles/Don-doodle.svg",
+    image: "./Images/cats/Don.jpg",
+    bgImage: "./Images/backgrounds/Don-bg.svg",
+    doodle: "./Images/doodles/Don-doodle.svg",
     age: "? year",
     gender: "Male",
     vaccinated: false,
@@ -189,9 +189,9 @@ const cats = [
     id: 13,
     name: "Raanu",
     nicknames:["mumma-cat"],
-    image: "../Images/cats/mumma cat.jpg",
-    bgImage: "../Images/backgrounds/Mumma-bg.svg",
-    doodle: "../Images/doodles/mumma cat-doodle.png",
+    image: "./Images/cats/mumma cat.jpg",
+    bgImage: "./Images/backgrounds/Mumma-bg.svg",
+    doodle: "./Images/doodles/mumma cat-doodle.png",
     age: "? months",
     gender: "Female",
     vaccinated: false,
@@ -204,9 +204,9 @@ const cats = [
   {
     id: 14,
     name: "Toothless",
-    image: "../Images/cats/Thoothless.jpg",
-    bgImage: "../Images/backgrounds/Toothless-bg.svg",
-    doodle: "../Images/doodles/Toothless-doodle.png",
+    image: "./Images/cats/Thoothless.jpg",
+    bgImage: "./Images/backgrounds/Toothless-bg.svg",
+    doodle: "./Images/doodles/Toothless-doodle.png",
     age: "2.5 years",
     gender: "Female",
     vaccinated: false,
@@ -219,9 +219,9 @@ const cats = [
   {
     id: 15,
     name: "Meowesh",
-    image: "../Images/cats/White.jpg",
-    bgImage: "../Images/backgrounds/White-bg.svg",
-    doodle: "../Images/doodles/White-doodle.svg",
+    image: "./Images/cats/White.jpg",
+    bgImage: "./Images/backgrounds/White-bg.svg",
+    doodle: "./Images/doodles/White-doodle.svg",
     age: "1.5 year",
     gender: "Male",
     vaccinated: false,
@@ -234,9 +234,9 @@ const cats = [
   {
     id: 16,
     name: "Utpal",
-    image: "../Images/cats/Utpal.jpg",
-    bgImage: "../Images/backgrounds/Utpal-bg.svg",
-    doodle: "../Images/doodles/Utpal-doodle.svg",
+    image: "./Images/cats/Utpal.jpg",
+    bgImage: "./Images/backgrounds/Utpal-bg.svg",
+    doodle: "./Images/doodles/Utpal-doodle.svg",
     age: "old af",
     gender: "Male",
     vaccinated: false,
@@ -249,9 +249,9 @@ const cats = [
   {
     id: 17,
     name: "Coco",
-    image: "../Images/cats/Coco.jpg",
-    bgImage: "../Images/backgrounds/Coco-bg.svg",
-    doodle: "../Images/doodles/Coco-doodle.svg",
+    image: "./Images/cats/Coco.jpg",
+    bgImage: "./Images/backgrounds/Coco-bg.svg",
+    doodle: "./Images/doodles/Coco-doodle.svg",
     age: "? year",
     gender: "Female",
     vaccinated: false,
@@ -264,9 +264,9 @@ const cats = [
   {
     id: 18,
     name: "Dogie",
-    image: "../Images/cats/Dogie.jpg",
-    bgImage: "../Images/backgrounds/Dogie-bg.svg",
-    doodle: "../Images/doodles/Dogie-doodle.svg",
+    image: "./Images/cats/Dogie.jpg",
+    bgImage: "./Images/backgrounds/Dogie-bg.svg",
+    doodle: "./Images/doodles/Dogie-doodle.svg",
     age: "? year",
     gender: "Female",
     vaccinated: false,
@@ -302,7 +302,7 @@ cats.forEach((cat, index) => {
     </div>
     <div class="cat-info">
       <h3>${cat.name}</h3>
-      <p><img src="../Images/icons/${cat.gender.toLowerCase()}.svg" class="gender-icon-small" alt="${cat.gender}"> 
+      <p><img src="./Images/icons/${cat.gender.toLowerCase()}.svg" class="gender-icon-small" alt="${cat.gender}"> 
       <span class="cat-age">${cat.age}</span></p>
     </div>
   `;
@@ -392,16 +392,16 @@ function renderCat(index, instant = false, direction = null) {
             ${nicknamesDisplay}
           </div>
         </div>
-        <img src="../Images/icons/${cat.gender.toLowerCase()}.svg" class="gender-icon" alt="${cat.gender}">
+        <img src="./Images/icons/${cat.gender.toLowerCase()}.svg" class="gender-icon" alt="${cat.gender}">
       </div>
       <img src="${cat.image}" alt="${cat.name}" class="modal-cat-img" loading="lazy">
       <div class="details-grid">
         <div class="detail-item"><span class="detail-label">Age:</span><span class="detail-value">${cat.age}</span></div>
         <div class="detail-item"><span class="detail-label">Vaccinated:</span>
-          <img src="../Images/icons/${cat.vaccinated ? 'yes' : 'no'}.svg" class="status-icon">
+          <img src="./Images/icons/${cat.vaccinated ? 'yes' : 'no'}.svg" class="status-icon">
         </div>
         <div class="detail-item"><span class="detail-label">Sterilized:</span>
-          <img src="../Images/icons/${cat.sterilized ? 'yes' : 'no'}.svg" class="status-icon">
+          <img src="./Images/icons/${cat.sterilized ? 'yes' : 'no'}.svg" class="status-icon">
         </div>
         <div class="detail-item full-width"><span class="detail-label">Detail:</span><p>${cat.personality}</p></div>
         <div class="detail-item full-width"><span class="detail-label">Behavior:</span>
@@ -516,6 +516,7 @@ if (searchInput) {
     });
   });
 }
+
 
 
 
