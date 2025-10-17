@@ -103,7 +103,7 @@ const cats = [
     gender: "Female",
     vaccinated: true,
     sterilized: true,
-    personality: "She's very calm, loves humans, and might join you otw to the market ;)",
+    personality: "She's very calm, loves humans, and might join you otw to the market ;). She birthed litter once in a quiet shed near the RS hostel.",
     behavior: ["chill", "friendly", "easygoing"],
     petting: "Comfortable with humans and enjoys gentle affection.",
     location: "PJ auditorium"
@@ -516,6 +516,7 @@ if (searchInput) {
     });
   });
 }
+
 
 
 
