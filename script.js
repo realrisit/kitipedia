@@ -1,3 +1,16 @@
+// Firebase Configuration & Initialization
+const firebaseConfig = {
+  apiKey: "AIzaSyAVMaDAK86I9Gh8wVXkrqC7LRPyk4frzBtO",
+  authDomain: "kitipidia-80573.firebaseapp.com",
+  projectId: "kitipidia-80573",
+  storageBucket: "kitipidia-80573.firebasestorage.app",
+  messagingSenderId: "68236994639",
+  appId: "1:68236994639:web:7ea9c75bded7b0618b962a"
+};
+
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+
 // Cat Data with Consistent Naming
 const cats = [
   {
@@ -486,62 +499,182 @@ function updateCounter() {
   }, 0);
 }
 
-// Load comments from localStorage for a specific cat
-function loadComments(catIndex) {
+// Load comments from Firestore for a specific cat
+async function loadComments(catIndex) {
   const cat = cats[catIndex];
   const commentsDisplay = document.getElementById('commentsDisplay');
   if (!commentsDisplay) return;
 
-  const comments = getCommentsForCat(cat.id);
-  commentsDisplay.innerHTML = '';
+  try {
+    // Show loading state
+    commentsDisplay.innerHTML = '<p class="loading-comments">Loading experiences...</p>';
 
-  if (comments.length === 0) {
-    commentsDisplay.innerHTML = '<p class="no-comments">No experiences yet. Be the first to share! 🐾</p>';
-    return;
-  }
+    // Fetch comments from Firestore
+    const snapshot = await db.collection('comments')
+      .where('catId', '==', cat.id)
+      .orderBy('timestamp', 'desc')
+      .get();
 
-  comments.forEach(comment => {
-    const commentEl = document.createElement('div');
-    commentEl.className = 'comment-item';
-    
-    let photoHtml = '';
-    if (comment.photo) {
-      photoHtml = `<img src="${comment.photo}" class="comment-photo-display" alt="User photo">`;
+    commentsDisplay.innerHTML = '';
+
+    if (snapshot.empty) {
+      commentsDisplay.innerHTML = '<p class="no-comments">No experiences yet. Be the first to share! 🐾</p>';
+      return;
     }
 
-    commentEl.innerHTML = `
-      <div class="comment-header">
-        <strong class="comment-name">${escapeHtml(comment.name)}</strong>
-        <span class="comment-date">${formatDate(comment.timestamp)}</span>
-      </div>
-      <p class="comment-text">${escapeHtml(comment.text).replace(/\n/g, '<br>')}</p>
-      ${photoHtml}
-    `;
-    commentsDisplay.appendChild(commentEl);
-  });
+    const comments = [];
+    snapshot.forEach(doc => {
+      comments.push({ id: doc.id, ...doc.data() });
+    });
+
+    // Sort by score (upvotes - downvotes), then by timestamp
+    const sortedComments = comments.sort((a, b) => {
+      const scoreA = (a.upvotes || 0) - (a.downvotes || 0);
+      const scoreB = (b.upvotes || 0) - (b.downvotes || 0);
+      if (scoreB !== scoreA) return scoreB - scoreA;
+      return new Date(b.timestamp) - new Date(a.timestamp);
+    });
+
+    sortedComments.forEach(comment => {
+      const commentEl = document.createElement('div');
+      commentEl.className = 'comment-item';
+      
+      let photoHtml = '';
+      if (comment.photo) {
+        photoHtml = `<img src="${comment.photo}" class="comment-photo-display" alt="User photo">`;
+      }
+
+      const upvoteClass = (comment.upvotedBy?.includes(getCurrentUserId()) || false) ? 'voted' : '';
+      const downvoteClass = (comment.downvotedBy?.includes(getCurrentUserId()) || false) ? 'voted' : '';
+
+      commentEl.innerHTML = `
+        <div class="comment-header">
+          <strong class="comment-name">${escapeHtml(comment.name)}</strong>
+          <span class="comment-date">${formatDate(comment.timestamp)}</span>
+        </div>
+        <p class="comment-text">${escapeHtml(comment.text).replace(/\n/g, '<br>')}</p>
+        ${photoHtml}
+        <div class="comment-votes">
+          <button class="vote-btn upvote ${upvoteClass}" data-comment-id="${comment.id}" data-vote="up">
+            <i class="fas fa-thumbs-up"></i> <span class="vote-count">${comment.upvotes || 0}</span>
+          </button>
+          <button class="vote-btn downvote ${downvoteClass}" data-comment-id="${comment.id}" data-vote="down">
+            <i class="fas fa-thumbs-down"></i> <span class="vote-count">${comment.downvotes || 0}</span>
+          </button>
+          <span class="vote-score">${(comment.upvotes || 0) - (comment.downvotes || 0)}</span>
+        </div>
+      `;
+      commentsDisplay.appendChild(commentEl);
+
+      // Add vote button listeners
+      commentEl.querySelector('.upvote').addEventListener('click', () => {
+        handleCommentVote(cat.id, comment.id, 'up');
+      });
+      commentEl.querySelector('.downvote').addEventListener('click', () => {
+        handleCommentVote(cat.id, comment.id, 'down');
+      });
+    });
+  } catch (error) {
+    console.error('Error loading comments:', error);
+    commentsDisplay.innerHTML = '<p class="error-comments">Failed to load comments. Please refresh.</p>';
+  }
 }
 
-// Get comments for a specific cat from localStorage
-function getCommentsForCat(catId) {
-  const storageKey = `cat_comments_${catId}`;
-  const stored = localStorage.getItem(storageKey);
-  return stored ? JSON.parse(stored) : [];
+// Get unique user ID (stored in localStorage to identify user across sessions)
+function getCurrentUserId() {
+  let userId = localStorage.getItem('kitipidia_user_id');
+  if (!userId) {
+    userId = 'user_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+    localStorage.setItem('kitipidia_user_id', userId);
+  }
+  return userId;
 }
 
-// Save a new comment to localStorage
-function saveComment(catId, name, text, photo = null) {
-  const storageKey = `cat_comments_${catId}`;
-  const comments = getCommentsForCat(catId);
-  
-  const newComment = {
-    name,
-    text,
-    photo,
-    timestamp: new Date().toISOString()
-  };
+// Save a new comment to Firestore
+async function saveComment(catId, name, text, photo = null) {
+  try {
+    const newComment = {
+      catId,
+      name,
+      text,
+      photo,
+      timestamp: new Date(),
+      upvotes: 0,
+      downvotes: 0,
+      upvotedBy: [],
+      downvotedBy: []
+    };
 
-  comments.push(newComment);
-  localStorage.setItem(storageKey, JSON.stringify(comments));
+    await db.collection('comments').add(newComment);
+    
+    // Reload comments to show the new comment
+    loadComments(currentCatIndex);
+  } catch (error) {
+    console.error('Error saving comment:', error);
+    alert('Failed to save comment. Please try again.');
+  }
+}
+
+// Handle comment voting in Firestore
+async function handleCommentVote(catId, commentId, voteType) {
+  try {
+    const userId = getCurrentUserId();
+    const commentRef = db.collection('comments').doc(commentId);
+    const commentDoc = await commentRef.get();
+    
+    if (!commentDoc.exists) return;
+
+    const comment = commentDoc.data();
+    const upvotedBy = comment.upvotedBy || [];
+    const downvotedBy = comment.downvotedBy || [];
+
+    let upvotes = comment.upvotes || 0;
+    let downvotes = comment.downvotes || 0;
+
+    if (voteType === 'up') {
+      if (upvotedBy.includes(userId)) {
+        // Remove upvote
+        upvotedBy.splice(upvotedBy.indexOf(userId), 1);
+        upvotes = Math.max(0, upvotes - 1);
+      } else {
+        // Add upvote, remove downvote if exists
+        upvotedBy.push(userId);
+        upvotes++;
+        if (downvotedBy.includes(userId)) {
+          downvotedBy.splice(downvotedBy.indexOf(userId), 1);
+          downvotes = Math.max(0, downvotes - 1);
+        }
+      }
+    } else if (voteType === 'down') {
+      if (downvotedBy.includes(userId)) {
+        // Remove downvote
+        downvotedBy.splice(downvotedBy.indexOf(userId), 1);
+        downvotes = Math.max(0, downvotes - 1);
+      } else {
+        // Add downvote, remove upvote if exists
+        downvotedBy.push(userId);
+        downvotes++;
+        if (upvotedBy.includes(userId)) {
+          upvotedBy.splice(upvotedBy.indexOf(userId), 1);
+          upvotes = Math.max(0, upvotes - 1);
+        }
+      }
+    }
+
+    // Update Firestore
+    await commentRef.update({
+      upvotes,
+      downvotes,
+      upvotedBy,
+      downvotedBy
+    });
+
+    // Reload comments to show updated votes
+    loadComments(currentCatIndex);
+  } catch (error) {
+    console.error('Error voting on comment:', error);
+    alert('Failed to vote. Please try again.');
+  }
 }
 
 // Attach form submission listener
