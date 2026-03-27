@@ -298,13 +298,7 @@ let currentCatIndex = 0;
 cats.forEach((cat, index) => {
   const card = document.createElement('div');
   card.className = 'cat-card';
-  card.style.backgroundImage = `url('${cat.bgImage}')`;
-  card.style.backgroundSize = 'cover';
-  card.style.backgroundPosition = 'center';
-  card.style.backgroundRepeat = 'no-repeat';
-  card.style.backgroundColor = 'rgba(255, 255, 255, 0.25)';
   card.innerHTML = `
-    <div class="cat-overlay"></div>
     <img src="${cat.image}" alt="${cat.name}" class="cat-main-img" loading="lazy">
     <div class="cat-doodle">
       <img src="${cat.doodle}" alt="${cat.name} doodle" class="doodle-img" loading="lazy">
@@ -421,6 +415,22 @@ function renderCat(index, instant = false, direction = null) {
         <div class="detail-item full-width"><span class="detail-label">Petting Advice:</span><p>${cat.petting}</p></div>
         <div class="detail-item full-width"><span class="detail-label">Location:</span><p>${cat.location}</p></div>
       </div>
+
+      <!-- Comments Section -->
+      <div class="comments-section">
+        <h3>💭 Share Your Experience</h3>
+        
+        <form class="comment-form" id="commentForm">
+          <input type="text" class="comment-name" placeholder="Your name" required>
+          <textarea class="comment-text" placeholder="Share your experience with ${cat.name}... (e.g., how they behaved, funny moments, etc.)" required></textarea>
+          <input type="file" class="comment-photo" accept="image/*" title="Optional: Add a photo">
+          <button type="submit" class="submit-comment">Add Experience ✨</button>
+        </form>
+
+        <div class="comments-display" id="commentsDisplay">
+          <!-- Comments will be loaded here -->
+        </div>
+      </div>
     </div>
   `;
 
@@ -464,6 +474,142 @@ function renderCat(index, instant = false, direction = null) {
 // Update counter display
 function updateCounter() {
   catCounter.textContent = `${currentCatIndex + 1}/${cats.length}`;
+  
+  // Load and display comments for current cat
+  setTimeout(() => {
+    const commentForm = document.getElementById('commentForm');
+    const commentsDisplay = document.getElementById('commentsDisplay');
+    if (commentForm && commentsDisplay) {
+      loadComments(currentCatIndex);
+      attachCommentFormListener();
+    }
+  }, 0);
+}
+
+// Load comments from localStorage for a specific cat
+function loadComments(catIndex) {
+  const cat = cats[catIndex];
+  const commentsDisplay = document.getElementById('commentsDisplay');
+  if (!commentsDisplay) return;
+
+  const comments = getCommentsForCat(cat.id);
+  commentsDisplay.innerHTML = '';
+
+  if (comments.length === 0) {
+    commentsDisplay.innerHTML = '<p class="no-comments">No experiences yet. Be the first to share! 🐾</p>';
+    return;
+  }
+
+  comments.forEach(comment => {
+    const commentEl = document.createElement('div');
+    commentEl.className = 'comment-item';
+    
+    let photoHtml = '';
+    if (comment.photo) {
+      photoHtml = `<img src="${comment.photo}" class="comment-photo-display" alt="User photo">`;
+    }
+
+    commentEl.innerHTML = `
+      <div class="comment-header">
+        <strong class="comment-name">${escapeHtml(comment.name)}</strong>
+        <span class="comment-date">${formatDate(comment.timestamp)}</span>
+      </div>
+      <p class="comment-text">${escapeHtml(comment.text).replace(/\n/g, '<br>')}</p>
+      ${photoHtml}
+    `;
+    commentsDisplay.appendChild(commentEl);
+  });
+}
+
+// Get comments for a specific cat from localStorage
+function getCommentsForCat(catId) {
+  const storageKey = `cat_comments_${catId}`;
+  const stored = localStorage.getItem(storageKey);
+  return stored ? JSON.parse(stored) : [];
+}
+
+// Save a new comment to localStorage
+function saveComment(catId, name, text, photo = null) {
+  const storageKey = `cat_comments_${catId}`;
+  const comments = getCommentsForCat(catId);
+  
+  const newComment = {
+    name,
+    text,
+    photo,
+    timestamp: new Date().toISOString()
+  };
+
+  comments.push(newComment);
+  localStorage.setItem(storageKey, JSON.stringify(comments));
+}
+
+// Attach form submission listener
+function attachCommentFormListener() {
+  const form = document.getElementById('commentForm');
+  if (!form) return;
+
+  form.onsubmit = async (e) => {
+    e.preventDefault();
+    
+    const nameInput = form.querySelector('.comment-name');
+    const textInput = form.querySelector('.comment-text');
+    const photoInput = form.querySelector('.comment-photo');
+    
+    const name = nameInput.value.trim();
+    const text = textInput.value.trim();
+    
+    if (!name || !text) return;
+
+    let photoData = null;
+    if (photoInput.files && photoInput.files[0]) {
+      photoData = await fileToDataUrl(photoInput.files[0]);
+    }
+
+    const cat = cats[currentCatIndex];
+    saveComment(cat.id, name, text, photoData);
+    
+    // Clear form
+    form.reset();
+    
+    // Reload comments display
+    loadComments(currentCatIndex);
+  };
+}
+
+// Convert file to data URL
+function fileToDataUrl(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+  });
+}
+
+// Format timestamp to readable date
+function formatDate(isoString) {
+  const date = new Date(isoString);
+  const now = new Date();
+  const diff = now - date;
+  
+  const minutes = Math.floor(diff / 60000);
+  const hours = Math.floor(diff / 3600000);
+  const days = Math.floor(diff / 86400000);
+
+  if (minutes < 1) return 'just now';
+  if (minutes < 60) return `${minutes}m ago`;
+  if (hours < 24) return `${hours}h ago`;
+  if (days < 30) return `${days}d ago`;
+  
+  return date.toLocaleDateString();
+}
+
+// Escape HTML to prevent XSS
+function escapeHtml(text) {
+  const div = document.createElement('div');
+  div.textContent = text;
+  return div.innerHTML;
 }
 
 // Touch swipe support (keep your existing implementation)
