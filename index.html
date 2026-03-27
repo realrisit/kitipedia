@@ -68,11 +68,12 @@
   <i class="fas fa-heart"></i> Support
 </button>
 
-<script src="script.js"></script>
-
-<!-- Firebase SDK -->
+<!-- Firebase SDK (must load BEFORE script.js) -->
 <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js"></script>
+
+<!-- Main Script (loads AFTER Firebase) -->
+<script src="script.js"></script>
 
 <script>
   function copyUPI() {
