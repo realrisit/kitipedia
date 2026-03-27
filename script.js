@@ -11,10 +11,11 @@ const cats = [
     gender: "Male",
     vaccinated: true,
     sterilized: true,
-    personality: "He's so possessive 😭 — if I take care of another cat, he stops talking to me for days and won't let me pet him. But deep down, he's still a chill guy ;)",
+    personality: "He's so possessive 😭. if I take care of another cat, he stops talking to me for days and won't let me pet him. But deep down, he's still a chill guy ;)",
     behavior: ["very friendly","possessive","quite lazy"],
     petting: " he likes base of tail (upper back) scratches.",
-    location: "Hostel 2"
+    location: "Hostel 2",
+    shareUrl: "https://forms.gle/example1" // Replace with actual Google Form URL
   },
   {
     id: 2,
@@ -29,7 +30,8 @@ const cats = [
     personality: "He's huge af ... super affectionate, rubbing himself against everyone who passes by and purring when you pet him. As a part-time job, he also hunts snake.",
     behavior: ["friendly", "affectionate", "cuddly", "follows-you", "purring"],
     petting: "Enjoys pets all over, especially loves head scratches.",
-    location: "D-Quarters"
+    location: "D-Quarters",
+    shareUrl: "https://forms.gle/example2" // Replace with actual Google Form URL
   },
   {
     id: 3,
@@ -42,10 +44,11 @@ const cats = [
     gender: "Female",
     vaccinated: true,
     sterilized: true,
-    personality: "She's a strong, independent lady — super playful, does silly things, and is too cute :3",
+    personality: "She's a strong, independent lady. super playful, does silly things, and is too cute :3",
     behavior: ["playful", "independent", "bold"],
     petting: "Allows petting, but may scratch when annoyed.",
-    location: "Hostel 2 2nd floor"
+    location: "Hostel 2 2nd floor",
+    shareUrl: "https://forms.gle/example3" // Replace with actual Google Form URL
   },
   {
     id: 4,
@@ -75,7 +78,7 @@ const cats = [
     sterilized: true,
     personality: "You might confuse her with Toothless, but a major difference is the white stripe at the end of her tail. She doesn't let strangers touch her, but she's chill if you feed her ;)",
     behavior: ["selective", "attention-seeking","skittish", "moody","vocal"],
-    petting: "Avoid if you want to avoid scratches — she startles easily.",
+    petting: "Avoid if you want to avoid scratches. she startles easily.",
     location: "Hostel 2,Old Academic Building"
   },
   {
@@ -119,9 +122,9 @@ const cats = [
     gender: "Male",
     vaccinated: true,
     sterilized: false,
-    personality: "He's super energetic and playful—think twice before letting him into your room! 😭, His biological mom is Sasha, but Gravy adopted him ;)",
+    personality: "He's super energetic and playful.think twice before letting him into your room! 😭, His biological mom is Sasha, but Gravy adopted him ;)",
     behavior: ["energetic", "playful", "vocal", "clumsy", "curious"],
-    petting: "Pet very gently — he is too smoll yet.",
+    petting: "Pet very gently. he is too smoll yet.",
     location: "Hostel 2 2nd floor"
   },
   {
@@ -135,7 +138,7 @@ const cats = [
     gender: "Male",
     vaccinated: true,
     sterilized: true,
-    personality: "He's the chillest guy on campus—super friendly and fun to hang out with, and he's pretty popular with the ladies. Seems like he's been off on a mysterious mission lately :(",
+    personality: "He's the chillest guy on campus.super friendly and fun to hang out with, and he's pretty popular with the ladies. Seems like he's been off on a mysterious mission lately :(",
     behavior: ["chill", "friendly", "gentle", "confident", "laid-back", "never-aggressive"],
     petting: "can be petted anytime, anywhere.",
     location: "Missing :("
@@ -150,7 +153,7 @@ const cats = [
     gender: "Female",
     vaccinated: false,
     sterilized: true,
-    personality: "Super friendly and affectionate since day one, back when she and her sis Toothless were always together. You might mix her up with Patchy, but nah — Patchy's got a blacker back and a totally opposite vibe.",
+    personality: "Super friendly and affectionate since day one, back when she and her sis Toothless were always together. You might mix her up with Patchy, but nah. Patchy's got a blacker back and a totally opposite vibe.",
     behavior: ["friendly", "affectionate", "social", "easy-going", "people-loving", "gentle"],
     petting: "She'll probably come to you first, so just give her all the love.",
     location: "Missing :("
@@ -165,7 +168,7 @@ const cats = [
     gender: "Female",
     vaccinated: true,
     sterilized: false,
-    personality: "Used to be shy with her two sons near B quarters — food had to be dropped and you'd step away. Now she's way friendlier, and if you're feeding her, you can probably pet her.",
+    personality: "Used to be shy with her two sons near B quarters. food had to be dropped and you'd step away. Now she's way friendlier, and if you're feeding her, you can probably pet her.",
     behavior: ["vocal", "food-driven", "moody", "sometimes-aggressive"],
     petting: "Food first, pets after.",
     location: "B-Quarter"
@@ -180,7 +183,7 @@ const cats = [
     gender: "Male",
     vaccinated: false,
     sterilized: false,
-    personality: "Kinda the boss around here. Most male cats see him and bolt — and for good reason, he'll chase and bully them. Not really into humans or the food offered, totally does his own thing. Seen hanging out with Patchy sometimes.",
+    personality: "Kinda the boss around here. Most male cats see him and bolt. and for good reason, he'll chase and bully them. Not really into humans or the food offered, totally does his own thing. Seen hanging out with Patchy sometimes.",
     behavior: ["dominant", "territorial", "independent", "not-social", "bold"],
     petting: "Don't. Just… don't.",
     location: "Rarely but near Hostel 1"
@@ -196,7 +199,7 @@ const cats = [
     gender: "Female",
     vaccinated: true,
     sterilized: true,
-    personality: "She's the mama of every cat on campus—the most nonchalant one around—and you'll find her attending every class in G26. ;)",
+    personality: "She's the mama of every cat on campus.the most nonchalant one around.and you'll find her attending every class in G26. ;)",
     behavior: ["chill", "independent", "laid-back", "aloof", "unbothered"],
     petting: "Allows petting, though she may rarely signal to stop.",
     location: "Old Academic Building"
@@ -213,7 +216,7 @@ const cats = [
     sterilized: true,
     personality: "She's a cute black ball... but can be a bit aggressive sometimes.",
     behavior: ["vocal", "sometimes-aggressive", "needs-patience", "possibly-traumatized"],
-    petting: "Better to avoid petting if you don't want scratches or bites — she needs to be handled carefully",
+    petting: "Better to avoid petting if you don't want scratches or bites. she needs to be handled carefully",
     location: "Hostel 1"
   },
   {
@@ -271,7 +274,7 @@ const cats = [
     gender: "Female",
     vaccinated: false,
     sterilized: false,
-    personality: "She's a gorgeous girl—you'll usually find her at Rajubhiya's shop or chilling with a cup of tea.",
+    personality: "She's a gorgeous girl.you'll usually find her at Rajubhiya's shop or chilling with a cup of tea.",
     behavior: ["extrovert", "food-driven", "friendly"],
     petting: "she won't bite (probably)",
     location: "Near shops"
@@ -295,7 +298,13 @@ let currentCatIndex = 0;
 cats.forEach((cat, index) => {
   const card = document.createElement('div');
   card.className = 'cat-card';
+  card.style.backgroundImage = `url('${cat.bgImage}')`;
+  card.style.backgroundSize = 'cover';
+  card.style.backgroundPosition = 'center';
+  card.style.backgroundRepeat = 'no-repeat';
+  card.style.backgroundColor = 'rgba(255, 255, 255, 0.25)';
   card.innerHTML = `
+    <div class="cat-overlay"></div>
     <img src="${cat.image}" alt="${cat.name}" class="cat-main-img" loading="lazy">
     <div class="cat-doodle">
       <img src="${cat.doodle}" alt="${cat.name} doodle" class="doodle-img" loading="lazy">
@@ -347,10 +356,12 @@ document.addEventListener('keydown', (e) => {
 
 // ===== Navigation Functions =====
 function showNextCat() {
+  if (isAnimating) return;
   renderCat((currentCatIndex + 1) % cats.length, false, 'next');
 }
 
 function showPrevCat() {
+  if (isAnimating) return;
   renderCat((currentCatIndex - 1 + cats.length) % cats.length, false, 'prev');
 }
 
@@ -362,9 +373,9 @@ nextBtn.addEventListener('click', showNextCat);
 document.addEventListener('keydown', (e) => {
   if (modal.style.display === 'block') { // Only when modal is open
     if (e.key === 'ArrowLeft') {
-      showPrevCat();
+      if (!isAnimating) showPrevCat();
     } else if (e.key === 'ArrowRight') {
-      showNextCat();
+      if (!isAnimating) showNextCat();
     } else if (e.key === 'Escape') {
       closeModal();
     }
@@ -417,6 +428,7 @@ function renderCat(index, instant = false, direction = null) {
     modalBody.innerHTML = '';
     modalBody.appendChild(newContainer);
   } else {
+    isAnimating = true;
     const oldContainer = modalBody.querySelector('.modal-bg-container');
 
     // Prepare new container offscreen
@@ -441,6 +453,7 @@ function renderCat(index, instant = false, direction = null) {
     setTimeout(() => {
       if (oldContainer) oldContainer.remove();
       newContainer.style.position = 'relative';
+      isAnimating = false;
     }, 350);
   }
 
@@ -454,7 +467,7 @@ function updateCounter() {
 }
 
 // Touch swipe support (keep your existing implementation)
-let startX = 0, currentX = 0, isDragging = false;
+let startX = 0, currentX = 0, isDragging = false, isAnimating = false;
 const threshold = 50;
 
 modalBody.addEventListener('touchstart', (e) => {
@@ -463,7 +476,7 @@ modalBody.addEventListener('touchstart', (e) => {
 }, false);
 
 modalBody.addEventListener('touchend', (e) => {
-  if (!isDragging) return;
+  if (!isDragging || isAnimating) return;
   isDragging = false;
   let diffX = e.changedTouches[0].clientX - startX;
 

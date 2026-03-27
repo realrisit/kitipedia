@@ -31,14 +31,14 @@
 
 
 <!-- ===== QR + UPI Section ===== -->
-<section class="donation-section">
+<section class="donation-section" style="display: none;">
   <h2>Support the Cats 🐾</h2>
   <div class="qr-container">
     <img src="./Images/qr-code.png" alt="QR Code" class="qr-code">
   </div>
   <p class="upi-text">UPI ID: 
     <span id="upi-id">priyanka26031993@ibl</span>
-    <button onclick="copyUPI()" class="copy-btn"><i class="fas fa-copy"></i></button>
+    <button onclick="copyUPI()" class="copy-btn" style="display: none;"><i class="fas fa-copy"></i></button>
   </p>
 
 </section>
@@ -64,7 +64,7 @@
 
 
 <!-- Floating Donate Button (Mobile only) -->
-<button id="donate-float-btn">
+<button id="donate-float-btn" style="display: none !important;">
   <i class="fas fa-heart"></i> Support
 </button>
 
@@ -79,7 +79,7 @@
 </script>
 
 <footer>
-  <p>🐾 Designed & Developed by Ew 😛— <span class="credits">Doodles by Zoya</span> — Images © 2025 Kitipidia</p>
+  <p>🐾 Designed & Developed by Ew 😛. <span class="credits">Doodles by Zoya</span> . Images © 2025 Kitipidia</p>
 </footer>
 
 </body>
