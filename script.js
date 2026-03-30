@@ -561,22 +561,6 @@ function renderCat(index, instant = false, direction = null) {
         <div class="detail-item full-width"><span class="detail-label">Petting Advice:</span><p>${cat.petting}</p></div>
         <div class="detail-item full-width"><span class="detail-label">Location:</span><p>${cat.location}</p></div>
       </div>
-
-      <!-- Comments Section -->
-      <div class="comments-section">
-        <h3>💭 Share Your Experience</h3>
-        
-        <form class="comment-form" id="commentForm">
-          <input type="text" class="comment-name" placeholder="Your name" required>
-          <textarea class="comment-text" placeholder="Share your experience with ${cat.name}... (e.g., how they behaved, funny moments, etc.)" required></textarea>
-          <input type="file" class="comment-photo" accept="image/*" title="Optional: Add a photo">
-          <button type="submit" class="submit-comment">Add Experience ✨</button>
-        </form>
-
-        <div class="comments-display" id="commentsDisplay">
-          <!-- Comments will be loaded here -->
-        </div>
-      </div>
     </div>
   `;
 
@@ -620,16 +604,6 @@ function renderCat(index, instant = false, direction = null) {
 // Update counter display
 function updateCounter() {
   catCounter.textContent = `${currentCatIndex + 1}/${cats.length}`;
-  
-  // Load and display comments for current cat
-  setTimeout(() => {
-    const commentForm = document.getElementById('commentForm');
-    const commentsDisplay = document.getElementById('commentsDisplay');
-    if (commentForm && commentsDisplay) {
-      loadComments(currentCatIndex);
-      attachCommentFormListener();
-    }
-  }, 0);
 }
 
 // Load comments from Firestore for a specific cat
@@ -642,23 +616,40 @@ async function loadComments(catIndex) {
     // Show loading state
     commentsDisplay.innerHTML = '<p class="loading-comments">Loading experiences...</p>';
 
-    // Fetch comments from Firestore
-    const snapshot = await db.collection('comments')
-      .where('catId', '==', cat.id)
-      .orderBy('timestamp', 'desc')
-      .get();
+    let comments = [];
+
+    // Try to fetch from Firebase first
+    if (db) {
+      try {
+        const snapshot = await db.collection('comments')
+          .where('catId', '==', cat.id)
+          .orderBy('timestamp', 'desc')
+          .get();
+
+        snapshot.forEach(doc => {
+          comments.push({ id: doc.id, ...doc.data() });
+        });
+        console.log('✓ Loaded', comments.length, 'comments from Firebase');
+      } catch (firebaseError) {
+        console.warn('Firebase load failed:', firebaseError);
+        // Fall back to localStorage
+        const stored = JSON.parse(localStorage.getItem('kitipedia_comments') || '[]');
+        comments = stored.filter(c => c.catId === cat.id);
+        console.log('✓ Loaded', comments.length, 'comments from localStorage');
+      }
+    } else {
+      // Firebase not available, use localStorage
+      console.log('Firebase not available, loading from localStorage');
+      const stored = JSON.parse(localStorage.getItem('kitipedia_comments') || '[]');
+      comments = stored.filter(c => c.catId === cat.id);
+    }
 
     commentsDisplay.innerHTML = '';
 
-    if (snapshot.empty) {
+    if (comments.length === 0) {
       commentsDisplay.innerHTML = '<p class="no-comments">No experiences yet. Be the first to share! 🐾</p>';
       return;
     }
-
-    const comments = [];
-    snapshot.forEach(doc => {
-      comments.push({ id: doc.id, ...doc.data() });
-    });
 
     // Sort by score (upvotes - downvotes), then by timestamp
     const sortedComments = comments.sort((a, b) => {
@@ -701,15 +692,80 @@ async function loadComments(catIndex) {
 
       // Add vote button listeners
       commentEl.querySelector('.upvote').addEventListener('click', () => {
-        handleCommentVote(cat.id, comment.id, 'up');
+        if (!comment.id.startsWith('local_')) {
+          handleCommentVote(cat.id, comment.id, 'up');
+        } else {
+          handleLocalCommentVote(comment.id, 'up');
+        }
       });
       commentEl.querySelector('.downvote').addEventListener('click', () => {
-        handleCommentVote(cat.id, comment.id, 'down');
+        if (!comment.id.startsWith('local_')) {
+          handleCommentVote(cat.id, comment.id, 'down');
+        } else {
+          handleLocalCommentVote(comment.id, 'down');
+        }
       });
     });
   } catch (error) {
     console.error('Error loading comments:', error);
     commentsDisplay.innerHTML = '<p class="error-comments">Failed to load comments. Please refresh.</p>';
+  }
+}
+
+// Handle voting for local storage comments
+function handleLocalCommentVote(commentId, voteType) {
+  try {
+    const userId = getCurrentUserId();
+    const allComments = JSON.parse(localStorage.getItem('kitipedia_comments') || '[]');
+    const commentIndex = allComments.findIndex(c => c.id === commentId);
+    
+    if (commentIndex === -1) return;
+
+    const comment = allComments[commentIndex];
+    const upvotedBy = comment.upvotedBy || [];
+    const downvotedBy = comment.downvotedBy || [];
+
+    let upvotes = comment.upvotes || 0;
+    let downvotes = comment.downvotes || 0;
+
+    if (voteType === 'up') {
+      if (upvotedBy.includes(userId)) {
+        upvotedBy.splice(upvotedBy.indexOf(userId), 1);
+        upvotes = Math.max(0, upvotes - 1);
+      } else {
+        upvotedBy.push(userId);
+        upvotes++;
+        if (downvotedBy.includes(userId)) {
+          downvotedBy.splice(downvotedBy.indexOf(userId), 1);
+          downvotes = Math.max(0, downvotes - 1);
+        }
+      }
+    } else if (voteType === 'down') {
+      if (downvotedBy.includes(userId)) {
+        downvotedBy.splice(downvotedBy.indexOf(userId), 1);
+        downvotes = Math.max(0, downvotes - 1);
+      } else {
+        downvotedBy.push(userId);
+        downvotes++;
+        if (upvotedBy.includes(userId)) {
+          upvotedBy.splice(upvotedBy.indexOf(userId), 1);
+          upvotes = Math.max(0, upvotes - 1);
+        }
+      }
+    }
+
+    allComments[commentIndex] = {
+      ...comment,
+      upvotes,
+      downvotes,
+      upvotedBy,
+      downvotedBy
+    };
+
+    localStorage.setItem('kitipedia_comments', JSON.stringify(allComments));
+    loadComments(currentCatIndex);
+  } catch (error) {
+    console.error('Error voting:', error);
   }
 }
 
@@ -726,31 +782,70 @@ function getCurrentUserId() {
 // Save a new comment to Firestore
 async function saveComment(catId, name, text, photo = null) {
   try {
+    console.log('💾 Saving comment for catId:', catId);
+    
     const newComment = {
       catId,
       name,
       text,
       photo,
-      timestamp: new Date(),
+      timestamp: new Date().toISOString(),
       upvotes: 0,
       downvotes: 0,
       upvotedBy: [],
       downvotedBy: []
     };
 
-    await db.collection('comments').add(newComment);
-    
-    // Reload comments to show the new comment
-    loadComments(currentCatIndex);
+    // Try to save to Firebase if available
+    if (db) {
+      try {
+        console.log('📤 Attempting Firebase save...');
+        await db.collection('comments').add(newComment);
+        console.log('✓ Comment saved to Firebase');
+        return true;
+      } catch (firebaseError) {
+        console.warn('⚠️ Firebase save failed:', firebaseError.message);
+        // Fall back to localStorage
+        console.log('📝 Falling back to localStorage');
+        saveCommentToLocalStorage(newComment);
+        return true;
+      }
+    } else {
+      // Firebase not available, use localStorage
+      console.log('📝 Firebase not available, saving to localStorage');
+      saveCommentToLocalStorage(newComment);
+      return true;
+    }
   } catch (error) {
-    console.error('Error saving comment:', error);
-    alert('Failed to save comment. Please try again.');
+    console.error('❌ Error saving comment:', error);
+    throw error;
+  }
+}
+
+// Save comment to localStorage as fallback
+function saveCommentToLocalStorage(comment) {
+  try {
+    const allComments = JSON.parse(localStorage.getItem('kitipedia_comments') || '[]');
+    comment.id = 'local_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+    allComments.push(comment);
+    localStorage.setItem('kitipedia_comments', JSON.stringify(allComments));
+    console.log('✓ Comment saved to localStorage');
+  } catch (error) {
+    console.error('Error saving to localStorage:', error);
+    throw error;
   }
 }
 
 // Handle comment voting in Firestore
 async function handleCommentVote(catId, commentId, voteType) {
   try {
+    // Check if db is available
+    if (!db) {
+      console.warn('Firebase not available, using localStorage');
+      handleLocalCommentVote(commentId, voteType);
+      return;
+    }
+
     const userId = getCurrentUserId();
     const commentRef = db.collection('comments').doc(commentId);
     const commentDoc = await commentRef.get();
@@ -806,7 +901,12 @@ async function handleCommentVote(catId, commentId, voteType) {
     loadComments(currentCatIndex);
   } catch (error) {
     console.error('Error voting on comment:', error);
-    alert('Failed to vote. Please try again.');
+    // Try localStorage as fallback
+    try {
+      handleLocalCommentVote(commentId, voteType);
+    } catch (localError) {
+      alert('Failed to vote. Please try again.');
+    }
   }
 }
 
@@ -825,21 +925,44 @@ function attachCommentFormListener() {
     const name = nameInput.value.trim();
     const text = textInput.value.trim();
     
-    if (!name || !text) return;
-
-    let photoData = null;
-    if (photoInput.files && photoInput.files[0]) {
-      photoData = await fileToDataUrl(photoInput.files[0]);
+    if (!name || !text) {
+      alert('Please fill in name and experience');
+      return;
     }
 
-    const cat = cats[currentCatIndex];
-    saveComment(cat.id, name, text, photoData);
-    
-    // Clear form
-    form.reset();
-    
-    // Reload comments display
-    loadComments(currentCatIndex);
+    try {
+      const submitBtn = form.querySelector('.submit-comment');
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Saving...';
+
+      let photoData = null;
+      if (photoInput.files && photoInput.files[0]) {
+        photoData = await fileToDataUrl(photoInput.files[0]);
+      }
+
+      const cat = cats[currentCatIndex];
+      console.log('Saving comment for cat:', cat.name);
+      
+      // Wait for saveComment to complete
+      await saveComment(cat.id, name, text, photoData);
+      
+      console.log('✓ Comment saved successfully');
+      
+      // Clear form
+      form.reset();
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Add Experience ✨';
+      
+      // Reload comments display
+      await loadComments(currentCatIndex);
+      
+    } catch (error) {
+      console.error('Error in form submission:', error);
+      const submitBtn = form.querySelector('.submit-comment');
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Add Experience ✨';
+      alert('Failed to save comment. Please try again.');
+    }
   };
 }
 
