@@ -1,3 +1,5 @@
+console.log('🐱 Kitipedia Script Starting...');
+
 // Firebase Configuration & Initialization
 const firebaseConfig = {
   apiKey: "AIzaSyAVMaDAK86I9Gh8wVXkrqC7LRPyk4frzBtO",
@@ -8,8 +10,24 @@ const firebaseConfig = {
   appId: "1:68236994639:web:7ea9c75bded7b0618b962a"
 };
 
-firebase.initializeApp(firebaseConfig);
-const db = firebase.firestore();
+let db = null;
+
+// Try to initialize Firebase, but don't let it block the app
+try {
+  if (typeof firebase !== 'undefined') {
+    firebase.initializeApp(firebaseConfig);
+    db = firebase.firestore();
+    console.log('Firebase initialized successfully');
+  } else {
+    console.warn('Firebase SDK not loaded yet');
+  }
+} catch (error) {
+  console.error('Firebase initialization error:', error);
+}
+
+// Global variables for touch swipe support and modal handling
+let startX = 0, currentX = 0, isDragging = false, isAnimating = false;
+const threshold = 50;
 
 // Cat Data with Consistent Naming
 const cats = [
@@ -296,70 +314,202 @@ const cats = [
 
 // ===== Swipeable Cat Modal =====
 
-// DOM Elements
-const catGrid = document.getElementById('catGrid');
-const modal = document.getElementById('catModal');
-const modalBody = document.getElementById('modalBody');
-const closeBtn = document.querySelector('.close-btn');
-const prevBtn = document.getElementById('prevCat');
-const nextBtn = document.getElementById('nextCat');
-const catCounter = document.getElementById('catCounter');
+// Function to initialize cards
+function initializeCards() {
+  console.log('=== Starting initializeCards ===');
+  
+  catGrid = document.getElementById('catGrid');
+  modal = document.getElementById('catModal');
+  modalBody = document.getElementById('modalBody');
+  closeBtn = document.querySelector('.close-btn');
+  prevBtn = document.getElementById('prevCat');
+  nextBtn = document.getElementById('nextCat');
+  catCounter = document.getElementById('catCounter');
 
-let currentCatIndex = 0;
-
-// ===== Render Cat Cards =====
-cats.forEach((cat, index) => {
-  const card = document.createElement('div');
-  card.className = 'cat-card';
-  card.innerHTML = `
-    <img src="${cat.image}" alt="${cat.name}" class="cat-main-img" loading="lazy">
-    <div class="cat-doodle">
-      <img src="${cat.doodle}" alt="${cat.name} doodle" class="doodle-img" loading="lazy">
-    </div>
-    <div class="cat-info">
-      <h3>${cat.name}</h3>
-      <p><img src="./Images/icons/${cat.gender.toLowerCase()}.svg" class="gender-icon-small" alt="${cat.gender}"> 
-      <span class="cat-age">${cat.age}</span></p>
-    </div>
-  `;
-  card.addEventListener('click', () => {
-    currentCatIndex = index;
-    openModal(currentCatIndex);
+  console.log('DOM elements found:', {
+    catGrid: !!catGrid,
+    modal: !!modal,
+    modalBody: !!modalBody,
+    closeBtn: !!closeBtn,
+    prevBtn: !!prevBtn,
+    nextBtn: !!nextBtn,
+    catCounter: !!catCounter,
+    catsLength: cats.length
   });
-  catGrid.appendChild(card);
-});
+
+  if (!catGrid) {
+    console.error('❌ Cat grid element not found! DOM may not be ready.');
+    return;
+  }
+  
+  console.log('✓ Cat grid found, creating cards...');
+
+  // ===== Render Cat Cards =====
+  cats.forEach((cat, index) => {
+    const card = document.createElement('div');
+    card.className = 'cat-card';
+    card.innerHTML = `
+      <img src="${cat.image}" alt="${cat.name}" class="cat-main-img" loading="lazy">
+      <div class="cat-doodle">
+        <img src="${cat.doodle}" alt="${cat.name} doodle" class="doodle-img" loading="lazy">
+      </div>
+      <div class="cat-info">
+        <h3>${cat.name}</h3>
+        <p><img src="./Images/icons/${cat.gender.toLowerCase()}.svg" class="gender-icon-small" alt="${cat.gender}"> 
+        <span class="cat-age">${cat.age}</span></p>
+      </div>
+    `;
+    card.addEventListener('click', () => {
+      currentCatIndex = index;
+      openModal(currentCatIndex);
+    });
+    catGrid.appendChild(card);
+  });
+  
+  console.log('✓ Created ' + cats.length + ' cat cards');
+  console.log('✓ Cat grid now has', catGrid.children.length, 'children');
+  
+  // Attach all event listeners after DOM is ready
+  if (closeBtn) {
+    closeBtn.addEventListener('click', closeModal);
+  }
+  
+  window.addEventListener('click', (e) => {
+    if (modal && e.target === modal) closeModal();
+  });
+  
+  window.addEventListener('keydown', (e) => {
+    if (modal && modal.style.display === 'block') {
+      if (e.key === 'Escape') {
+        closeModal();
+      }
+    }
+  });
+  
+  if (prevBtn) {
+    prevBtn.addEventListener('click', showPrevCat);
+  }
+  if (nextBtn) {
+    nextBtn.addEventListener('click', showNextCat);
+  }
+  
+  document.addEventListener('keydown', (e) => {
+    if (modal && modal.style.display === 'block') {
+      if (e.key === 'ArrowLeft') {
+        if (!isAnimating) showPrevCat();
+      } else if (e.key === 'ArrowRight') {
+        if (!isAnimating) showNextCat();
+      } else if (e.key === 'Escape') {
+        closeModal();
+      }
+    }
+  });
+  
+  // Touch swipe support
+  if (modalBody) {
+    modalBody.addEventListener('touchstart', (e) => {
+      startX = e.touches[0].clientX;
+      isDragging = true;
+    }, false);
+
+    modalBody.addEventListener('touchend', (e) => {
+      if (!isDragging || isAnimating) return;
+      isDragging = false;
+      let diffX = e.changedTouches[0].clientX - startX;
+
+      if (Math.abs(diffX) > threshold) {
+        if (diffX < 0) {
+          showNextCat();
+        } else {
+          showPrevCat();
+        }
+      }
+    }, false);
+  }
+  
+  // ===== Mobile Search Filter =====
+  const searchInput = document.getElementById("catSearch");
+  if (searchInput) {
+    searchInput.addEventListener("input", () => {
+      const query = searchInput.value.toLowerCase().trim();
+      const cards = document.querySelectorAll(".cat-card");
+
+      cards.forEach(card => {
+        if (card.classList.contains("donation-card")) return; // skip donation
+
+        const name = card.querySelector("h3")?.textContent.toLowerCase() || "";
+        const extra = card.dataset.search || ""; // extra info
+
+        if (name.includes(query) || extra.includes(query)) {
+          card.style.display = "block";
+        } else {
+          card.style.display = "none";
+        }
+      });
+    });
+  }
+  
+  // ===== Floating Donate Button =====
+  donateBtn = document.getElementById("donate-float-btn");
+  const donationSection = document.querySelector(".donation-section");
+
+  // Show/Hide button depending on section visibility
+  window.addEventListener("scroll", () => {
+    if (!donationSection || !donateBtn) return;
+    const rect = donationSection.getBoundingClientRect();
+    const inView = rect.top < window.innerHeight && rect.bottom > 0;
+    donateBtn.style.display = inView ? "none" : "flex";
+  });
+
+  // Scroll smoothly to donation section
+  if (donateBtn && donationSection) {
+    donateBtn.addEventListener("click", () => {
+      donationSection.scrollIntoView({ behavior: "smooth" });
+    });
+  }
+}
+
+// Initialize variables that will be used globally
+let currentCatIndex = 0;
+let catGrid, modal, modalBody, closeBtn, prevBtn, nextBtn, catCounter, donateBtn;
+
+console.log('📄 Script loaded, document.readyState:', document.readyState);
+
+// Wait for DOM to be fully loaded
+if (document.readyState === 'loading') {
+  console.log('⏳ DOM still loading, waiting for DOMContentLoaded...');
+  document.addEventListener('DOMContentLoaded', () => {
+    console.log('✓ DOMContentLoaded fired');
+    initializeCards();
+  });
+} else {
+  // DOM is already loaded
+  console.log('✓ DOM already loaded, initializing immediately');
+  initializeCards();
+}
 
 // ===== Modal Functions =====
 function openModal(index) {
-  modal.style.display = 'block';
-  document.body.style.overflow = 'hidden';
+  if (modal) {
+    modal.style.display = 'block';
+    document.body.style.overflow = 'hidden';
 
-  // hide support button
-  if (donateBtn) donateBtn.style.display = "none";
+    // hide support button
+    if (donateBtn) donateBtn.style.display = "none";
 
-  renderCat(index, true);
+    renderCat(index, true);
+  }
 }
 
 function closeModal() {
-  modal.style.display = 'none';
-  document.body.style.overflow = '';
+  if (modal) {
+    modal.style.display = 'none';
+    document.body.style.overflow = '';
 
-  // show support button again
-  if (donateBtn) donateBtn.style.display = "flex";
-}
-
-closeBtn.addEventListener('click', closeModal);
-window.addEventListener('click', (e) => {
-  if (e.target === modal) closeModal();
-});
-document.addEventListener('keydown', (e) => {
-  if (modal.style.display === 'block') {
-    if (e.key === 'Escape') {
-      closeModal();
-    }
+    // show support button again
+    if (donateBtn) donateBtn.style.display = "flex";
   }
-});
-
+}
 
 // ===== Navigation Functions =====
 function showNextCat() {
@@ -371,23 +521,6 @@ function showPrevCat() {
   if (isAnimating) return;
   renderCat((currentCatIndex - 1 + cats.length) % cats.length, false, 'prev');
 }
-
-// Connect navigation buttons
-prevBtn.addEventListener('click', showPrevCat);
-nextBtn.addEventListener('click', showNextCat);
-
-// Add keyboard navigation
-document.addEventListener('keydown', (e) => {
-  if (modal.style.display === 'block') { // Only when modal is open
-    if (e.key === 'ArrowLeft') {
-      if (!isAnimating) showPrevCat();
-    } else if (e.key === 'ArrowRight') {
-      if (!isAnimating) showNextCat();
-    } else if (e.key === 'Escape') {
-      closeModal();
-    }
-  }
-});
 
 // ===== Render Cat in Modal with Slide Animation =====
 function renderCat(index, instant = false, direction = null) {
@@ -743,70 +876,6 @@ function escapeHtml(text) {
   const div = document.createElement('div');
   div.textContent = text;
   return div.innerHTML;
-}
-
-// Touch swipe support (keep your existing implementation)
-let startX = 0, currentX = 0, isDragging = false, isAnimating = false;
-const threshold = 50;
-
-modalBody.addEventListener('touchstart', (e) => {
-  startX = e.touches[0].clientX;
-  isDragging = true;
-}, false);
-
-modalBody.addEventListener('touchend', (e) => {
-  if (!isDragging || isAnimating) return;
-  isDragging = false;
-  let diffX = e.changedTouches[0].clientX - startX;
-
-  if (Math.abs(diffX) > threshold) {
-    if (diffX < 0) {
-      showNextCat();
-    } else {
-      showPrevCat();
-    }
-  }
-}, false);
-// ===== Floating Donate Button =====
-const donateBtn = document.getElementById("donate-float-btn");
-const donationSection = document.querySelector(".donation-section");
-
-// Show/Hide button depending on section visibility
-window.addEventListener("scroll", () => {
-  if (!donationSection || !donateBtn) return;
-  const rect = donationSection.getBoundingClientRect();
-  const inView = rect.top < window.innerHeight && rect.bottom > 0;
-  donateBtn.style.display = inView ? "none" : "flex";
-});
-
-// Scroll smoothly to donation section
-if (donateBtn && donationSection) {
-  donateBtn.addEventListener("click", () => {
-    donationSection.scrollIntoView({ behavior: "smooth" });
-  });
-}
-
-// ===== Mobile Search Filter =====
-const searchInput = document.getElementById("catSearch");
-
-if (searchInput) {
-  searchInput.addEventListener("input", () => {
-    const query = searchInput.value.toLowerCase().trim();
-    const cards = document.querySelectorAll(".cat-card");
-
-    cards.forEach(card => {
-      if (card.classList.contains("donation-card")) return; // skip donation
-
-      const name = card.querySelector("h3")?.textContent.toLowerCase() || "";
-      const extra = card.dataset.search || ""; // extra info
-
-      if (name.includes(query) || extra.includes(query)) {
-        card.style.display = "block";
-      } else {
-        card.style.display = "none";
-      }
-    });
-  });
 }
 
 
