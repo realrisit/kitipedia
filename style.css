@@ -609,6 +609,18 @@ h1 {
   margin-right: 5px; /* Added spacing */
 }
 
+/* Behavior tag styling */
+.tag {
+  display: inline-block;
+  background-color: #ff6b6b;
+  color: white;
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 0.85em;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
 /* ============== SHARE SECTION ============== */
 .share-section {
   text-align: center;
