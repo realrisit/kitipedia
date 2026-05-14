@@ -309,6 +309,52 @@ const cats = [
     behavior: ["extrovert", "food-driven", "friendly"],
     petting: "she won't bite (probably)",
     location: "Near shops"
+  },
+  {
+    id: 19,
+    name: "Poco",
+    nicknames: ["Boombox"],
+    image: "./Images/cats/Poco.jpg",
+    bgImage: "./Images/backgrounds/Poco-bg.svg",
+    doodle: "./Images/doodles/Poco-doodle.svg",
+    age: "? year",
+    gender: "Male",
+    vaccinated: false,
+    sterilized: false,
+    personality: "Megaphone of ISI 📣, AKA boombox. Runs faster than a cheetah, basically a car with a quad-turbo W16 engine. Void's best friend, shares a braincell with Void. Looks like he could kill you but is actually a cinnamon roll. Cutest when he eats.",
+    behavior: ["fast", "loud", "friendly", "playful", "dorky"],
+    petting: "Pet him once he gets comfortable with you.",
+    location: "B Quarters"
+  },
+  {
+    id: 20,
+    name: "Void",
+    image: "./Images/cats/Void.jpg",
+    bgImage: "./Images/backgrounds/Void-bg.svg",
+    doodle: "./Images/doodles/Void-doodle.svg",
+    age: "? year",
+    gender: "Female",
+    vaccinated: false,
+    sterilized: false,
+    personality: "Super shy. Yapper, please talk back to her. Shares a braincell with Poco, no thoughts behind those eyes. Should drop her furcare routine (silkiest fur). Easily kidnappable.",
+    behavior: ["shy", "vocal", "skittish", "silky-fur"],
+    petting: "Wait for her to get familiar with you for pets.",
+    location: "B Quarters"
+  },
+  {
+    id: 21,
+    name: "Adrak",
+    image: "./Images/cats/Adrak.jpg",
+    bgImage: "./Images/backgrounds/Adrak-bg.svg",
+    doodle: "./Images/doodles/Adrak-doodle.svg",
+    age: "? year",
+    gender: "Female",
+    vaccinated: false,
+    sterilized: false,
+    personality: "She yaps every time but is a very playful and adorable kitty. Wants to give head bumps once she gets comfortable with you and trusts people very easily.",
+    behavior: ["keen", "playful", "vocal", "affectionate", "head-bumps"],
+    petting: "Feel free to pet. If you try something she doesn't like, she can shred your skin.",
+    location: "Missing ;("
   }
 ];
 
