@@ -276,9 +276,9 @@ const cats = [
     gender: "Male",
     vaccinated: false,
     sterilized: false,
-    personality: "Always hungry and loves a good snack! He has a distinctive loud meow and is particularly fond of attacking shoes (they make great scratching targets). Despite his occasional mischievous side, he's a sweetie who enjoys being petted.",
-    behavior: ["always-hungry", "vocal", "playful", "mischievous", "shoe-destroyer"],
-    petting: "Feel free to pet him; he generally enjoys the affection.",
+    personality: "Megaphone of ISI 📣, AKA boombox. Runs faster than a cheetah, basically a car with a quad-turbo W16 engine. Void's best friend, shares a braincell with Void. Meows a lot, always hungry, and likes scratching shoes in particular. Looks like he could kill you but is actually a cinnamon roll. Cutest when he eats.",
+    behavior: ["loud", "fast", "always-hungry", "vocal", "playful", "shoe-destroyer", "sometimes-aggressive"],
+    petting: "Allows pets, but may attack sometimes. Pet him once he gets comfortable with you.",
     location: "B Quarters"
   },
   {
@@ -292,9 +292,9 @@ const cats = [
     gender: "Female",
     vaccinated: false,
     sterilized: false,
-    personality: "Very dumb and adorably clingy! She has a distinctive little crackling voice that's absolutely cute. Shares a braincell with Poco, no thoughts behind those eyes. She's never aggressive and struggles to retract her claws, so be gentle! Despite her silliness, she's a sweetheart who loves attention.",
-    behavior: ["clingy", "vocal", "silly", "non-aggressive", "affectionate"],
-    petting: "Allows pets from everyone, though watch out for her claws!",
+    personality: "Super shy but very clingy sometimes. Yapper, please talk back to her. Shares a braincell with Poco, no thoughts behind those eyes. Very dumb. Her voice is quite distinctive, like a little crackling sound. Doesn't know how to properly retract her claws. Never attacks. Should drop her furcare routine (silkiest fur). Easily kidnappable.",
+    behavior: ["shy", "clingy", "vocal", "silly", "non-aggressive", "affectionate"],
+    petting: "Allows pets to everyone, but she still likes getting familiar with people first.",
     location: "B Quarters"
   },
   {
