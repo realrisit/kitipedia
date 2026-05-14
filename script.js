@@ -276,7 +276,7 @@ const cats = [
     gender: "Male",
     vaccinated: false,
     sterilized: false,
-    personality: "Megaphone of ISI 📣, AKA boombox. Runs faster than a cheetah, basically a car with a quad-turbo W16 engine. Void's best friend, shares a braincell with Void. Meows a lot, always hungry, and likes scratching shoes in particular. Looks like he could kill you but is actually a cinnamon roll. Cutest when he eats.",
+    personality: "Megaphone of ISI 📣,Runs faster than a cheetah, basically a car with a quad-turbo W16 engine. Void's best friend, shares a braincell with Void. Meows a lot, always hungry, and likes scratching shoes in particular. Looks like he could kill you but is actually a cinnamon roll. Cutest when he eats.",
     behavior: ["loud", "fast", "always-hungry", "vocal", "playful", "shoe-destroyer", "sometimes-aggressive"],
     petting: "Allows pets, but may attack sometimes. Pet him once he gets comfortable with you.",
     location: "B Quarters"
